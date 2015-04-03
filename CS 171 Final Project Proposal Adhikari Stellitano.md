@@ -1,7 +1,7 @@
-## CS 171 Final Project Proposal:
-#Title: Migration as an Instrument of International Development
-Group members: Samik Adhikari, Nicholas Stellitano
-•
+# CS 171 Final Project Proposal:
+## Title: Migration as an Instrument of International Development
+## Group members: Samik Adhikari, Nicholas Stellitano
+
     Background and Motivation: As two students of the MPAID program we are very interested in the role Migration plays in International Development.  One of our Program Directors is interested in visualizing the overall wage increment of migrants from Non-OECD countries to OECD countries.  We hope to visually depict not only the Bilateral flows of Migration and Remittance but the overall changes in Wages by education level and gender when they move from developing countries to non developing countries.  Also, showing these in comparison to more standard metrics like Aid and Trade will be beneficial.
 •   Project Objectives. What is the overall increment on wages of migrants of certain skill levels when they move from a developing country to a developed country?   How does that increment compare to overall trade flows, remittances, and aid flows.
 •	Data. Our data will be collected in three forms
