@@ -1,0 +1,68 @@
+body{
+    font-family: 'PT Sans', sans-serif;
+}
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.boundingBox{
+    cursor: pointer;
+    fill: grey;
+    fill-opacity: .3;
+    pointer-events: all;
+}
+
+.brush{
+    fill: darkgrey;
+    fill-opacity: .5;
+    pointer-events: none;
+}
+
+.area {
+    fill: steelblue;
+    clip-path: url(#clip);
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 0.5px;
+}
+
+#prioVis {
+
+    /*background-color:#eeeeee;*/
+    height:550px;
+    /*width:100px;*/
+    float:left;
+    padding:5px;
+}
+
+#check_box
+{
+
+    background-color:#eeeeee;
+    height:50px;
+    width:50px;
+    /*float:left;*/
+    /*padding:5px;*/
+}
+
+#Min_Date{
+    font: 10px sans-serif;
+}
+#Max_Date{
+    font: 10px sans-serif;
+}
+
+/*svg {*/
+    /*font: 10px sans-serif;*/
+    /*width: 100%;*/
+/*}*/
