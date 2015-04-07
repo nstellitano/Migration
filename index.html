@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <title>Migration as an Instrument for International Development </title>
+    <meta charset="UTF-8">
+
+</head>
+
+<script src="js/d3.min.js"></script>
+<script src="js/topojson.v1.min.js"></script>
+<script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+<script src = "http://d3js.org/queue.v1.min.js"></script>
+
+<!--Stylesheets-->
+<link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+
+<!-- Get some nice font-->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+<!-- add own stylesheet-->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
+<!-- add own vis classes-->
+<script src = "js/map.js"></script>
+
+
+<body>
+
+<div class="container" id = "container"></div>
+
+<script>
+
+
+
+
+
+
+    function ready(error, countries, capitals) {
+        cdata = countries;
+        ccapitals = capitals;
+
+        world_map = new WorldMap(d3.select("#container"),cdata,ccapitals);
+
+
+    };
+
+//----------Load the data-----------------------------------
+
+
+
+    queue()
+            .defer(d3.csv, "data/countries-data.csv")
+            .defer(d3.json, "data/capitals.json")
+            .await(ready);
+
+</script>
+
+</body>
+</html>

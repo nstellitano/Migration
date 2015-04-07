@@ -2,10 +2,257 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63fb6b85-8924-44d7-a8af-b9f985d948f3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/d3.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/topojson.v1.min.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/World_view.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/myStyle.css" afterPath="$PROJECT_DIR$/css/myStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ABW.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AFG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AGO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AIA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ALA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ALB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AND.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ARE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ARG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ARM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ASM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ATA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ATF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ATG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AUS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AUT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/AZE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BDI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BEL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BEN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BFA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BGD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BGR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BHR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BHS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BIH.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BLM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BLR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BLZ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BMU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BOL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BRA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BRB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BRN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BTN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/BWA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CAF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CAN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CHE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CHL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CHN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CIV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CMR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/COD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/COG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/COK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/COL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/COM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CPV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CRI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CUB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CUW.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CYM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CYP.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/CZE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DEU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DJI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DMA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DNK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DOM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/DZA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ECU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/EGY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ERI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ESH.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ESP.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/EST.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ETH.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FIN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FJI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FLK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FRA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FRO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/FSM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GAB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GBR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GEO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GGY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GHA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GIB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GIN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GMB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GNB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GNQ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GRC.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GRD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GRL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GTM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GUM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/GUY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/Graph_1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/Graph_2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/Graph_3.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HKG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HMD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HND.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HRV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HTI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/HUN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IDN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IMN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IND.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IOT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IRL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IRN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/IRQ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ISL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ISR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ITA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/JAM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/JEY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/JOR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/JPN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KAZ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KEN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KGZ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KHM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KIR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KNA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KOR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/KWT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LAO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LBN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LBR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LBY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LCA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LIE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LKA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LSO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LTU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LUX.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/LVA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MAC.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MAF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MAR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MCO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MDA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MDG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MDV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MEX.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MHL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MKD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MLI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MLT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MMR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MNE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MNG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MNP.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MOZ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MRT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MSR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MUS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MWI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/MYS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NAM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NCL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NER.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NFK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NGA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NIC.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NIU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NLD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NOR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NPL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NRU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/NZL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/OMN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PAK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PAN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PCN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PER.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PHL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PLW.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PNG.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/POL.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PRI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PRK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PRT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PRY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PSE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/PYF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/QAT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ROU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/RUS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/RWA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SAU.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SDN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SEN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SGP.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SGS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SHN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SLB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SLE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SLV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SMR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SOM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SPM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SRB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SSD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/STP.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SUR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SVK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SVN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SWE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SWZ.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SXM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SYC.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/SYR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TCA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TCD.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TGO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/THA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TJK.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TKM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TLS.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TON.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TTO.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TUN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TUR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TUV.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TWN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/TZA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/UGA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/UKR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/UMI.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/URY.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/USA.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/UZB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VCT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VEN.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VGB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VIR.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VNM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/VUT.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/WLF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/WSM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/XX1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/XX2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/XX3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/YEM.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ZAF.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ZMB.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-10m-topojson/ZWE.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/capitals.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/countries-data.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/d3/d3.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/map.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/d3/topojson.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/world-topo-110m.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/d3.min.js" afterPath="$PROJECT_DIR$/js/d3.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Migration.iws" />
@@ -132,14 +379,10 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -147,6 +390,10 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -219,7 +466,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428251063836</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Set up basic Structure with Index and JS files">
+      <created>1428371623270</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1428371623270</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -233,19 +486,19 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25244755" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.171659" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13392857" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2217262" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -266,7 +519,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="Make Proposal MD file&#10;" />
     <MESSAGE value="Set up basic Structure for the folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up basic Structure for the folder" />
+    <MESSAGE value="Set up basic Structure with Index and JS files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set up basic Structure with Index and JS files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -276,51 +530,49 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="735">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
       <provider selected="true" editor-type-id="MarkdownPreviewEditor">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="735">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+      <provider editor-type-id="MarkdownPreviewEditor">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CS 171 Final Project Proposal Adhikari Stellitano.md">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/d3.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -328,7 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -336,7 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4515">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -344,7 +594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="26.875" vertical-offset="645" max-vertical-offset="1335">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -352,7 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47226387" vertical-offset="1650" max-vertical-offset="4005">
           <caret line="131" column="57" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -360,7 +608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="4695">
           <caret line="31" column="54" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -368,7 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8188976" vertical-offset="0" max-vertical-offset="1665">
           <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -376,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3478261" vertical-offset="323" max-vertical-offset="990">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -384,7 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52098405" vertical-offset="0" max-vertical-offset="691">
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
