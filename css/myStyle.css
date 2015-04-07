@@ -1,68 +1,27 @@
-body{
-    font-family: 'PT Sans', sans-serif;
-}
-.axis text {
-    font: 10px sans-serif;
-}
+.container {
+    /*margin:5px 5%;*/
+    padding:20px;
+    border:2px solid #d0d0d0;
+    border-radius: 5px;
+    height:90%;
+    clear:both;
 
-.axis line,
-.axis path {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
 }
 
-.boundingBox{
-    cursor: pointer;
-    fill: grey;
-    fill-opacity: .3;
-    pointer-events: all;
+div.tooltip {
+    color: #222;
+    background: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px 0px #a6a6a6;
+    opacity: 0.9;
+    position: absolute;
+}
+.hidden {
+    display: none;
 }
 
-.brush{
-    fill: darkgrey;
-    fill-opacity: .5;
-    pointer-events: none;
+.highlight{
+    fill: "black"
 }
-
-.area {
-    fill: steelblue;
-    clip-path: url(#clip);
-}
-
-.line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 0.5px;
-}
-
-#prioVis {
-
-    /*background-color:#eeeeee;*/
-    height:550px;
-    /*width:100px;*/
-    float:left;
-    padding:5px;
-}
-
-#check_box
-{
-
-    background-color:#eeeeee;
-    height:50px;
-    width:50px;
-    /*float:left;*/
-    /*padding:5px;*/
-}
-
-#Min_Date{
-    font: 10px sans-serif;
-}
-#Max_Date{
-    font: 10px sans-serif;
-}
-
-/*svg {*/
-    /*font: 10px sans-serif;*/
-    /*width: 100%;*/
-/*}*/
