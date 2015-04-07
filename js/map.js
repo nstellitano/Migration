@@ -3,12 +3,15 @@
 WorldMap = function(_parentElement, _cdata, _capitals) {
 
     this.parentElement = _parentElement;
+    console.log(this.parentElement)
     this.width = getInnerWidth(this.parentElement) - 50;
     this.height = (this.width - 200) / 2;
     this.projection = d3.geo.mercator().translate([0, 0]).scale(this.width / 2 / Math.PI);
     this.path = d3.geo.path().projection(this.projection);
     this.cdata =_cdata
     this.ccapitals = _capitals
+
+
 
     this.tooltip = d3.select("body").append("div").attr("class", "tooltip hidden");
 

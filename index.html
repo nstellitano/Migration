@@ -12,8 +12,10 @@
 <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
 <script src = "http://d3js.org/queue.v1.min.js"></script>
 
+
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type = "text/css" href="css/960_12_col.css" />
 
 <!-- Get some nice font-->
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -27,7 +29,37 @@
 
 <body>
 
-<div class="container" id = "container"></div>
+<div class = "container_12 clearfix">
+    <div id="header" class="grid_12">
+        <h1>LOGO</h1>
+            <div id="nav">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Video</a></li>
+                    <li><a href="">Authors</a></li>
+                </ul>
+            </div>
+    </div>
+
+    <div  id = "world_map" class="map grid_12">
+        <!--<div id ="container" class = "container"></div>-->
+    </div>
+    <div  id = "graph_1" class="graph grid_4">
+        <p>Graph 1</p>
+    </div>
+    <div  id = "graph_2" class="graph grid_4">
+        <p>Graph 2</p>
+    </div>
+    <div  id = "graph_3" class="graph grid_4">
+        <p>Graph 3</p>
+    </div>
+    <div  id = "footer" class="grid_12">
+        <p>Copyright etc...</p>
+    </div>
+</div>
+
+
 
 <script>
 
@@ -40,7 +72,7 @@
         cdata = countries;
         ccapitals = capitals;
 
-        world_map = new WorldMap(d3.select("#container"),cdata,ccapitals);
+        world_map = new WorldMap(d3.select(".map"),cdata,ccapitals);
 
 
     };
