@@ -7,6 +7,7 @@
 
 </head>
 
+<!--Load Libraries-->
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
@@ -15,9 +16,9 @@
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type = "text/css" href="css/960_12_col.css" />
-
-<!-- Get some nice font-->
+<!--<link rel="stylesheet" type = "text/css" href="css/960_12_col.css" />-->
+<!--<link rel="stylesheet" type = "text/css" href="css/960_24_col.css" />-->
+<!--&lt;!&ndash; Get some nice font&ndash;&gt;-->
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
 <!-- add own stylesheet-->
@@ -29,9 +30,10 @@
 
 <body>
 
-<div class = "container_12 clearfix">
-    <div id="header" class="grid_12">
-        <h1>LOGO</h1>
+<!--Setup the overall structure of the website-->
+<div class = "container">
+    <div id="header" class="header">
+        <h1>Migration as an Instrument for International Development</h1>
             <div id="nav">
                 <ul>
                     <li><a href="">Home</a></li>
@@ -42,19 +44,21 @@
             </div>
     </div>
 
-    <div  id = "world_map" class="map grid_12">
-        <!--<div id ="container" class = "container"></div>-->
+    <div  id = "dashboard" class="dashboard">
     </div>
-    <div  id = "graph_1" class="graph grid_4">
+
+    <div  id = "world_map" class="world_map">
+    </div>
+    <div  id = "graph_1" class="graph grid_8">
         <p>Graph 1</p>
     </div>
-    <div  id = "graph_2" class="graph grid_4">
+    <div  id = "graph_2" class="graph grid_8">
         <p>Graph 2</p>
     </div>
-    <div  id = "graph_3" class="graph grid_4">
+    <div  id = "graph_3" class="graph grid_8">
         <p>Graph 3</p>
     </div>
-    <div  id = "footer" class="grid_12">
+    <div  id = "footer" >
         <p>Copyright etc...</p>
     </div>
 </div>
@@ -62,30 +66,45 @@
 
 
 <script>
+$(function() {
 
 
+    //Create EventHandler
+    var MyEventHandler = new Object();
 
 
-
-
-    function ready(error, countries, capitals) {
-        cdata = countries;
-        ccapitals = capitals;
-
-        world_map = new WorldMap(d3.select(".map"),cdata,ccapitals);
-
-
-    };
-
-//----------Load the data-----------------------------------
-
-
+    //------------Load the Data and begin-------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------
 
     queue()
             .defer(d3.csv, "data/countries-data.csv")
             .defer(d3.json, "data/capitals.json")
             .await(ready);
 
+    //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
+    function ready(error, countries, capitals) {
+        cdata = countries;
+        ccapitals = capitals;
+
+        //Make a WorldMap via the worldmap object
+        world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, MyEventHandler);
+
+
+    };
+
+    //------------Events-------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+    $(MyEventHandler).bind("selection", function (event, name) {
+        console.log(name);
+    });
+
+
+
+
+
+
+})
 </script>
 
 </body>

@@ -4,29 +4,47 @@
     text-align: center;
 }
 
-#nav, #world_map, .graph, #footer {
-    background-color: #efefef;
-    margin-top: 20px;
-    padding: 10px 0px 5px 0px;
+body{
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
 }
 
-#container1, .graph {
-    /*height: 100px;*/
+#container {
+    overflow: auto;
+}
+
+#nav, #world_map, #footer, #dashboard {
+    margin: 1%;
+}
+
+#graph_1, #graph_2, #graph_3{
+    width: 31.3%;
+    float: left;
+    margin: 1%;
+
+}
+
+#graph_3{
+    margin-right: 0%;
 }
 
 li {
     display: inline;
-    padding: 5px;
+    padding: 5em;
 }
-/*.container {*/
-    /*margin:5px 5%;*/
-    /*padding:20px;*/
-    /*border:2px solid #d0d0d0;*/
-    /*border-radius: 5px;*/
-    /*height:90%;*/
-    /*clear:both;*/
 
-/*}*/
+#nav, #footer, {
+    background-color: #efefef;
+    padding: 0.5em 0;
+}
+
+#graph_1, #graph_2, #graph_3{
+    height: 10em;
+    margin-bottom: 1em;
+    background-color: #efefef;
+}
+
 
 div.tooltip {
     color: #222;
@@ -44,4 +62,8 @@ div.tooltip {
 
 .highlight{
     fill: "black"
+}
+
+.country:hover {
+    fill: orangered ;
 }
