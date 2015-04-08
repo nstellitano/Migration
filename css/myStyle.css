@@ -39,11 +39,12 @@ li {
     padding: 0.5em 0;
 }
 
-#graph_1, #graph_2, #graph_3{
-    height: 10em;
+#graph_1, #graph_2, #graph_3, #dashboard{
+    height: 5em;
     margin-bottom: 1em;
     background-color: #efefef;
 }
+
 
 
 div.tooltip {
@@ -66,4 +67,24 @@ div.tooltip {
 
 .country:hover {
     fill: orangered ;
+}
+
+.arcs path {
+    stroke-width: 2px;
+    stroke: tomato;
+    pointer-events: none;
+    fill: none;
+}
+
+#legend {
+    padding: 1.5em 0 0 1.5em;
+}
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
 }

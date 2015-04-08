@@ -10,12 +10,14 @@
 <!--Load Libraries-->
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
+<script src="js/colorbrewer.js"></script>
 <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
 <script src = "http://d3js.org/queue.v1.min.js"></script>
 
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/colorbrewer.css">
 <!--<link rel="stylesheet" type = "text/css" href="css/960_12_col.css" />-->
 <!--<link rel="stylesheet" type = "text/css" href="css/960_24_col.css" />-->
 <!--&lt;!&ndash; Get some nice font&ndash;&gt;-->
@@ -45,18 +47,37 @@
     </div>
 
     <div  id = "dashboard" class="dashboard">
+       <p>
+            <label>Heat Map:
+                Avg Wage Rate<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
+                Migration Rates<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
+                Remittance Rates<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
+                Education<input type="radio" name="coord" id = "latlong" value="latlong" onclick=""> </input>
+            </label>
+       </p>
+        <p>
+            <label>By Country:
+                OECD Countries<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
+                NON OECD Countries<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
+
+            </label>
+        </p>
     </div>
 
     <div  id = "world_map" class="world_map">
     </div>
     <div  id = "graph_1" class="graph grid_8">
         <p>Graph 1</p>
+        <p>Bar Graph: NON OECD Avg Wage vs Increased Avg Wage</p>
     </div>
     <div  id = "graph_2" class="graph grid_8">
         <p>Graph 2</p>
+        <p>Bar Graph: Top 10 Migration Countries by Migrant Stock </p>
     </div>
     <div  id = "graph_3" class="graph grid_8">
         <p>Graph 3</p>
+        <p>Scatter Plot: Migrant Stock for ALl countries by Educaiton Level</p>
+
     </div>
     <div  id = "footer" >
         <p>Copyright etc...</p>
@@ -97,6 +118,20 @@ $(function() {
 
     $(MyEventHandler).bind("selection", function (event, name) {
         console.log(name);
+        //Draw Graphs
+        //Draw Lines from each country
+    });
+
+    d3.selectAll("input").on("change", function()
+    {
+        if(d3.select(this).attr("id") == "migration_rate" && d3.select(this).node().checked)
+        {
+            //Filter data maybe call world_map.migration() or something...
+            //but for now...
+            console.log("test")
+            world_map.HM_migration();
+        };
+
     });
 
 
