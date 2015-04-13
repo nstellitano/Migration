@@ -97,9 +97,10 @@ WorldMap.prototype.initVis = function(){
             .on("mousemove", function (d, i) {
 
                 d3.select(this).style("fill", "black")
-                var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                var mouse = d3.mouse(that.svg.node()).map(function (d) {console.log(d);
                     return parseInt(d);
                 });
+                console.log(mouse[0] + offsetL)
                 that.tooltip.classed("hidden", false)
                     .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT) + "px")
                     .html(d.properties.name)
