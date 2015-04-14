@@ -22,7 +22,7 @@
     var NON_OECD = [];
     var template = [];
 
-    var non_oecd_main = ["Argentina", "Bulgaria", "Belgium", "Colombia", "Dominican Republic", "Ecuador", "Estonia", "Ethiopia", "Gamiba", "Honduras",
+    var non_oecd_main = ["Argentina", "Bulgaria", "Belgium", "Colombia", "Dominican Republic", "Ecuador", "Estonia", "Ethiopia", "Gambia", "Honduras",
                     "Indonesia", "Jordan", "Kazakasthan", "Kosovo", "Lesotho", "Lithuania", "Latvia", "Madagascar", "Malta",
                     "Myanmar", "Mongolia", "Mauritius", "Malawi", "Mexico", "Nigeria", "Nepal", "Pakistan", "Panama", "Peru", "Phillipines",
                     "Paraguay", "Poland",  "Rwanda", "Serbia", "Sao Tome", "Slovakia", "Thailand", "Timor Leste", "Tunisia", "Tuvola", "Uruguay",
@@ -32,14 +32,16 @@
     queue()
             .defer(d3.json, "flow_data_2010.json")
             .defer(d3.csv, "Bilateral_Remittance_Matrix_2010.csv")
+            .defer(d3.csv, "aid_data.csv")
             .await(update);
 
 
 
 
     //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
-    function update(error, flow, bilateral) {
+    function update(error, flow, bilateral, aid) {
 
+        console.log(aid)
         flow._children.splice(18,1)
         flow._children.splice(17,1)
         flow._children.splice(16,1)
@@ -51,8 +53,10 @@
         flow._children.splice(4,1)
         flow._children.splice(3,1)
 
-        console.log(bilateral)
+
         for(i=0;i<non_oecd_main.length; i++){
+
+
 
            Name = non_oecd_main[i];
 
@@ -61,14 +65,32 @@
            {
                OECD = flow._children[z].name;
 
+
                var row = 0;
                var col = 0;
+               var ro = 0;
+
                for(ii=0; ii<bilateral.length; ii++){
-                   if(Name == bilateral[0][ii]){row = ii; console.log(Name); console.log(row)}
-                   if(OECD == bilateral[0][ii]){ col = ii; console.log(col)}
+                   if(Name == bilateral[0][ii]){row = ii}
+                   if(OECD == bilateral[0][ii]){col = ii}
 
                }
-               Remittance = parseInt(bilateral[row][col])
+
+               if( isNaN(parseInt(aid[ro][col]))) {Remittance =0} else {Remittance = parseInt(bilateral[row][col])}
+
+
+
+
+               for(zz=1; zz<187; zz++){
+                   if(Name == aid[0][zz]){col = zz}
+               }
+
+               for(tt=0; tt< 70 ; tt++){
+                   if(OECD == aid[tt][1]){ro = tt}
+               }
+
+
+               if( isNaN(parseInt(aid[ro][col]))) {AID =0} else {AID = parseInt(aid[ro][col])}
 
                var totalI = 0;
                var totalII = 0;
