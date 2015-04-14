@@ -32,7 +32,7 @@
     queue()
             .defer(d3.json, "flow_data_2010.json")
             .defer(d3.csv, "Bilateral_Remittance_Matrix_2010.csv")
-            .defer(d3.csv, "aid_data.csv")
+            .defer(d3.csv, "aid_data.csv")   // http://aiddata.org/aiddata-research-releases
             .await(update);
 
 
