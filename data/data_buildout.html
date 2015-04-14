@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+</style>
+
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "http://d3js.org/queue.v1.min.js"></script>
+
+<script>
+
+
+    var oecd = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain",
+        "Finland", "France", "Great Britain", "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway",
+        "New Zealand", "Portugal", "Sweden", "United States" ]
+
+    var oecd_main = ["Australia", "Austria", "Canada", "France","Germany", "Great Britian", "Greece", "Netherlands", "Norway", "United States" ]
+
+    var oecd_main_need = ["Germany", "Great Britain", "Canada"]
+
+    var Name, Trade, AID, Remittance, Male, Female, Level_I, Level_II, Level_III, OECD = "";
+    var NON_OECD = [];
+    var template = [];
+
+    var non_oecd_main = ["Argentina", "Bulgaria", "Belgium", "Colombia", "Dominican Republic", "Ecuador", "Estonia", "Ethiopia", "Gamiba", "Honduras",
+                    "Indonesia", "Jordan", "Kazakasthan", "Kosovo", "Lesotho", "Lithuania", "Latvia", "Madagascar", "Malta",
+                    "Myanmar", "Mongolia", "Mauritius", "Malawi", "Mexico", "Nigeria", "Nepal", "Pakistan", "Panama", "Peru", "Phillipines",
+                    "Paraguay", "Poland",  "Rwanda", "Serbia", "Sao Tome", "Slovakia", "Thailand", "Timor Leste", "Tunisia", "Tuvola", "Uruguay",
+                    "South Africa", "Zambia"]
+
+
+    queue()
+            .defer(d3.json, "flow_data_2010.json")
+            .defer(d3.csv, "Bilateral_Remittance_Matrix_2010.csv")
+            .await(update);
+
+
+
+
+    //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
+    function update(error, flow, bilateral) {
+
+        flow._children.splice(18,1)
+        flow._children.splice(17,1)
+        flow._children.splice(16,1)
+        flow._children.splice(13,1)
+        flow._children.splice(12,1)
+        flow._children.splice(8,1)
+        flow._children.splice(7,1)
+        flow._children.splice(6,1)
+        flow._children.splice(4,1)
+        flow._children.splice(3,1)
+
+        console.log(bilateral)
+        for(i=0;i<non_oecd_main.length; i++){
+
+           Name = non_oecd_main[i];
+
+
+           for(z=0; z<10; z++)
+           {
+               OECD = flow._children[z].name;
+
+               var row = 0;
+               var col = 0;
+               for(ii=0; ii<bilateral.length; ii++){
+                   if(Name == bilateral[0][ii]){row = ii; console.log(Name); console.log(row)}
+                   if(OECD == bilateral[0][ii]){ col = ii; console.log(col)}
+
+               }
+               Remittance = parseInt(bilateral[row][col])
+
+               var totalI = 0;
+               var totalII = 0;
+               var totalIII = 0;
+               var totalMale = 0;
+               var totalFemale = 0;
+
+               for(zz=0; zz<196; zz++) {
+                   if(flow._children[z]._children[zz].name == non_oecd_main[i]) {
+                       totalI = totalI + parseInt(flow._children[z]._children[zz]._children[0].size);
+                       totalII = totalII + parseInt(flow._children[z]._children[zz]._children[1].size);
+                       totalIII = totalIII + parseInt(flow._children[z]._children[zz]._children[2].size);
+                       totalMale = totalMale + parseInt(flow._children[z]._children[zz]._children[0]._children[0].size) +
+                                               parseInt(flow._children[z]._children[zz]._children[1]._children[0].size) +
+                                               parseInt(flow._children[z]._children[zz]._children[2]._children[0].size);
+                       totalFemale = totalFemale + parseInt(flow._children[z]._children[zz]._children[0]._children[1].size) +
+                                               parseInt(flow._children[z]._children[zz]._children[1]._children[1].size) +
+                                               parseInt(flow._children[z]._children[zz]._children[2]._children[1].size);
+
+                   }
+               }
+               Level_I = totalI;
+               Level_II = totalII;
+               Level_III = totalIII;
+               Male = totalMale;
+               Female = totalFemale;
+
+               NON_OECD = [Name, OECD, Trade, AID, Remittance, Male, Female, Level_I, Level_II, Level_III]
+               template.push(NON_OECD)
+           }
+
+
+
+       }
+
+        console.log(template);
+        };
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -33,10 +33,11 @@
         "Finland", "France", "Great Britain", "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway",
         "New Zealand", "Portugal", "Sweden", "United States" ]
 
+    var edu_level = ["Level I", "Level II", "Level III"]
 
     //Create Empty frame of future JSON file
     var year_fill = {
-        "name": "Year", "size": 0,
+        "name": "Education Level", "size": 0,
         "_children": [
             {
                 "name": "OECD", "size": 0,
@@ -44,27 +45,9 @@
                     {
                         "name": "NONOECD", "size": 0,
                         "_children": [
-                            {
-                                "name": "Level I", "size": 0,
-                                "_children": [
                                     {"name": "Male", "size": 0},
                                     {"name": "Female", "size": 0}
-                                ]
-                            },
-                            {
-                                "name": "Level II", "size": 0,
-                                "_children": [
-                                    {"name": "Male", "size": 0},
-                                    {"name": "Female", "size": 0}
-                                ]
-                            },
-                            {
-                                "name": "Level III", "size": 0,
-                                "_children": [
-                                    {"name": "Male", "size": 0},
-                                    {"name": "Female", "size": 0}
-                                ]
-                            }]
+                            ]
                     }
                 ]
             }
@@ -85,30 +68,11 @@
         for (i = 0; i < 196; i++) {
             if(i==1){year_fill._children[z]._children.splice(0,1)}
             year_fill._children[z]._children.push({
-
                         "name": "NONOECD", "size": 0,
                         "_children": [
-                            {
-                                "name": "Level I", "size": 0,
-                                "_children": [
-                                    {"name": "Male", "size": 0},
-                                    {"name": "Female", "size": 0}
-                                ]
-                            },
-                            {
-                                "name": "Level II", "size": 0,
-                                "_children": [
-                                    {"name": "Male", "size": 0},
-                                    {"name": "Female", "size": 0}
-                                ]
-                            },
-                            {
-                                "name": "Level III", "size": 0,
-                                "_children": [
-                                    {"name": "Male", "size": 0},
-                                    {"name": "Female", "size": 0}
-                                ]
-                            }]
+                            {"name": "Male", "size": 0},
+                            {"name": "Female", "size": 0}
+                        ]
                     }
             )
         }
@@ -191,7 +155,7 @@
 
         }
 
-        console.log(year_2010)
+        console.log(year_2000)
 
     }
 
