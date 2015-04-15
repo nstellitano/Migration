@@ -10,7 +10,11 @@ WorldMap = function(_parentElement, _cdata, _capitals, _eventHandler) {
     this.height = (this.width) / 2;
     this.cdata =_cdata
     this.ccapitals = _capitals
-    this.arcdata
+    this.arcdata = [
+        {
+            sourceLocation: [0, 0],
+            targetLocation: [0, 0]
+        }]
 
 
     //Map Required Calculations
@@ -73,8 +77,8 @@ WorldMap.prototype.initVis = function(){
         that.country = d3.select("#innerg").selectAll(".country").data(topo);
 
         //I think it has to do with centering purposes...adjusting for any positioning of the div
-        var offsetL = document.getElementsByClassName(that.parentElement).offsetLeft;
-        var offsetT = document.getElementsByClassName(that.parentElement).offsetTop;
+        var offsetL = document.getElementById("world_map").offsetLeft;
+        var offsetT = document.getElementById("world_map").offsetTop;
 
 
 
@@ -97,12 +101,12 @@ WorldMap.prototype.initVis = function(){
             .on("mousemove", function (d, i) {
 
                 d3.select(this).style("fill", "black")
-                var mouse = d3.mouse(that.svg.node()).map(function (d) {console.log(d);
+                var mouse = d3.mouse(that.svg.node()).map(function (d) {
                     return parseInt(d);
                 });
-                console.log(mouse[0] + offsetL)
+
                 that.tooltip.classed("hidden", false)
-                    .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT) + "px")
+                    .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT-25) + "px" )
                     .html(d.properties.name)
 
             })
@@ -110,7 +114,7 @@ WorldMap.prototype.initVis = function(){
                 d3.select(this).style("fill", "#ccc")
                 that.tooltip.classed("hidden", true);
             });
-        console.log(that.country)
+
 
         that.updateVis();
     })
@@ -149,7 +153,7 @@ WorldMap.prototype.updateVis = function(){
 
 
     arcs.selectAll("path")
-        .data(arcdata)
+        .data(that.arcdata)
         .enter()
         .append("path")
         .attr('d', function(d) {
@@ -163,16 +167,16 @@ WorldMap.prototype.updateVis = function(){
 
 
     //Zoom and scroll of the map.  Need to integrate the arcs if we want to have them move too
-    var zoom = d3.behavior.zoom()
-        .on("zoom",function() {
-            that.country.attr("transform","translate("+
-            d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-            that.country.selectAll("path")
-                .attr("d", that.path.projection(that.projection));
-
-
-        });
-    that.svg.call(zoom)
+    //var zoom = d3.behavior.zoom()
+    //    .on("zoom",function() {
+    //        that.country.attr("transform","translate("+
+    //        d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+    //        that.country.selectAll("path")
+    //            .attr("d", that.path.projection(that.projection));
+    //
+    //
+    //    });
+    //that.svg.call(zoom)
 };
 
 
@@ -180,8 +184,49 @@ WorldMap.prototype.filter = function(){
     //filter what data we want to display via the heat map.
 }
 
-WorldMap.prototype.arcData = function(){
+WorldMap.prototype.draw_arcData = function(source_country){
     //Filter out the OECD country or NON OECD country and their "targets" or "sources"
+
+    that = this;
+    var oecd_main = ["Australia", "Austria", "Canada", "France","Germany", "Great Britain", "Greece", "Netherlands", "Norway", "United States" ]
+
+    this.arcdata = [
+        {
+            sourceLocation: [0, 0],
+            targetLocation: [0, 0]
+        }]
+
+    d3.json("data/capitals.json", function(cdata) {
+        console.log(cdata)
+        var source_lat, source_long
+        var target_lat=0
+        var target_long=0;
+        for(z=0; z<oecd_main.length; z++ ) {
+            for (i = 0; i < cdata.length; i++) {
+                if (source_country == cdata[i]["country"]) {
+                    source_lat = cdata[i]["lat"]
+                    source_long = cdata[i]["lon"]
+                }
+
+                if (oecd_main[z] == cdata[i]["country"]) {
+                    target_lat = cdata[i]["lat"]
+                    target_long = cdata[i]["lon"]
+                    console.log(oecd_main[z])
+                    console.log(cdata[i]["country"])
+                }
+            }
+            that.arcdata.push(
+                {
+                    sourceLocation: [source_long, source_lat],
+                    targetLocation: [target_long, target_lat]
+                });
+
+        }
+
+        //that.arcdata.splice(0,1)
+        console.log(that.arcdata)
+        that.updateVis()
+    });
 }
 
 WorldMap.prototype.HM_migration = function(){
@@ -246,101 +291,3 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
     }
 }
 
-var arcdata = [
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-106.503961875, 33.051502817366334]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-97.27544625, 34.29490081496779]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-92.793024375, 34.837711658059135]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-100.3076728125, 41.85852354782116]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-104.6143134375, 43.18636214435451]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-106.152399375, 45.57291634897]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-105.5811103125, 42.3800618087319]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-74.610651328125, 42.160561343227656]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-78.148248984375, 40.20112201100485]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-81.795709921875, 39.89836713516883]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-91.738336875, 42.1320516230261]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-93.902643515625, 39.89836713516886]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-146.68645699218752, 62.84587613514389]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-151.03704292968752, 62.3197734579205]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-150.50969917968752, 68.0575087745829]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-155.58278180000002, 19.896766200000002]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-155.41249371406252, 19.355435189875685]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-156.22204876777346, 20.77817385333129]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-156.08334637519533, 20.781383752662176]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-119.41793240000001, 36.77826099999999]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-111.73848904062501, 34.311442605956636]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-118.62691677500001, 39.80409417718468]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-115.56173122812501, 44.531552843807575]
-    },
-    {
-        sourceLocation: [-99.5606025, 41.068178502813595],
-        targetLocation: [-107.13521755625001, 43.90164233696157]
-    }
-]
