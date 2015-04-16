@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    .node circle {
+        cursor: pointer;
+        stroke: #3182bd;
+        stroke-width: 1.5px;
+    }
+
+    .node text {
+        font: 10px sans-serif;
+        pointer-events: none;
+        text-anchor: middle;
+    }
+
+    line.link {
+        fill: none;
+        stroke: #9ecae1;
+        stroke-width: 1.5px;
+    }
+
+</style>
+<div  id = "dashboard" class="dashboard">
+    <p>
+        <label>Year:
+            1980<input type="radio" name="coord" id="1980" value="popgdp" onclick=""> </input>
+            1985<input type="radio" name="coord" id = "1985" value="latlong" onclick=""> </input>
+
+        </label>
+    </p>
+</div>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "http://d3js.org/queue.v1.min.js"></script>
+
+<script>
+
+    queue()
+            .defer(d3.json, "_1980.json")
+            .defer(d3.json, "_1980.json")
+            .await(ready);
+
+    var data_1980, data_1985;
+
+    //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
+    function ready(error, _1980, _1985) {
+        data_1980 = _1980;
+        data_1985 = _1985;
+
+//        root = data_1980;
+//        update();
+    };
+
+    //Create Empty frame of future JSON file
+    var year1 = {
+        "name": "Year", "size": 0,
+        "_children": [
+            {
+                "name": "OECD", "size": 0,
+                "_children": [
+                    {
+                        "name": "NONOECD", "size": 0,
+                        "_children": [
+                            {
+                                "name": "Level I", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level II", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level III", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            }]
+                    }
+                ]
+            }
+        ]
+    }
+
+    year1._children.splice(0,1)
+    //Push on 19 more OECD Countries
+    for (i=0; i<20;i++) {
+        year1._children.push({
+            "name": "OECD", "size": 0,
+            "_children": [{}]
+        })
+    }
+
+    //Fill in each OECD Country with 196 other non oecd countries
+    for(z=0; z<20;z++) {
+    for (i = 0; i < 196; i++) {
+        if(i==1){year1._children[z]._children.splice(0,1)}
+        year1._children[z]._children.push({
+
+                    "name": "NONOECD", "size": 0,
+                    "_children": [
+                        {
+                            "name": "Level I", "size": 0,
+                            "_children": [
+                                {"name": "Male", "size": 0},
+                                {"name": "Female", "size": 0}
+                            ]
+                        },
+                        {
+                            "name": "Level II", "size": 0,
+                            "_children": [
+                                {"name": "Male", "size": 0},
+                                {"name": "Female", "size": 0}
+                            ]
+                        },
+                        {
+                            "name": "Level III", "size": 0,
+                            "_children": [
+                                {"name": "Male", "size": 0},
+                                {"name": "Female", "size": 0}
+                            ]
+                        }]
+                }
+        )
+    }
+
+}
+
+    console.log(year1)
+
+    var oecd = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain",
+                "Finland", "France", "Great Britain", "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway",
+                "New Zealand", "Portugal", "Sweden", "United States" ]
+
+
+
+    queue()
+            .defer(d3.csv, "flow_data.csv")
+            .defer(d3.csv, "1985.csv")
+            .await(ready1);
+1
+
+    //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
+    function ready1(error, flow, _1985) {
+console.log(flow)
+
+        var counter = 0
+        var total = 0
+        for(z=0; z<20; z++){
+
+            year1._children[z].name = oecd[z]
+
+            //Set Total Stock of Migrants in each OECD
+            year1._children[z].size = parseInt(flow[1][2+counter]) + parseInt(flow[1][31])
+            total = total + year1._children[z].size;
+
+
+
+
+            for (i=0; i<195; i++){
+
+                //Set Total Country Migrant movements per NON OECD Country per OECD
+                year1._children[z]._children[i].size = parseInt(flow[i+3][2+counter]) + parseInt(flow[i+3][31+counter])
+
+                //Set Education Level Totals for each Non OECD Country
+                //Set Base level sizes (Males) per education
+                year1._children[z]._children[i]._children[0].size = parseInt(flow[i+3][3+counter]) + parseInt(flow[i+3][32+counter])
+                year1._children[z]._children[i]._children[1].size = parseInt(flow[i+3][4+counter]) + parseInt(flow[i+3][33+counter])
+                year1._children[z]._children[i]._children[2].size = parseInt(flow[i+3][5+counter]) + parseInt(flow[i+3][34+counter])
+
+
+
+
+                //Set Names
+                year1._children[z]._children[i].name = flow[i+3][1]
+
+                //Set Base level sizes (Males) per education
+                year1._children[z]._children[i]._children[0]._children[0].size = flow[i+3][3+counter]
+                year1._children[z]._children[i]._children[1]._children[0].size = flow[i+3][4+counter]
+                year1._children[z]._children[i]._children[2]._children[0].size = flow[i+3][5+counter]
+
+                //Females per Education
+                year1._children[z]._children[i]._children[0]._children[1].size = flow[i+3][32+counter]
+                year1._children[z]._children[i]._children[1]._children[1].size = flow[i+3][33+counter]
+                year1._children[z]._children[i]._children[2]._children[1].size = flow[i+3][34+counter]
+
+
+            }
+            counter = counter + 58
+       }
+        year1.size = total;
+    };
+
+
+        var width = 960,
+            height = 1500,
+            root;
+
+    var force = d3.layout.force()
+            .linkDistance(200)
+            .charge(-120)
+            .gravity(.05)
+            .size([width, height])
+            .on("tick", tick);
+
+    var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+    var link = svg.selectAll(".link"),
+            node = svg.selectAll(".node");
+
+//    d3.json("_1980.json", function(error, json) {
+//        root = json;
+//        console.log(json)
+//        console.log(root)
+//        update();
+//    });
+
+
+
+    function update() {
+
+        var nodes = flatten(root),
+                links = d3.layout.tree().links(nodes);
+
+
+        // Restart the force layout.
+        force
+                .nodes(nodes)
+                .links(links)
+                .start();
+
+        // Update links.
+        link = link.data(links, function(d) { return d.target.id; });
+
+        link.exit().remove();
+
+        link.enter().insert("line", ".node")
+                .attr("class", "link");
+
+        // Update nodes.
+        node = node.data(nodes, function(d) { return d.id; });
+
+
+
+        var nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .on("click", click)
+                .call(force.drag);
+
+        nodeEnter.append("circle")
+                .attr("class", "circle")
+                .attr("r", function(d) { return d.size/100000; });
+
+        nodeEnter.append("text")
+                .attr("dy", ".35em")
+                .text(function(d) { return d.name; });
+
+        node.select("circle")
+                .style("fill", color);
+
+        node.exit().remove();
+    }
+
+    function tick() {
+        link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    }
+
+    function color(d) {
+        return d._children ? "#3182bd" // collapsed package
+                : d.children ? "#c6dbef" // expanded package
+                : "#fd8d3c"; // leaf node
+    }
+
+    // Toggle children on click.
+    function click(d) {
+        if (d3.event.defaultPrevented) return; // ignore drag
+        if (d.children) {
+            console.log(d._children)
+            d._children = d.children;
+            d.children = null;
+        } else {
+            d.children = d._children;
+            d._children = null;
+        }
+        update();
+    }
+
+    // Returns a list of all nodes under the root.
+    function flatten(root) {
+        var nodes = [], i = 0;
+
+        function recurse(node) {
+            if (node.children) node.children.forEach(recurse);
+            if (!node.id) node.id = ++i;
+            nodes.push(node);
+        }
+
+        recurse(root);
+        return nodes;
+    }
+
+
+    d3.selectAll("input").on("change", function()
+    {
+        if(d3.select(this).attr("id") == "1985" && d3.select(this).node().checked)
+        {
+            root = year1;
+            update()
+        };
+
+        if(d3.select(this).attr("id") == "1980" && d3.select(this).node().checked)
+        {
+            root = data_1980;
+            update()
+        };
+
+
+
+    });
+
+</script>
+</body>
+</html>

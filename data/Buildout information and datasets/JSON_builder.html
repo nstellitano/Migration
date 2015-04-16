@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    .node circle {
+        cursor: pointer;
+        stroke: #3182bd;
+        stroke-width: 1.5px;
+    }
+
+    .node text {
+        font: 10px sans-serif;
+        pointer-events: none;
+        text-anchor: middle;
+    }
+
+    line.link {
+        fill: none;
+        stroke: #9ecae1;
+        stroke-width: 1.5px;
+    }
+
+</style>
+
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "http://d3js.org/queue.v1.min.js"></script>
+
+<script>
+
+
+    var oecd = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain",
+        "Finland", "France", "Great Britain", "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway",
+        "New Zealand", "Portugal", "Sweden", "United States" ]
+
+
+    //Create Empty frame of future JSON file
+    var year_fill = {
+        "name": "Year", "size": 0,
+        "_children": [
+            {
+                "name": "OECD", "size": 0,
+                "_children": [
+                    {
+                        "name": "NONOECD", "size": 0,
+                        "_children": [
+                            {
+                                "name": "Level I", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level II", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level III", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            }]
+                    }
+                ]
+            }
+        ]
+    }
+
+    year_fill._children.splice(0,1)
+    //Push on 19 more OECD Countries
+    for (i=0; i<20;i++) {
+        year_fill._children.push({
+            "name": "OECD", "size": 0,
+            "_children": [{}]
+        })
+    }
+
+    //Fill in each OECD Country with 196 other non oecd countries
+    for(z=0; z<20;z++) {
+        for (i = 0; i < 196; i++) {
+            if(i==1){year_fill._children[z]._children.splice(0,1)}
+            year_fill._children[z]._children.push({
+
+                        "name": "NONOECD", "size": 0,
+                        "_children": [
+                            {
+                                "name": "Level I", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level II", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            },
+                            {
+                                "name": "Level III", "size": 0,
+                                "_children": [
+                                    {"name": "Male", "size": 0},
+                                    {"name": "Female", "size": 0}
+                                ]
+                            }]
+                    }
+            )
+        }
+
+    }
+
+
+
+
+    queue()
+            .defer(d3.csv, "flow_data.csv")
+            .defer(d3.csv, "flow_data.csv")
+            .await(update);
+
+    var year_1980,year_1985,year_1990,year_1995,year_2000,year_2005, year_2010 = year_fill
+
+
+    //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
+    function update(error, flow, _1985) {
+
+        var _5_adjustment = 0
+        for (ii = 0; ii < 7; ii++) {
+            var year1 = year_fill;
+
+            var counter = 0
+            var total = 0
+            for (z = 0; z < 20; z++) {
+
+                year1._children[z].name = oecd[z]
+
+                //Set Total Stock of Migrants in each OECD
+                year1._children[z].size = parseInt(flow[1][2 + counter]) + parseInt(flow[1][31])
+                total = total + year1._children[z].size;
+
+
+                for (i = 0; i < 195; i++) {
+
+                    //Set Total Country Migrant movements per NON OECD Country per OECD
+                    year1._children[z]._children[i].size = parseInt(flow[i + 3][2 + counter]) + parseInt(flow[i + 3][31 + counter])
+
+                    //Set Education Level Totals for each Non OECD Country
+                    //Set Base level sizes (Males) per education
+                    year1._children[z]._children[i]._children[0].size = parseInt(flow[i + 3][3 + counter+_5_adjustment]) + parseInt(flow[i + 3][32 + counter +_5_adjustment])
+                    year1._children[z]._children[i]._children[1].size = parseInt(flow[i + 3][4 + counter+_5_adjustment]) + parseInt(flow[i + 3][33 + counter+_5_adjustment])
+                    year1._children[z]._children[i]._children[2].size = parseInt(flow[i + 3][5 + counter+_5_adjustment]) + parseInt(flow[i + 3][34 + counter+_5_adjustment])
+
+
+                    //Set Names
+                    year1._children[z]._children[i].name = flow[i + 3][1]
+
+                    //Set Base level sizes (Males) per education
+                    year1._children[z]._children[i]._children[0]._children[0].size = flow[i + 3][3 + counter+_5_adjustment]
+                    year1._children[z]._children[i]._children[1]._children[0].size = flow[i + 3][4 + counter+_5_adjustment]
+                    year1._children[z]._children[i]._children[2]._children[0].size = flow[i + 3][5 + counter+_5_adjustment]
+
+                    //Females per Education
+                    year1._children[z]._children[i]._children[0]._children[1].size = flow[i + 3][32 + counter+_5_adjustment]
+                    year1._children[z]._children[i]._children[1]._children[1].size = flow[i + 3][33 + counter+_5_adjustment]
+                    year1._children[z]._children[i]._children[2]._children[1].size = flow[i + 3][34 + counter+_5_adjustment]
+
+
+                }
+                counter = counter + 58
+            }
+            year1.size = total;
+            var str = JSON.stringify(year1, null, 2); // spacing level = 2
+            //console.log(str)
+
+
+
+            if(_5_adjustment == 0 ){year_1980 = year1};
+            if(_5_adjustment == 4 ){year_1985 = year1};
+            if(_5_adjustment == 8 ){year_1990 = year1};
+            if(_5_adjustment == 12 ){year_1995 = year1};
+            if(_5_adjustment == 16 ){year_2000 = year1};
+            if(_5_adjustment == 20 ){year_2005 = year1};
+            if(_5_adjustment == 24 ){year_2010 = year1};
+
+            _5_adjustment = _5_adjustment + 4;
+
+        }
+
+        console.log(year_2010)
+
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
