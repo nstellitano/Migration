@@ -2,12 +2,13 @@
 //------------World Map Object Function -------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-WorldMap = function(_parentElement, _cdata, _capitals, _eventHandler) {
+WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
 
     this.parentElement = _parentElement;
+    this.data = alldata;
     this.eventHandler = _eventHandler;
-    this.width = getInnerWidth(this.parentElement) - 50;
-    this.height = (this.width) / 2;
+    this.width = getInnerWidth(this.parentElement);
+    this.height = (this.width) / 2.15;
     this.cdata =_cdata
     this.ccapitals = _capitals
     this.arcdata = [
@@ -147,24 +148,42 @@ WorldMap.prototype.updateVis = function(){
 
    //to draw out lines need to research d3.svg.line()
 
-    var arcs = this.svg.append("g")
-        .attr("class","arcs")
-        .attr("transform", "translate(" + (that.width-70) / 2 + "," + that.height / 2 + ")");
+    //This works....
+    //var arcs = this.svg.append("g")
+    //    .attr("class","arcs")
+    //    .attr("transform", "translate(" + (that.width-70) / 2 + "," + that.height / 2 + ")");
+    //
+    //
+    //arcs.selectAll("path")
+    //    .data(that.arcdata)
+    //    .enter()
+    //    .append("path")
+    //    .attr('d', function(d) {
+    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    //    }).transition().duration(2000)
+    //    .attr('d', function(d) {
+    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    //    })
+    //    .style("stroke", "#111")
 
 
-    arcs.selectAll("path")
-        .data(that.arcdata)
-        .enter()
+    var arcs =this.svg.selectAll(".arcs").data(that.arcdata);
+
+    arcs.enter().append("g")
+            .attr("class","arcs")
+            .attr("transform", "translate(" + (that.width-70) / 2 + "," + that.height / 2 + ")")
         .append("path")
-        .attr('d', function(d) {
-            return lngLatToArc(d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
-        }).transition().duration(2000)
-        .attr('d', function(d) {
-            return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
-        })
-        .style("stroke", "#111")
+        .attr("class", "arcs")
 
+    arcs.attr('d', function(d) {
+                return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+            }).transition().duration(2000)
+            .attr('d', function(d) {
+                return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+            })
+            .style("stroke", "#111")
 
+    arcs.exit().remove()
 
     //Zoom and scroll of the map.  Need to integrate the arcs if we want to have them move too
     //var zoom = d3.behavior.zoom()
@@ -211,8 +230,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 if (oecd_main[z] == cdata[i]["country"]) {
                     target_lat = cdata[i]["lat"]
                     target_long = cdata[i]["lon"]
-                    console.log(oecd_main[z])
-                    console.log(cdata[i]["country"])
+
                 }
             }
             that.arcdata.push(

@@ -11,39 +11,95 @@ body{
 }
 
 #container {
+
     overflow: auto;
+
 }
 
-#nav, #world_map, #footer, #dashboard {
+#header{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    margin: 1%;
+
+    background-color: #efefef;
+    z-index:10;
+}
+
+#dashboard{
+    position: relative;
     margin: 1%;
 }
 
-#graph_1, #graph_2, #graph_3{
+#country_list{
+    position: relative;
+    margin: 1%;
+    float: left;
+    width: 15%;
+    background-color: #efefef;
+    height: 30em;
+}
+
+#world_map{
+    float: left;
+    margin: 1%;
+    width: 81%;
+    height:30em;
+
+}
+
+#graph_1{
     width: 31.3%;
     float: left;
     margin: 1%;
+    background-color: #efefef;
+    height: 30em;
+
+}
+
+
+
+ #graph_2{
+     width: 64%;
+     height: 14em;
+     float: left;
+     margin: 1%;
+     background-color: #efefef;
 
 }
 
 #graph_3{
-    margin-right: 0%;
+    width: 64%;
+    height: 14em;
+    float: left;
+    margin: 1%;
+    background-color: #efefef;
+
 }
+
+#dashboard{
+
+    background-color: #efefef;
+
+}
+
+#footers  {
+    width: 99%;
+    height: 5em;
+    float: left;
+    margin: 1%;
+    background-color: #efefef;
+
+}
+
+
 
 li {
     display: inline;
     padding: 5em;
 }
 
-#nav, #footer, {
-    background-color: #efefef;
-    padding: 0.5em 0;
-}
 
-#graph_1, #graph_2, #graph_3, #dashboard{
-    height: 5em;
-    margin-bottom: 1em;
-    background-color: #efefef;
-}
 
 
 
