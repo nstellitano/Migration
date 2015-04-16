@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
 
     <title>Migration as an Instrument for International Development </title>
@@ -46,26 +46,42 @@
             </div>
     </div>
 
-    <div  id = "dashboard" class="dashboard">
-       <p>
-            <label>Heat Map:
-                Avg Wage Rate<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
-                Migration Rates<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
-                Remittance Rates<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
-                Education<input type="radio" name="coord" id = "latlong" value="latlong" onclick=""> </input>
-            </label>
-       </p>
-        <p>
-            <label>By Country:
-                OECD Countries<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
-                NON OECD Countries<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
+    <form>
+    <label>Migration Rates</label>
+    <input  type="radio" name="coord" id = "migration_rate" value="migration_rate" onclick=""> </input>
+</form>
+        <div  id = "dashboard" class="dashboard">
+            <p></p>
+            <p>
+                <label>By Country:
+                    Migration Rate<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
+                    Hate<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
 
-            </label>
-        </p>
-    </div>
+                </label>
+
+            <!--<label class = "title">Remittance Rates</label>-->
+            <!--<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>-->
+
+            <!--<label class = "title">"Education</label>-->
+            <!--<input type="radio" name="coord" id = "latlong" value="latlong" onclick=""> </input>-->
+
+
+
+                <label>By Country:
+                    OECD Countries<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
+                    NON OECD Countries<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
+
+                </label>
+            </p>
+        </div>
+
 
     <div  id = "country_list" class="country_list">
-        <p>List of Countries</p>
+        <p><b><u>Selected Countries</u></b></p>
+
+            Displays Selected Countries
+
+        </p>
     </div>
 
     <div  id = "world_map" class="world_map">
@@ -98,6 +114,7 @@
 $(function() {
 
 
+   // d3.select.("#country_list").write("test");
     //Create EventHandler
     var MyEventHandler = new Object();
 
@@ -133,6 +150,7 @@ $(function() {
         //Draw Graphs
         //Draw Lines from each country
         world_map.draw_arcData(name)
+        changeDivHTML()
     });
 
     d3.selectAll("input").on("change", function()
@@ -143,9 +161,28 @@ $(function() {
             //but for now...
             console.log("test")
             world_map.HM_migration();
+            changeDivHTML();
         };
 
     });
+
+    function changeDivHTML()
+    {
+
+        //clear current list
+        document.getElementById('country_list').innerHTML = ("<p><b><u>Selected Countries</u></b></p>");
+
+        var previousInnerHTML = new String();
+
+        previousInnerHTML = document.getElementById('country_list').innerHTML;
+        console.log(alldata)
+        for(i=0; i<20; i++) {
+            previousInnerHTML = previousInnerHTML.concat("<p>" + alldata._children[i].name + "<p>");
+        }
+
+        document.getElementById('country_list').innerHTML = previousInnerHTML;
+
+    }
 
 
 
