@@ -67,8 +67,8 @@
       <file leaf-file-name="scatter.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/scatter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.4600515">
-              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.27061856">
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -77,7 +77,7 @@
       <file leaf-file-name="graph.html" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
               <folding />
             </state>
@@ -422,13 +422,20 @@
       <option name="project" value="LOCAL" />
       <updated>1429203787778</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="this is a scatter plot push test">
+      <created>1429204773206</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1429204773207</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="39" y="27" width="1401" height="873" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2217262" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -445,7 +452,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14179105" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2217262" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -494,7 +500,8 @@
     <MESSAGE value="Updated Aid Data" />
     <MESSAGE value="Updated Data Build" />
     <MESSAGE value="Added master data file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added master data file" />
+    <MESSAGE value="this is a scatter plot push test" />
+    <option name="LAST_COMMIT_MESSAGE" value="this is a scatter plot push test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -706,14 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/countries-data.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2177835">
@@ -759,10 +758,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/scatter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4600515">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.27061856">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
           <folding />
         </state>
       </provider>

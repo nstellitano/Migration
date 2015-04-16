@@ -12,7 +12,7 @@ ScatterVis = function(_parentElement, _data, _metaData){
     this.displayData = [];
 
 
-    this.margin = {top: 20, right: 20, bottom: 10, left: 60},
+    this.margin = {top: 10, right: 20, bottom: 10, left: 60},
         this.width = getInnerWidth(this.parentElement) - this.margin.left - this.margin.right,
         this.height = 400 - this.margin.top - this.margin.bottom;
 
