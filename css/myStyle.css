@@ -75,7 +75,7 @@ input[type=radio] {
     float: left;
     margin: 1%;
     background-color: #efefef;
-    height: 30em;
+    height: 35.4em;
 
 }
 
@@ -92,7 +92,7 @@ input[type=radio] {
 
 #scatterVis{
     width: 64%;
-    height: 14em;
+    height: 20em;
     float: left;
     margin: 1%;
     background-color: #efefef;

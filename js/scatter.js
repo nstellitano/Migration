@@ -13,9 +13,8 @@ ScatterVis = function(_parentElement, _alldata, _eventHandler){
     this.eventHandler = _eventHandler;
     console.log(this.data);
 
-    this.margin = {top: 10, right: 20, bottom: 10, left: 60},
-        this.width = getInnerWidth(this.parentElement) - this.margin.left - this.margin.right,
-        this.height = 400 - this.margin.top - this.margin.bottom;
+    this.width = getInnerWidth(this.parentElement)
+    this.height = (this.width) / 2.4
 
     this.initVis();
 
@@ -29,69 +28,43 @@ ScatterVis.prototype.initVis = function(){
 
     var that = this; // read about the this
 
+    this.svg = this.parentElement.append("svg")
+        .attr("width", this.width)
+        .attr("height", this.height)
+        .append("g")
+        .attr("class", "graph")
 
-    var x = d3.scale.linear()
-        .range([0, width]);
+    this.x = d3.scale.linear()
+        .range([20, this.width-30]);
 
-    var y = d3.scale.linear()
-        .range([height, 0]);
+    this.y = d3.scale.linear()
+        .range([this.height,0]);
 
 
-    var color = d3.scale.category10();
+    this.color = d3.scale.category10();
 
-    var xAxis = d3.svg.axis()
-        .scale(x)
+    this.xAxis = d3.svg.axis()
+        .scale(this.x)
         .orient("bottom");
 
-    var yAxis = d3.svg.axis()
-        .scale(y)
+    this.yAxis = d3.svg.axis()
+        .scale(this.y)
         .orient("left");
 
+    this.svg.append("g")
+        .attr("class", "y axis")
 
-    var svg = d3.select("body").insert("svg",":first-child")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    var xg = svg.append("g")
+    this.svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")");
-    xg
-        .append("text")
-        .attr("class", "label")
-        .attr("x", width)
-        .attr("y", -6)
-        .style("text-anchor", "end");
+        .attr("transform", "translate(0," + this.height + ")");
 
-    var yg = svg.append("g")
-        .attr("class", "y axis");
-    yg
-        .append("text")
-        .attr("class", "label")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end");
-
-    var legend = svg.selectAll(".legend")
-        .data(color.domain())
-        .enter().append("g")
-        .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-    legend.append("rect")
-        .attr("x", width - 18)
-        .attr("width", 18)
-        .attr("height", 18)
-        .style("fill", color);
-
-    legend.append("text")
-        .attr("x", width - 24)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .text(function(d) { return d; });
+    this.svg.append("text")
+        .attr("x", (that.width / 2))
+        .attr("y", 0 + (that.height/20))
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .style("text-decoration", "underline")
+        .text("Scatter Plot of Average Wage Differentials and Migrant Stock");
 
 
     // filter, aggregate, modify data
@@ -133,15 +106,15 @@ ScatterVis.prototype.updateVis = function(){
     var that = this;
 
     // updates scales
-    this.x.domain(d3.extent(this.displayData, function(d) { return d.size; }));
-    this.y.domain(d3.extent(this.displayData, function(d) { return d.wage_diffI; }));
+    this.x.domain([0,100000]);
+    this.y.domain([0,100000]);
 
     // updates axis
     this.svg.select(".y.axis")
         .call(this.yAxis);
 
     this.svg.select(".x.axis")
-        .call(that.xAxis)
+        .call(this.xAxis)
 
     // on enter
     var circles = this.svg.selectAll(".dot")
@@ -197,7 +170,7 @@ ScatterVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
  * @param _filter - A filter can be, e.g.,  a function that is only true for data of a given time range
  * @returns {Array|*}
  */
-//ScatterVis.prototype.filterAndAggregate = function(_filter){
+ScatterVis.prototype.filterAndAggregate = function(_filter){
 //
 //
 //    // Set filter to a function that accepts all items
