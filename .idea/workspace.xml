@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="63fb6b85-8924-44d7-a8af-b9f985d948f3" name="Default" comment="" />
+=======
+    <list default="true" id="63fb6b85-8924-44d7-a8af-b9f985d948f3" name="Default" comment="">
+<<<<<<< HEAD
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/Bilateral_Remittance_Matrix_2010.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/Flow_data_1980.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/JSON_Builder_by_education.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/JSON_builder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/Master_JSON_builder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/_1980.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/aid_data.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/data_buildout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/flow_data.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/flow_data_2010.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/flow_dots.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wage_nonoecd.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/wage_oecd.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/map.js" afterPath="$PROJECT_DIR$/js/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/master_data_set.json" afterPath="$PROJECT_DIR$/data/master_data_set.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/myStyle.css" afterPath="$PROJECT_DIR$/css/myStyle.css" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/scatter.js" afterPath="$PROJECT_DIR$/js/scatter.js" />
+>>>>>>> origin/master
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+>>>>>>> origin/master
     <ignored path="Migration.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,9 +51,22 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.6451613">
               <caret line="116" column="34" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
+=======
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="-10.0" vertical-offset="645" max-vertical-offset="2610">
+              <caret line="59" column="3" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
+              <folding>
+                <element signature="e#5087#6106#0" expanded="false" />
+              </folding>
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+>>>>>>> origin/master
               <folding />
+>>>>>>> origin/master
             </state>
           </provider>
         </entry>
@@ -34,18 +74,36 @@
       <file leaf-file-name="myStyle.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/myStyle.css">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="2520">
+              <caret line="115" column="3" selection-start-line="115" selection-start-column="3" selection-end-line="115" selection-end-column="19" />
+=======
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+=======
+              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+>>>>>>> origin/master
+>>>>>>> origin/master
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="0.7190202" vertical-offset="3251" max-vertical-offset="5745">
+              <caret line="250" column="3" selection-start-line="250" selection-start-column="3" selection-end-line="277" selection-end-column="5" />
+=======
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+=======
+              <caret line="185" column="24" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
+>>>>>>> origin/master
+>>>>>>> origin/master
               <folding />
             </state>
           </provider>
@@ -64,9 +122,21 @@
       <file leaf-file-name="graph.html" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="-68.75">
+=======
+<<<<<<< HEAD
+            <state vertical-scroll-proportion="-10.25" vertical-offset="114" max-vertical-offset="840">
+              <caret line="24" column="72" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="72" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+=======
+            <state vertical-scroll-proportion="-0.0">
+>>>>>>> origin/master
               <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
               <folding />
+>>>>>>> origin/master
             </state>
           </provider>
         </entry>
@@ -103,13 +173,29 @@
         <option value="$PROJECT_DIR$/data/data_buildout.html" />
         <option value="$PROJECT_DIR$/data/capitals.json" />
         <option value="$PROJECT_DIR$/data/package.json" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/css/myStyle.css" />
+>>>>>>> origin/master
         <option value="$PROJECT_DIR$/data/Master_JSON_builder.html" />
+>>>>>>> origin/master
         <option value="$PROJECT_DIR$/data/master data set.json" />
         <option value="$PROJECT_DIR$/js/map.js" />
         <option value="$PROJECT_DIR$/js/practice.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/myStyle.css" />
         <option value="$PROJECT_DIR$/js/scatter.js" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/practice.html" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/data/Master_JSON_builder.html" />
+        <option value="$PROJECT_DIR$/data/master_data_set.json" />
+        <option value="$PROJECT_DIR$/js/map.js" />
+        <option value="$PROJECT_DIR$/css/myStyle.css" />
+=======
+>>>>>>> origin/master
       </list>
     </option>
   </component>
@@ -121,10 +207,24 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="31" />
     <option name="y" value="53" />
     <option name="width" value="993" />
     <option name="height" value="772" />
+=======
+<<<<<<< HEAD
+    <option name="x" value="45" />
+    <option name="y" value="23" />
+    <option name="width" value="1514" />
+    <option name="height" value="847" />
+=======
+    <option name="x" value="39" />
+    <option name="y" value="27" />
+    <option name="width" value="1401" />
+    <option name="height" value="873" />
+>>>>>>> origin/master
+>>>>>>> origin/master
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -234,6 +334,7 @@
       <recent name="$PROJECT_DIR$/Building the World Map/d3-exploring-countries" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/countries-10m-topojson" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/Building the World Map/d3-exploring-countries" />
     </key>
@@ -415,6 +516,7 @@
       <option name="project" value="LOCAL" />
       <updated>1429204773207</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00022" summary="this is a scatter plot push test">
       <created>1429286806535</created>
       <option name="number" value="00022" />
@@ -426,29 +528,81 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="31" y="53" width="993" height="772" extended-state="0" />
+=======
+<<<<<<< HEAD
+    <task id="LOCAL-00022" summary="this is a scatter plot push test">
+      <created>1429205380006</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1429205380006</updated>
+    </task>
+    <task id="LOCAL-00023" summary="stupid Div stuff...">
+      <created>1429212687780</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1429212687780</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fixed the radio buttons...sort of">
+      <created>1429231557503</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1429231557503</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fixed the radio buttons...sort of">
+      <created>1429285747741</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1429285747741</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="45" y="23" width="1514" height="847" extended-state="0" />
+=======
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="39" y="27" width="1401" height="873" extended-state="0" />
+>>>>>>> origin/master
+>>>>>>> origin/master
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2217262" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19536757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+<<<<<<< HEAD
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19628836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> origin/master
+>>>>>>> origin/master
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.171659" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13392857" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2217262" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19536757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18494056" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.171659" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13392857" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14179105" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> origin/master
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
+<<<<<<< HEAD
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -471,6 +625,8 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
+=======
+>>>>>>> origin/master
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -505,9 +661,61 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0" vertical-offset="1905" max-vertical-offset="2880">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph_example.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="3510">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="30" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/myStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2550">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3450" max-vertical-offset="4920">
+          <caret line="255" column="29" selection-start-line="255" selection-start-column="29" selection-end-line="255" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/practice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="840">
+          <caret line="24" column="72" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="72" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1770" max-vertical-offset="2475">
+          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+=======
         <state vertical-scroll-proportion="0.0">
           <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding />
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
@@ -543,22 +751,38 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
           <folding />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/myStyle.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0">
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+>>>>>>> origin/master
           <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -575,6 +799,10 @@
         </state>
       </provider>
     </entry>
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -587,7 +815,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+=======
           <folding />
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
@@ -611,7 +845,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="134" selection-end-column="7" />
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+=======
           <folding />
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
@@ -667,6 +907,8 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="file://$PROJECT_DIR$/data/countries-10m-topojson/ABW.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -674,6 +916,7 @@
         </state>
       </provider>
     </entry>
+>>>>>>> origin/master
     <entry file="file://$USER_HOME$/2015-cs171-homework/hw3/js/priovis.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46153846">
@@ -723,6 +966,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/js/scatter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="3945">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph_example.html">
+=======
     <entry file="file://$USER_HOME$/2015-cs171-homework/section3/material/miserables.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="39.375">
@@ -731,12 +985,35 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/countries-data.csv">
+>>>>>>> origin/master
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2177835">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/data/countries-data.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3690">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="190.0" vertical-offset="6345" max-vertical-offset="13950">
+          <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/countries-10m-topojson/ABW.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
     <entry file="file://$PROJECT_DIR$/data/capitals.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -747,7 +1024,13 @@
     <entry file="file://$PROJECT_DIR$/data/master_data_set.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+>>>>>>> origin/master
+          <folding />
+>>>>>>> origin/master
         </state>
       </provider>
     </entry>
@@ -759,7 +1042,27 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/2015-cs171-homework/hw2/graph.html">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/practice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.25" vertical-offset="114" max-vertical-offset="840">
+          <caret line="24" column="72" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="72" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/master_data_set.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4752066" vertical-offset="0" max-vertical-offset="3900165">
+          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+=======
+    <entry file="file://$PROJECT_DIR$/data/master_data_set.json">
+>>>>>>> origin/master
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-68.75">
           <caret line="119" column="12" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="12" />
@@ -769,14 +1072,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/scatter.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="-13.125">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+>>>>>>> origin/master
+>>>>>>> origin/master
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-10.0" vertical-offset="645" max-vertical-offset="2610">
+          <caret line="59" column="3" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
+          <folding>
+            <element signature="e#5087#6106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> origin/master
     <entry file="file://$PROJECT_DIR$/css/myStyle.css">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="2520">
+          <caret line="115" column="3" selection-start-line="115" selection-start-column="3" selection-end-line="115" selection-end-column="19" />
+=======
         <state vertical-scroll-proportion="0.0">
           <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
           <folding />
@@ -785,11 +1111,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.6451613">
           <caret line="116" column="34" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
+=======
+        <state vertical-scroll-proportion="0.27061856">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+>>>>>>> origin/master
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/js/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7190202" vertical-offset="3251" max-vertical-offset="5745">
+          <caret line="250" column="3" selection-start-line="250" selection-start-column="3" selection-end-line="277" selection-end-column="5" />
+>>>>>>> origin/master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+=======
+>>>>>>> origin/master
   </component>
 </project>

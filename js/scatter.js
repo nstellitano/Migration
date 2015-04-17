@@ -35,10 +35,10 @@ ScatterVis.prototype.initVis = function(){
         .attr("class", "graph")
 
     this.x = d3.scale.linear()
-        .range([20, this.width-30]);
+        .range([54, this.width-30]);
 
     this.y = d3.scale.linear()
-        .range([this.height,0]);
+        .range([this.height-20,20]);
 
 
     this.color = d3.scale.category10();
@@ -53,10 +53,11 @@ ScatterVis.prototype.initVis = function(){
 
     this.svg.append("g")
         .attr("class", "y axis")
+        .attr("transform", "translate(60,0)");
 
     this.svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + this.height + ")");
+        .attr("transform", "translate(0," + this.height/1.1 + ")");
 
     this.svg.append("text")
         .attr("x", (that.width / 2))
