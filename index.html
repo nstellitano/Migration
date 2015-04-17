@@ -17,6 +17,7 @@
 
 <!-- add own vis classes-->
 <script src = "js/map.js"></script>
+<script src = "js/script.js"></script>
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -91,10 +92,11 @@
         <p>Bar Graph: Top 10 Migration Countries by Migrant Stock </p>
     </div>
     <p>
-    <div  id = "graph_3" class="graph grid_8">
-        <p>Graph 3</p>
-        <p>Scatter Plot: Migrant Stock for ALl countries by Educaiton Level</p>
-
+    <div  id = "scatterVis" class="graph grid_8">
+        <b>Skill Level:</b>
+        <input name="a" value="lowskill" type="checkbox" checked>Low Skill
+        <input name="a" value="medskill" type="checkbox" checked >Medium Skill
+        <input name="a" value="highskill" type="checkbox" checked >High Skill
     </div>
     </p>
     <div  id = "footers" class = "footers" >
@@ -131,7 +133,7 @@ $(function() {
 
         //Make a WorldMap via the worldmap object
         world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler);
-
+        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
 
 
 
