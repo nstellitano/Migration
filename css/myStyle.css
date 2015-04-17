@@ -27,17 +27,39 @@ body{
 }
 
 #dashboard{
-    position: relative;
+    /*position: fixed;*/
     margin: 1%;
+    /*float: left;*/
+    width: 97%;
+    background-color: #efefef;
+    height: 5em;
+    overflow: scroll;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 10px;
+    /*width: 97%*/
+    font-size: 20px
 }
+
+input[type=radio] {
+    border: 2px;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+
+    outline:1px solid #F00; /* Firefox, Opera, Chrome, IE8+ */
+}
+
+
 
 #country_list{
     position: relative;
-    margin: 1%;
+    /*margin: 1%;*/
     float: left;
     width: 15%;
     background-color: #efefef;
     height: 30em;
+    overflow: scroll;
+    margin:.5em 0 .5em 0
 }
 
 #world_map{
@@ -85,7 +107,7 @@ body{
 
 #footers  {
     width: 99%;
-    height: 5em;
+    height: 2em;
     float: left;
     margin: 1%;
     background-color: #efefef;

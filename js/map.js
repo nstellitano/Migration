@@ -35,7 +35,7 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
 
 
     this.heat_map = d3.scale.ordinal()
-        .range(colorbrewer.Set2[7]);
+        .range(colorbrewer.Set3[7]);
 
     this.initVis();
 
@@ -101,7 +101,7 @@ WorldMap.prototype.initVis = function(){
             })
             .on("mousemove", function (d, i) {
 
-                d3.select(this).style("fill", "black")
+                d3.select(this).style("stroke", "red")
                 var mouse = d3.mouse(that.svg.node()).map(function (d) {
                     return parseInt(d);
                 });
@@ -112,7 +112,7 @@ WorldMap.prototype.initVis = function(){
 
             })
             .on("mouseout", function (d, i) {
-                d3.select(this).style("fill", "#ccc")
+                d3.select(this).style("stroke", "#111")
                 that.tooltip.classed("hidden", true);
             });
 
@@ -247,12 +247,35 @@ WorldMap.prototype.draw_arcData = function(source_country){
     });
 }
 
-WorldMap.prototype.HM_migration = function(){
-    that = this;
-    this.heat_map.domain(d3.extent(this.cdata, function(d) { return parseInt(d.gdp_md_est); }))
 
-    this.country.transition().duration(1300).style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
-}
+    WorldMap.prototype.heatmap = function(radio) {
+        that = this;
+
+console.log(that.data)
+        if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
+
+            that.heat_map.domain([0, d3.max(that.data, function (d, i) {
+                return parseInt(d.data._children[i].size);
+            })])
+
+            for (i = 0; i < 195; i++) {
+
+                var total=0;
+                that.data._children.map(function (d) {
+                    console.log(d)
+                    //total = total + d._children[i].size
+                })
+
+                //$('[title= ' + that.data._children[1]._children[i].name + ']').css("fill", function(){return that.heat_map(total)});
+            }
+
+            for (i = 0; i < 20; i++) {
+                console.log("test")
+                $('[title= ' + that.data._children[i].name + ']').css("fill", function(){console.log(that.heat_map(that.data._children[1].wage));return that.heat_map(that.data._children[1].wage)});
+            }
+        }
+
+    };
 
 //------------Helper Functions-------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------
