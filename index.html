@@ -46,33 +46,23 @@
             </div>
     </div>
 
-    <form>
-    <label>Migration Rates</label>
-    <input  type="radio" name="coord" id = "migration_rate" value="migration_rate" onclick=""> </input>
-</form>
+
         <div  id = "dashboard" class="dashboard">
+            <form>
+                Type of Country:
+                <label><input type="radio" name="layout" value="OECD" checked> OECD</label>
+                <label><input type="radio" name="layout" value="NONOECD" > NON-OECD</label>
+
             <p></p>
-            <p>
-                <label>By Country:
-                    Migration Rate<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
-                    Hate<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
 
-                </label>
+                Characteristic:
+                <label><input type="radio" name="layout" value="Migrant" > Migrant Stock</label>
+                <label><input type="radio" name="layout" value="Remittance" > Remittance</label>
+                <label><input type="radio" name="layout" value="Aid"> Aid</label>
+                <label><input type="radio" name="layout" value="Trade"> Trade</label>
+                <label><input type="radio" name="layout" value="Wage"> Wage Rate</label>
+            </form>
 
-            <!--<label class = "title">Remittance Rates</label>-->
-            <!--<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>-->
-
-            <!--<label class = "title">"Education</label>-->
-            <!--<input type="radio" name="coord" id = "latlong" value="latlong" onclick=""> </input>-->
-
-
-
-                <label>By Country:
-                    OECD Countries<input type="radio" name="coord" id="popgdp" value="popgdp" onclick=""> </input>
-                    NON OECD Countries<input type="radio" name="coord" id = "migration_rate" value="latlong" onclick=""> </input>
-
-                </label>
-            </p>
         </div>
 
 
@@ -177,7 +167,7 @@ $(function() {
         previousInnerHTML = document.getElementById('country_list').innerHTML;
         console.log(alldata)
         for(i=0; i<20; i++) {
-            previousInnerHTML = previousInnerHTML.concat("<p>" + alldata._children[i].name + "<p>");
+            previousInnerHTML = previousInnerHTML.concat("<p style = \"margin:.1em\">" + alldata._children[i].name + "<p>");
         }
 
         document.getElementById('country_list').innerHTML = previousInnerHTML;
