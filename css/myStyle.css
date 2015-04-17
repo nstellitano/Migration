@@ -29,25 +29,25 @@ body{
 #dashboard{
     /*position: fixed;*/
     margin: 1%;
-    /*float: left;*/
+    float: left;
     width: 97%;
     background-color: #efefef;
     height: 5em;
-    overflow: scroll;
+    /*overflow: scroll;*/
     border-bottom: 1px solid #efefef;
     padding-bottom: 10px;
     /*width: 97%*/
     font-size: 20px
 }
 
-input[type=radio] {
-    border: 2px;
-    width: 18px;
-    height: 18px;
-    background-color: white;
+/*input[type=radio] {*/
+    /*border: 2px;*/
+    /*width: 18px;*/
+    /*height: 18px;*/
+    /*background-color: white;*/
 
-    outline:1px solid #F00; /* Firefox, Opera, Chrome, IE8+ */
-}
+    /*outline:1px solid #F00; *//* Firefox, Opera, Chrome, IE8+ */
+/*}*/
 
 
 
@@ -99,11 +99,6 @@ input[type=radio] {
 
 }
 
-#dashboard{
-
-    background-color: #efefef;
-
-}
 
 #footers  {
     width: 99%;
@@ -118,7 +113,7 @@ input[type=radio] {
 
 li {
     display: inline;
-    padding: 5em;
+    /*padding: 5em;*/
 }
 
 

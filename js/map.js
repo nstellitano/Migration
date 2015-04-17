@@ -251,7 +251,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
     WorldMap.prototype.heatmap = function(radio) {
         that = this;
 
-console.log(that.data)
+        console.log(that.data)
         if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
 
             that.heat_map.domain([0, d3.max(that.data, function (d, i) {
@@ -262,18 +262,61 @@ console.log(that.data)
 
                 var total=0;
                 that.data._children.map(function (d) {
-                    console.log(d)
-                    //total = total + d._children[i].size
+                    //console.log(d)
+                    total = total + d._children[i].size
                 })
 
-                //$('[title= ' + that.data._children[1]._children[i].name + ']').css("fill", function(){return that.heat_map(total)});
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(total)});
             }
 
             for (i = 0; i < 20; i++) {
-                console.log("test")
-                $('[title= ' + that.data._children[i].name + ']').css("fill", function(){console.log(that.heat_map(that.data._children[1].wage));return that.heat_map(that.data._children[1].wage)});
-            }
+
+                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(that.data._children[i].wage)
+            })
         }
+
+    }
+
+        if(d3.select(radio).attr("value") == "Remittance" && d3.select(radio).node().checked) {
+
+            var remit_oecd = []
+            var remit_nonoecd = []
+
+            that.data._children.map(function(d){
+                var total = 0;
+                for (i = 0; i < 195; i++) {
+                    total = total + d._children[i]._children[4].size
+                }
+                remit_oecd.push(parseInt(total))
+            })
+
+            for (i = 0; i < 195; i++) {
+                var total = 0;
+                for(z =0; z<20; z++) {
+                    total = total + that.data._children[z]._children[i]._children[4].size
+                }
+                remit_nonoecd.push(parseInt(total*(-1)))
+            }
+
+            console.log(remit_nonoecd)
+            console.log(d3.min(remit_nonoecd,function(d,i){return d[i]}));
+            console.log(d3.max(remit_oecd, function (d, i) {return d[i];}))
+
+            that.heat_map.domain([-2000, 11000])
+
+            for (i = 0; i < 195; i++) {
+
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(remit_nonoecd[i])});
+            }
+
+            for (i = 0; i < 20; i++) {
+
+                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(remit_oecd[i])
+                })
+            }
+
+        }
+
 
     };
 
