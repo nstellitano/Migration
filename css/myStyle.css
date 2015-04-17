@@ -41,9 +41,12 @@ body{
 }
 
 input[type=radio] {
-    border: 0px;
+    border: 2px;
     width: 18px;
-    height: 1em;
+    height: 18px;
+    background-color: white;
+
+    outline:1px solid #F00; /* Firefox, Opera, Chrome, IE8+ */
 }
 
 
