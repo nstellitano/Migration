@@ -136,7 +136,7 @@ $(function() {
 
 console.log(capitals)
 
-        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
+       var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
 
 
 
@@ -170,9 +170,20 @@ console.log(capitals)
 
         previousInnerHTML = document.getElementById('country_list').innerHTML;
 
+        if(d3.select(radio).attr("value") == "NONOECD") {
+
+            for (i = 0; i < 195; i++) {
+                var check = true;
+                for (z = 0; z < 20; z++) {
+                    if (alldata._children[1]._children[i].name == alldata._children[z].name){ check=false}
+
+                }
+                if (check==true) { previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");}
+            }
+        }
+
         if(d3.select(radio).attr("value") == "OECD") {
-            //Filter data maybe call world_map.migration() or something...
-            //but for now...)
+
             for (i = 0; i < 20; i++) {
                 previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
             }

@@ -148,23 +148,7 @@ WorldMap.prototype.updateVis = function(){
 
    //to draw out lines need to research d3.svg.line()
 
-    //This works....
-    //var arcs = this.svg.append("g")
-    //    .attr("class","arcs")
-    //    .attr("transform", "translate(" + (that.width-70) / 2 + "," + that.height / 2 + ")");
-    //
-    //
-    //arcs.selectAll("path")
-    //    .data(that.arcdata)
-    //    .enter()
-    //    .append("path")
-    //    .attr('d', function(d) {
-    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
-    //    }).transition().duration(2000)
-    //    .attr('d', function(d) {
-    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
-    //    })
-    //    .style("stroke", "#111")
+
 
 
     var arcs =this.svg.selectAll(".arcs").data(that.arcdata);
@@ -298,11 +282,8 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 remit_nonoecd.push(parseInt(total*(-1)))
             }
 
-            console.log(remit_nonoecd)
-            console.log(d3.min(remit_nonoecd,function(d,i){return d[i]}));
-            console.log(d3.max(remit_oecd, function (d, i) {return d[i];}))
 
-            that.heat_map.domain([-2000, 11000])
+            that.heat_map.domain([d3.min(remit_nonoecd,function(d,i){return d}), d3.max(remit_oecd, function (d, i) {return d;})])
 
             for (i = 0; i < 195; i++) {
 
@@ -315,10 +296,89 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 })
             }
 
+            that.legend;
         }
 
+        if(d3.select(radio).attr("value") == "Aid" && d3.select(radio).node().checked) {
+
+            var aid_oecd = [];
+            var aid_nonoecd = [];
+
+            that.data._children.map(function(d){
+                var total = 0;
+                for (i = 0; i < 195; i++) {
+                    total = total + d._children[i]._children[3].size
+                }
+                aid_oecd.push(parseInt(total))
+            })
+
+            for (i = 0; i < 195; i++) {
+                var total = 0;
+                for(z =0; z<20; z++) {
+                    total = total + that.data._children[z]._children[i]._children[3].size
+                }
+                aid_nonoecd.push(parseInt(total*(-1)))
+            }
+
+            that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
+
+            for (i = 0; i < 195; i++) {
+
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(aid_nonoecd[i])});
+            }
+
+            for (i = 0; i < 20; i++) {
+
+                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(aid_oecd[i])
+                })
+            }
+
+            that.legend;
+        }
+
+        //if(d3.select(radio).attr("value") == "Wage" && d3.select(radio).node().checked) {
+        //
+        //    var aid_oecd = [];
+        //    var aid_nonoecd = [];
+        //
+        //    that.data._children.map(function(d){
+        //        var total = 0;
+        //        for (i = 0; i < 195; i++) {
+        //            total = total + d._children[i]._children[3].size
+        //        }
+        //        aid_oecd.push(parseInt(total))
+        //    })
+        //
+        //    for (i = 0; i < 195; i++) {
+        //        var total = 0;
+        //        for(z =0; z<20; z++) {
+        //            total = total + that.data._children[z]._children[i]._children[3].size
+        //        }
+        //        aid_nonoecd.push(parseInt(total*(-1)))
+        //    }
+        //
+        //    that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
+        //
+        //    for (i = 0; i < 195; i++) {
+        //
+        //        $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(aid_nonoecd[i])});
+        //    }
+        //
+        //    for (i = 0; i < 20; i++) {
+        //
+        //        $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(aid_oecd[i])
+        //        })
+        //    }
+        //
+        //    that.legend;
+        //}
 
     };
+
+
+
+WorldMap.prototype.legend = function(radio) {}
+
 
 //------------Helper Functions-------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------

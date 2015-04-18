@@ -75,7 +75,7 @@ body{
     float: left;
     margin: 1%;
     background-color: #efefef;
-    height: 35.4em;
+    height: 52em;
 
 }
 
@@ -83,7 +83,7 @@ body{
 
  #graph_2{
      width: 64%;
-     height: 14em;
+     height: 25em;
      float: left;
      margin: 1%;
      background-color: #efefef;
@@ -92,7 +92,7 @@ body{
 
 #scatterVis{
     width: 64%;
-    height: 20em;
+    height: 25em;
     float: left;
     margin: 1%;
     background-color: #efefef;

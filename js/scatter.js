@@ -118,20 +118,20 @@ ScatterVis.prototype.updateVis = function(){
         .call(this.xAxis)
 
     // on enter
-    var circles = this.svg.selectAll(".dot")
-        .data(this.displayData);
-
-    circles.enter()
-        .append("circle")
-        .attr("class", "dot");
-
-    circles.exit().remove();
-
-    // on update
-    circles.attr("cx", function(d) { return x(d.x); })
-        .attr("cy", function(d) { return y(d.y); })
-        .style("fill", "steelblue")
-        .attr("r", 6);
+    //var circles = this.svg.selectAll(".dot")
+    //    .data(that.displayData);
+    //
+    //circles.enter()
+    //    .append("circle")
+    //    .attr("class", "dot");
+    //
+    //circles.exit().remove();
+    //
+    //// on update
+    //circles.attr("cx", function(d) { return x(d.x); })
+    //    .attr("cy", function(d) { return y(d.y); })
+    //    .style("fill", "steelblue")
+    //    .attr("r", 6);
 
 
 
