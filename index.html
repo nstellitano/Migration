@@ -18,6 +18,7 @@
 <!-- add own vis classes-->
 <script src = "js/map.js"></script>
 <script src = "js/scatter.js"></script>
+<script src = "js/OECDBAR.js"></script>
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -82,8 +83,8 @@
     </div>
 
     <div  id = "graph_1" class="graph grid_8">
-        <p>Graph 1</p>
-        <p>Bar Graph: NON OECD Avg Wage vs Increased Avg Wage</p>
+        <!--<p>Graph 1</p>-->
+        <!--<p>Bar Graph: NON OECD Avg Wage vs Increased Avg Wage</p>-->
     </div>
 
     <div  id = "graph_2" class="graph grid_8">
@@ -138,6 +139,7 @@ console.log(capitals)
 
        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
 
+        var oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
 

@@ -74,7 +74,7 @@ body{
     width: 31.3%;
     float: left;
     margin: 1%;
-    background-color: #efefef;
+    background-color: white;
     height: 52em;
 
 }
@@ -95,7 +95,7 @@ body{
     height: 25em;
     float: left;
     margin: 1%;
-    background-color: #efefef;
+    background-color: white;
 
 }
 
@@ -160,4 +160,19 @@ li.key {
     width: 10%;
     padding-left: 0;
     padding-right: 0;
+}
+
+.y_axis text {
+    color: white;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
