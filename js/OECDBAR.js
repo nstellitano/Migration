@@ -32,7 +32,7 @@ OECDBAR.prototype.initvis = function(){
 
 
     this.x = d3.scale.linear()
-        .range([0,this.width - 50])
+        .range([0,this.width - 75])
 
     this.y = d3.scale.linear()
         .range([0,this.height]);

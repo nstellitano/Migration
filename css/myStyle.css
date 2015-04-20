@@ -22,7 +22,7 @@ body{
     left: 0px;
     margin: 1%;
 
-    background-color: #efefef;
+    /*background-color: #efefef;*/
     z-index:10;
 }
 
@@ -31,10 +31,10 @@ body{
     margin: 1%;
     float: left;
     width: 97%;
-    background-color: #efefef;
-    height: 5em;
+    /*background-color: #efefef;*/
+    height: 2em;
     /*overflow: scroll;*/
-    border-bottom: 1px solid #efefef;
+    /*border-bottom: 1px solid #efefef;*/
     padding-bottom: 10px;
     /*width: 97%*/
     font-size: 20px
@@ -56,7 +56,7 @@ body{
     /*margin: 1%;*/
     float: left;
     width: 15%;
-    background-color: #efefef;
+    /*background-color: #efefef;*/
     height: 30em;
     overflow: scroll;
     margin:.5em 0 .5em 0
@@ -113,7 +113,7 @@ body{
 
 li {
     display: inline;
-    /*padding: 5em;*/
+    padding: 1em;
 }
 
 
@@ -143,6 +143,10 @@ div.tooltip_oecd  {
 }
 .hidden {
     display: none;
+}
+
+.country_hidden{
+    fill: "white";
 }
 
 .highlight{

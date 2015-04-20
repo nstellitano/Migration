@@ -55,17 +55,13 @@
 
         <div  id = "dashboard" class="dashboard">
             <form>
-               <label> Type of Country:</label>
-                <input type="radio" name="layout" value="OECD" id="OECD"/><label>OECD</label>
-                <input type="radio" name="layout" value="NONOECD"/> <label>NON-OECD</label>
 
-<p></p>
-                Characteristic:
-                <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant Stock</label>
-                <label><input type="radio" name="layout" value="Remittance", id = "Remittance" > Remittance</label>
-                <label><input type="radio" name="layout" value="Aid"> Aid</label>
-                <label><input type="radio" name="layout" value="Trade"> Trade</label>
-                <label><input type="radio" name="layout" value="Wage"> Wage Rate</label>
+                By:
+                <label><input type="radio" name="layout" value="Wage" id = "Wage"> Wage </label>
+                <label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>
+                <label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>
+                <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant</label>
+
             </form>
 
         </div>
@@ -145,6 +141,7 @@ $(function() {
 
        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
 
+        console.log(scatter_vis)
         var oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
@@ -157,6 +154,7 @@ $(function() {
         last_name = name;
         world_map.draw_arcData(name)
         oecd_bar.wrangledata(name)
+        changeDivHTML(name);
 
     });
 
@@ -164,12 +162,12 @@ $(function() {
     {
 
         world_map.heatmap(this);
-        changeDivHTML(this);
+
         oecd_bar.wrangledata(last_name)
 
     });
 
-    function changeDivHTML(radio)
+    function changeDivHTML(name)
     {
 
         //clear current list
@@ -178,34 +176,35 @@ $(function() {
         var previousInnerHTML = new String();
 
         previousInnerHTML = document.getElementById('country_list').innerHTML;
+        previousInnerHTML = previousInnerHTML.concat("<h5>" + name + "<h5>")
+//        if(d3.select(radio).attr("value") == "NONOECD") {
+//
+//            for (i = 0; i < 195; i++) {
+//                var check = true;
+//                for (z = 0; z < 20; z++) {
+//                    if (alldata._children[1]._children[i].name == alldata._children[z].name){ check=false}
+//
+//                }
+//                if (check==true) { previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");}
+//            }
+//        }
+//
+//        if(d3.select(radio).attr("value") == "OECD") {
+//
+//            for (i = 0; i < 20; i++) {
+//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
+//            }
+//
+//        }
+//
+//        if(d3.select(radio).attr("value") == "Migrant" || d3.select(radio).attr("value") == "Remittance" || d3.select(radio).attr("value") == "Aid") {
+//
+//            for (i = 0; i < 195; i++) {
+//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");
+//            }
+//
+//        }
 
-        if(d3.select(radio).attr("value") == "NONOECD") {
-
-            for (i = 0; i < 195; i++) {
-                var check = true;
-                for (z = 0; z < 20; z++) {
-                    if (alldata._children[1]._children[i].name == alldata._children[z].name){ check=false}
-
-                }
-                if (check==true) { previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");}
-            }
-        }
-
-        if(d3.select(radio).attr("value") == "OECD") {
-
-            for (i = 0; i < 20; i++) {
-                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
-            }
-
-        }
-
-        if(d3.select(radio).attr("value") == "Migrant" || d3.select(radio).attr("value") == "Remittance" || d3.select(radio).attr("value") == "Aid") {
-
-            for (i = 0; i < 195; i++) {
-                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");
-            }
-
-        }
         document.getElementById('country_list').innerHTML = previousInnerHTML;
 
     }

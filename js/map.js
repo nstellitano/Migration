@@ -18,7 +18,7 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
         }]
 
 
-    console.log(this.data)
+
     //Map Required Calculations
     this.projection = d3.geo.mercator()
         .translate([0, 0])
@@ -35,8 +35,11 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
     this.tooltip = d3.select("body").append("div").attr("class", "tooltip hidden");
 
 
-    this.heat_map = d3.scale.ordinal()
-        .range(colorbrewer.Set3[7]);
+    this.heat_map_oecd = d3.scale.quantize()
+        .range(colorbrewer.Reds[9]).domain([0, 6000000]);
+
+    this.heat_map_nonoecd = d3.scale.quantize()
+        .range(colorbrewer.Greens[9]).domain([-3000000, 0]);
 
     this.initVis();
 
@@ -57,7 +60,7 @@ WorldMap.prototype.initVis = function(){
     this.svg.append("rect")
         .attr("width", that.width)
         .attr("height", that.height)
-        .style("fill", "steelblue")
+        .style("fill", "white")
 
 
     //Still working out what this is actually doing
@@ -103,7 +106,8 @@ WorldMap.prototype.initVis = function(){
             })
             .on("mousemove", function (d, i) {
 
-                d3.select(this).style("stroke", "red")
+                //d3.select(this).style("stroke", "red")
+                //d.classed("country_hidden", true)
                 var mouse = d3.mouse(that.svg.node()).map(function (d) {
                     return parseInt(d);
                 });
@@ -114,8 +118,9 @@ WorldMap.prototype.initVis = function(){
 
             })
             .on("mouseout", function (d, i) {
-                d3.select(this).style("stroke", "#111")
+                //d3.select(this).style("stroke", "#111")
                 that.tooltip.classed("hidden", true);
+                //d.classed("country_hidden", false)
             });
 
 
@@ -134,12 +139,81 @@ WorldMap.prototype.updateVis = function(){
 
 
 
+    var startValue = -3000000;
+    var endValue = 0;
+    var nElements = 9;
+    var stepSize = (endValue-startValue)/(nElements-1) -2;
+    var color_data =  []
+
+    for (var i = startValue+3; i <= endValue; i=i+stepSize) {
+        color_data.push(i);
+    }
+
+    var startValue1 = 0;
+    var endValue1 = 6000000;
+    var nElements1 = 9;
+    var stepSize1 = (endValue1-startValue1)/(nElements1-1) -2;
+    var color_data1 =  []
+
+    for (var i = startValue1+3; i <= endValue1; i=i+stepSize1) {
+        color_data1.push(i);
+    }
+
+
+    var rect = this.svg.selectAll(".rectoecd")
+        .data(color_data1, function(d){return d})
+
+    rect.enter().append("g").append("rect").attr("class", "rectoed")
+
+
+        .attr("x", function(d, i) {console.log(i);return i*20+20})
+        .attr("y", function(d,i) {return 300 ; })
+        .attr("width", function(d,i) {return 20})
+        .attr("height", 20)
+
+
+
+    rect
+
+        .attr("fill", function(d,i){return that.heat_map_oecd(d)})
+
+
+    rect
+        .exit()
+        .remove();
+
+    var rect1 = this.svg.selectAll(".rectnon")
+        .data(color_data, function(d){return d})
+
+    rect1.enter().append("g").append("rect").attr("class", "rectnon")
+
+    rect1
+        .select(".rectnon")
+        .attr("x", function(d, i) {return i*20+20})
+        .attr("y", function(d,i) {return 400 ; })
+        .attr("width", function(d,i) {return 20})
+        .attr("height", 20)
+
+
+
+    rect1
+        //.attr("class", "rect")
+        .attr("fill", function(d,i){return that.heat_map_nonoecd(d)})
+
+
+    rect1
+        .exit()
+        .remove();
+
+
+
+
+
+
 
 
    //to draw out lines need to research d3.svg.line()
    //
-
-
 
     var arcs =this.svg.selectAll(".arcs").data(that.arcdata);
 
@@ -240,10 +314,11 @@ WorldMap.prototype.draw_arcData = function(source_country){
         //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
         //Need to make a legend
         var colors = d3.scale.quantize()   //Quantifies the size of colors
-            .range(colorbrewer.Set3[7]);
+            .range(colorbrewer.Set3[7])
+            .domain([-3000000, 6000000])
 
 
-        console.log(colors)
+
         //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
         //
         //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
@@ -253,9 +328,10 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
             var min=0;
             var max=0;
-            that.heat_map.domain([0, d3.max(that.data, function (d, i) {
-                return parseInt(d.data._children[i].size);
-            })])
+           // that.heat_map.domain([-3000000, 6000000]);
+
+
+
 
             for (i = 0; i < 195; i++) {
 
@@ -265,20 +341,30 @@ WorldMap.prototype.draw_arcData = function(source_country){
                     total = total + d._children[i].size
                 })
 
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_nonoecd(-1*total)});
                 if(total*-1 <min){min = -1*total};
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(-1*total)});
-            }
 
-            for (i = 0; i < 20; i++) {
-                if(that.data._children[i].size>max){max =that.data._children[i].size}
-                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(that.data._children[i].size)
-            })
+
+                //Need to subtract out outflows of OECD countries
+                for(z = 0; z<20; z++){
+                    if(total>max){max =that.data._children[z].size-total}
+                    if(that.data._children[z].name == that.data._children[1]._children[i].name) {
+                        $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
+                        console.log(that.data._children[1]._children[i].name)
+                        console.log(total)
+
+                    }
+                }
+
+
+
+            }
+console.log(min)
+            console.log(max)
+
         }
 
-            console.log(min)
-            console.log(max)
-            colors.domain([min,max])
-    }
+
 
 
         if(d3.select(radio).attr("value") == "Remittance" && d3.select(radio).node().checked) {
@@ -303,7 +389,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
             }
 
 
-            that.heat_map.domain([d3.min(remit_nonoecd,function(d,i){return d}), d3.max(remit_oecd, function (d, i) {return d;})])
+            //that.heat_map.domain([d3.min(remit_nonoecd,function(d,i){return d}), d3.max(remit_oecd, function (d, i) {return d;})])
 
             for (i = 0; i < 195; i++) {
 
@@ -340,7 +426,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 aid_nonoecd.push(parseInt(total*(-1)))
             }
 
-            that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
+            //that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
 
             for (i = 0; i < 195; i++) {
 

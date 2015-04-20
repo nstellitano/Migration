@@ -11,7 +11,7 @@ ScatterVis = function(_parentElement, _alldata, _eventHandler){
     this.data = _alldata;
     this.displayData = [];
     this.eventHandler = _eventHandler;
-    console.log(this.data);
+
 
     this.width = getInnerWidth(this.parentElement)
     this.height = (this.width) / 2.4
@@ -91,9 +91,6 @@ ScatterVis.prototype.wrangleData= function(_filterFunction){
     //var options = _options || {filter: function(){return true;}};
 
 
-
-
-
 }
 
 
@@ -103,12 +100,13 @@ ScatterVis.prototype.wrangleData= function(_filterFunction){
  */
 ScatterVis.prototype.updateVis = function(){
 
-
     var that = this;
 
+
     // updates scales
-    this.x.domain([0,100000]);
-    this.y.domain([0,100000]);
+
+    this.x.domain([0,d3.max(that.displayData.size_low)]);
+    this.y.domain([0,d3.max(that.displayData.wage_diff_high)]);
 
     // updates axis
     this.svg.select(".y.axis")
@@ -118,20 +116,26 @@ ScatterVis.prototype.updateVis = function(){
         .call(this.xAxis)
 
     // on enter
-    //var circles = this.svg.selectAll(".dot")
-    //    .data(that.displayData);
-    //
-    //circles.enter()
-    //    .append("circle")
-    //    .attr("class", "dot");
-    //
-    //circles.exit().remove();
-    //
-    //// on update
-    //circles.attr("cx", function(d) { return x(d.x); })
-    //    .attr("cy", function(d) { return y(d.y); })
-    //    .style("fill", "steelblue")
-    //    .attr("r", 6);
+    var dots = this.svg.selectAll("circle")
+        .data(that.displayData);
+
+
+    dots.enter().append("g").append("circle")
+
+    dots
+        .attr("class","circle")
+        .style("fill", "black")
+        .attr("r", 5);
+
+    dots.exit()
+        .remove();
+
+    // on update
+    dots.select("circle")
+        .attr("cx", 4)
+        .attr("cy", 4)
+        .style("fill", "black")
+        .attr("r", 5);
 
 
 
@@ -172,38 +176,143 @@ ScatterVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
  * @returns {Array|*}
  */
 ScatterVis.prototype.filterAndAggregate = function(_filter){
-//
-//
-//    // Set filter to a function that accepts all items
-//    // ONLY if the parameter _filter is NOT null use this parameter
-//    var filter = function(){return true;}
-//    if (_filter != null){
-//        filter = _filter;
-//    }
-//    //Dear JS hipster, a more hip variant of this construct would be:
-//    // var filter = _filter || function(){return true;}
-//
-//    var that = this;
-//
-//
-//    // create an array of values for age 0-100
-//    var avg_wage_diff = d3.range(24).map(function () {
-//        return 0;
-//    });
-//    // accumulate all values that fulfill the filter criterion
-//
-//    // TODO: implement the function that filters the data and sums the values
-//
-//
-//    that.data.map(function (d,i) {
-//        if (d["_children"][i]["_children"][i]["wage_diffI"] !=0) {}
-//        else {
-//            for (i = 0; i < d["_children"].length; i++) {
-//                avg_wage_diff[i] = avg_wage_diff[i] + d["_children"][i]["_children"][i]["wage_diffI"][i];
-//            }
-//        }
-//        }
-//        return avg_wage_diff
-//    });
+
+
+
+    var filter = function(){return true;}
+    if (_filter != null){
+        filter = _filter;
+    }
+
+
+    var that = this;
+
+
+    // create an array of wage differential for different education levels
+    var avg_wage_diffI = []
+    var avg_wage_diffII = []
+    var avg_wage_diffIII = []
+
+    //create total number of migrants for each skill level
+    var sizeI = []
+    var sizeII = []
+    var sizeIII = []
+
+    var country=[]
+
+    for (i = 0; i < 195; i++) {
+        var lowskill=0
+        var medskill=0
+        var highskill=0
+
+        var lowwage=0
+        var medwage=0
+        var highwage=0
+        name=""
+
+        for(z =0; z<20; z++) {
+            if (that.data._children[z]._children[i].wage_diffI !=0)
+            {
+                lowskill= lowskill + +that.data._children[z]._children[i]._children[0].size
+                medskill= medskill + +that.data._children[z]._children[i]._children[1].size
+                highskill= highskill + +that.data._children[z]._children[i]._children[2].size
+
+                lowwage= lowwage + +that.data._children[z]._children[i].wage_diffI
+                medwage= medwage + +that.data._children[z]._children[i].wage_diffII
+                highwage= highwage + +that.data._children[z]._children[i].wage_diffIII
+
+                name = that.data._children[z]._children[i].name
+
+            }
+
+        }
+        sizeI.push(parseInt(lowskill))
+        sizeII.push(parseInt(medskill))
+        sizeIII.push(parseInt(highskill))
+
+        avg_wage_diffI.push(parseInt(lowwage)/20)
+        avg_wage_diffII.push(parseInt(medwage)/20)
+        avg_wage_diffIII.push(parseInt(highwage)/20)
+
+        country.push(name)
+    }
+
+    var sizeI = sizeI.filter(function(v) {
+        return v !== 0;
+    });
+    var sizeII = sizeII.filter(function(v) {
+        return v !== 0;
+    });
+    var sizeIII = sizeIII.filter(function(v) {
+        return v !== 0;
+    });
+    var avg_wage_diffI = avg_wage_diffI.filter(function(v) {
+        return v !== 0;
+    });
+    var avg_wage_diffII = avg_wage_diffII.filter(function(v) {
+        return v !== 0;
+    });
+    var avg_wage_diffIII = avg_wage_diffIII.filter(function(v) {
+        return v !== 0;
+    });
+    var country = country.filter(function(v) {
+        return v !== "";
+    });
+
+    sc = {"country":country,
+        "size_low":sizeI,
+        "size_medium": sizeII,
+        "size_high":sizeIII,
+        "wage_diff_low": avg_wage_diffI,
+        "wage_diff_medium":avg_wage_diffII,
+        "wage_diff_high":avg_wage_diffIII}
+
+    return sc;
+    //this.updateVis(sc);
+
+
+    //that.data._children.map(function (d) {
+    //    var lowskill=0
+    //    var medskill=0
+    //    var highskill=0
+    //
+    //    var lowwage=0
+    //    var medwage=0
+    //    var highwage=0
+    //
+    //
+    //
+    //
+    //    for (i = 0; i < 195; i++) {
+    //        if (d._children[i].wage_diffI !=0)
+    //        {
+    //            lowskill= lowskill + +d._children[i]._children[0].size
+    //            medskill= medskill + +d._children[i]._children[1].size
+    //            highskill= highskill + +d._children[i]._children[2].size
+    //
+    //            lowwage= lowwage + +d._children[i].wage_diffI
+    //            medwage= medwage + +d._children[i].wage_diffII
+    //            highwage= highwage + +d._children[i].wage_diffIII
+    //
+    //
+    //
+    //        }
+    //    }
+    //
+    //    sizeI.push(parseInt(lowskill))
+    //    sizeII.push(parseInt(medskill))
+    //    sizeIII.push(parseInt(highskill))
+    //
+    //    avg_wage_diffI.push(parseInt(lowwage))
+    //    avg_wage_diffII.push(parseInt(medwage))
+    //    avg_wage_diffIII.push(parseInt(highwage))
+    //
+    //
+    //
+    //
+    //
+    //});
+
+
 
 }
