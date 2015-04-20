@@ -18,6 +18,7 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
         }]
 
 
+    console.log(this.data)
     //Map Required Calculations
     this.projection = d3.geo.mercator()
         .translate([0, 0])
@@ -98,6 +99,7 @@ WorldMap.prototype.initVis = function(){
             .style("stroke", "#111")
             .on("click", function (d) {
                 $(that.eventHandler).trigger("selection", d.properties.name)
+
             })
             .on("mousemove", function (d, i) {
 
@@ -133,21 +135,9 @@ WorldMap.prototype.updateVis = function(){
 
 
 
-    //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
-    //Need to make a legend
-    //var colors = d3.scale.quantize()   //Quantifies the size of colors
-    //    .domain()
-    //    .range(colorbrewer.Greens[7]);
-    //
-    //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
-    //
-    //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
-
-
-
 
    //to draw out lines need to research d3.svg.line()
-
+   //
 
 
 
@@ -159,15 +149,19 @@ WorldMap.prototype.updateVis = function(){
         .append("path")
         .attr("class", "arcs")
 
-    arcs.attr('d', function(d) {
-                return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    arcs.attr('d', function(d,i) {
+        return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             }).transition().duration(2000)
             .attr('d', function(d) {
-                return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+            console.log(lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9)); return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             })
-            .style("stroke", "#111")
+            .style("stroke", "black")
+
 
     arcs.exit().remove()
+
+
+
 
     //Zoom and scroll of the map.  Need to integrate the arcs if we want to have them move too
     //var zoom = d3.behavior.zoom()
@@ -191,32 +185,37 @@ WorldMap.prototype.draw_arcData = function(source_country){
     //Filter out the OECD country or NON OECD country and their "targets" or "sources"
 
     that = this;
-    var oecd_main = ["Australia", "Austria", "Canada", "France","Germany", "Great Britain", "Greece", "Netherlands", "Norway", "United States" ]
+    var oecd_main = {"name": "Mexico"};
 
-    this.arcdata = [
+
+
+    that.arcdata = [
         {
             sourceLocation: [0, 0],
             targetLocation: [0, 0]
         }]
 
-    d3.json("data/capitals.json", function(cdata) {
-        console.log(cdata)
-        var source_lat, source_long
+
+    var source_lat = 0
+    var source_long = 0;
         var target_lat=0
         var target_long=0;
-        for(z=0; z<oecd_main.length; z++ ) {
-            for (i = 0; i < cdata.length; i++) {
-                if (source_country == cdata[i]["country"]) {
-                    source_lat = cdata[i]["lat"]
-                    source_long = cdata[i]["lon"]
+
+        for(z=0; z<1; z++ ) {
+            for (i = 0; i < 241; i++) {
+                if (source_country == that.ccapitals[i]["country"]) {
+                    source_lat = that.ccapitals[i]["lat"]
+                    source_long = that.ccapitals[i]["lon"]
                 }
 
-                if (oecd_main[z] == cdata[i]["country"]) {
-                    target_lat = cdata[i]["lat"]
-                    target_long = cdata[i]["lon"]
+                if (oecd_main.name == that.ccapitals[i]["country"]) {
+                    console.log("It compared correctly")
+                    target_lat = that.ccapitals[i]["lat"]
+                    target_long = that.ccapitals[i]["lon"]
 
                 }
             }
+
             that.arcdata.push(
                 {
                     sourceLocation: [source_long, source_lat],
@@ -225,19 +224,35 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
         }
 
-        //that.arcdata.splice(0,1)
-        console.log(that.arcdata)
+        that.arcdata.splice(0,1)
+
+
         that.updateVis()
-    });
+
 }
 
 
     WorldMap.prototype.heatmap = function(radio) {
         that = this;
 
-        console.log(that.data)
+
+
+        //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
+        //Need to make a legend
+        var colors = d3.scale.quantize()   //Quantifies the size of colors
+            .range(colorbrewer.Set3[7]);
+
+
+        console.log(colors)
+        //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
+        //
+        //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
+
+
         if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
 
+            var min=0;
+            var max=0;
             that.heat_map.domain([0, d3.max(that.data, function (d, i) {
                 return parseInt(d.data._children[i].size);
             })])
@@ -246,20 +261,25 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
                 var total=0;
                 that.data._children.map(function (d) {
-                    //console.log(d)
+
                     total = total + d._children[i].size
                 })
 
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(total)});
+                if(total*-1 <min){min = -1*total};
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(-1*total)});
             }
 
             for (i = 0; i < 20; i++) {
-
-                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(that.data._children[i].wage)
+                if(that.data._children[i].size>max){max =that.data._children[i].size}
+                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(that.data._children[i].size)
             })
         }
 
+            console.log(min)
+            console.log(max)
+            colors.domain([min,max])
     }
+
 
         if(d3.select(radio).attr("value") == "Remittance" && d3.select(radio).node().checked) {
 
@@ -409,7 +429,9 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
     var sourceLngLat = d[sourceName],
         targetLngLat = d[targetName];
 
+
     if (targetLngLat && sourceLngLat) {
+
         var sourceXY = projection( sourceLngLat ),
             targetXY = projection( targetLngLat );
 
@@ -428,7 +450,7 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
         // To avoid a whirlpool effect, make the bend direction consistent regardless of whether the source is east or west of the target
         var west_of_source = (targetX - sourceX) < 0;
         if (west_of_source) return "M" + targetX + "," + targetY + "A" + dr + "," + dr + " 0 0,1 " + sourceX + "," + sourceY;
-        return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
+        return  "M"+sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
 
     } else {
         return "M0,0,l0,0z";
