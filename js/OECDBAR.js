@@ -260,7 +260,7 @@ OECDBAR.prototype.filter = function(name){
                                     total_wageI = total_wageI + (d._children[z]._children[0].size * d._children[z].wage_diffI)
                                     total_wageII = total_wageII + (d._children[z]._children[1].size * d._children[z].wage_diffII)
                                     total_wageIII = total_wageIII + (d._children[z]._children[2].size * d._children[z].wage_diffIII);
-console.log(d._children[z].wage_diffI)
+
 
                                     total_popI = total_popI + d._children[z]._children[0].size;
                                     total_popII = total_popII + d._children[z]._children[1].size;
