@@ -142,7 +142,7 @@ OECDBAR.prototype.updatevis = function(){
     var oecd_abbr = ["AUS", "AUT", "CAN", "CHE", "CHL", "DEU", "DNK", "ESP", "FIN", "FRA", "GBR",
                      "GRC", "IRL", "LUX", "NDL", "NOR", "NZL", "PRT", "SWE", "USA"];
 
-    var oecd_full = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "United Kingdom",
+    var oecd_full = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "Great Britain",
         "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway", "New Zealand", "Portugal", "Sweden", "United States" ]
 
     var yaxis_names = this.displayData.name.map(function(d,z){
@@ -195,7 +195,7 @@ OECDBAR.prototype.selection= function (name){
 
 OECDBAR.prototype.filter = function(name){
 
-    console.log(name)
+
     selected_name = [name] || ["Argentina"]
     console.log(selected_name)
     var total_oecd = {"name":[], "total": [], "type":[]};
@@ -213,7 +213,7 @@ OECDBAR.prototype.filter = function(name){
 
 
     if(document.getElementById("Remittance").checked){
-        var total_oecd = {"name":["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "United Kingdom",
+        var total_oecd = {"name":["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "Great Britain",
             "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway", "New Zealand", "Portugal", "Sweden", "United States" ], "total": [], "type":[]};
 
         this.data._children.map(function(d){
@@ -227,6 +227,7 @@ OECDBAR.prototype.filter = function(name){
     if(document.getElementById("Wage").checked){
         total_oecd = {"name":[], "total": [], "type":[]};
         var counter = 0;
+        console.log(that.data)
         that.data._children.map(function (d) {
 
             if (d.wageI > 0) {
@@ -238,7 +239,8 @@ OECDBAR.prototype.filter = function(name){
         });
 
         this.data._children.map(function(d){
-            for (i = 0; i <total_oecd.name.length; i++) {
+            var check =1;
+            for (i = 0; i <total_oecd.name.length-2; i=i+3) {
 
                 var total_wageI = 0;
                 var total_wageII = 0;
@@ -246,34 +248,57 @@ OECDBAR.prototype.filter = function(name){
                 var total_popI = 0;
                 var total_popII = 0;
                 var total_popIII = 0;
-                if(d.name == total_oecd.name[i]) {
-                    for (z = 0; z < 195; z++) {
-                       selected_name.map(function(selection) {
+                if (check == 1) {
 
-                               total_wageI = total_wageI + (d._children[z]._children[0].size * d._children[z].wage_diffI)
-                               total_wageII = total_wageII + (d._children[z]._children[1].size * d._children[z].wage_diffII)
-                               total_wageIII = total_wageIII + (d._children[z]._children[1].size * d._children[z].wage_diffIII);
+                    if (d.name == total_oecd.name[i]) {
+                        check = 0;
+
+                        for (z = 0; z < 195; z++) {
+                            selected_name.map(function (selection) {
+
+                                if (selection == d._children[z].name) {
+                                    total_wageI = total_wageI + (d._children[z]._children[0].size * d._children[z].wage_diffI)
+                                    total_wageII = total_wageII + (d._children[z]._children[1].size * d._children[z].wage_diffII)
+                                    total_wageIII = total_wageIII + (d._children[z]._children[2].size * d._children[z].wage_diffIII);
+console.log(d._children[z].wage_diffI)
+
+                                    total_popI = total_popI + d._children[z]._children[0].size;
+                                    total_popII = total_popII + d._children[z]._children[1].size;
+                                    total_popIII = total_popIII + d._children[z]._children[2].size;
+                                    console.log(total_wageI/total_popI)
+                                }
+
+                            })
+                        }
+
+                        if (document.getElementById("migrant_stock").checked) {
+                            total_oecd.total[i] = Math.round(total_wageI)
+                            total_oecd.total[i + 1] = Math.round(total_wageII)
+                            total_oecd.total[i + 2] = Math.round(total_wageIII)
+                        } else {
+                            if (total_popI > 0) {
+                                total_oecd.total[i] = Math.round(total_wageI / total_popI)
+                            } else {
+                                total_oecd.total[i] = 0
+                            }
+                            if (total_popII > 0) {
+                                total_oecd.total[i + 1] = Math.round(total_wageII / total_popII)
+                            } else {
+                                total_oecd.total[i + 1] = 0
+                            }
+                            if (total_popIII > 0) {
+                                total_oecd.total[i + 2] = Math.round(total_wageIII / total_popIII)
+                            } else {
+                                total_oecd.total[i + 2] = 0
+                            }
+                        }
 
 
-                               total_popI = d._children[z]._children[0].size ;
-                               total_popII = d._children[z]._children[1].size;
-                               total_popIII = d._children[z]._children[2].size ;
-
-
-                       })
+                        total_oecd.type[i] = "Wage: "
+                        total_oecd.type[i + 1] = "Wage: "
+                        total_oecd.type[i + 2] = "Wage: "
                     }
-
-                    if(document.getElementById("migrant_stock").checked) {
-                        total_oecd.total[i] = total_wageI
-                        total_oecd.total[i+1] =total_wageII
-                        total_oecd.total[i+2] =total_wageIII
-                    } else{
-                        total_oecd.total[i] = total_wageI/total_popI
-                        total_oecd.total[i+1] = total_wageII/total_popII
-                        total_oecd.total[i+2] = total_wageIII/total_popIII
-                    };
-
-                    total_oecd.type[i] = "Wage: "}
+                }
             }
 
         })
