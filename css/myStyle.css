@@ -81,9 +81,9 @@ body{
 
 
 
- #graph_2{
+ #stackbarVis{
      width: 64%;
-     height: 25em;
+     height: 20em;
      float: left;
      margin: 1%;
      background-color: #efefef;
@@ -92,7 +92,7 @@ body{
 
 #scatterVis{
     width: 64%;
-    height: 25em;
+    height: 20em;
     float: left;
     margin: 1%;
     background-color: white;
@@ -177,17 +177,6 @@ li.key {
     padding-right: 0;
 }
 
-.y_axis text {
-    color: white;
-}
-
-.axis text {
-    font: 10px sans-serif;
-}
-
-.axis line,
-.axis path {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+.rect{
+    shape-rendering: crispEdges
 }
