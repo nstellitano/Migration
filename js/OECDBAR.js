@@ -75,7 +75,7 @@ OECDBAR.prototype.updatevis = function(){
 
     //What is selected?
     this.x.domain([0, d3.max(that.displayData.total)]);
-    this.y.domain([0,20]); //Can change if we just do wages
+    this.y.domain([0,that.displayData.total.length]); //Can change if we just do wages
 
     var offsetL = document.getElementById("graph_1").offsetLeft;
     var offsetT = document.getElementById("graph_1").offsetTop;
@@ -104,7 +104,7 @@ OECDBAR.prototype.updatevis = function(){
     rect.transition().duration(1500)
         .select("rect")
         .attr("x", 50)
-        .attr("y", function(d,i) {return that.y(i) +20 ; })
+        .attr("y", function(d,i) {console.log(i); return that.y(i) +20 ; })
         .attr("width", function(d,i) {return that.x(d)})
         .attr("height", 20)
 
@@ -142,8 +142,21 @@ OECDBAR.prototype.updatevis = function(){
     var oecd_abbr = ["AUS", "AUT", "CAN", "CHE", "CHL", "DEU", "DNK", "ESP", "FIN", "FRA", "GBR",
                      "GRC", "IRL", "LUX", "NDL", "NOR", "NZL", "PRT", "SWE", "USA"];
 
+    var oecd_full = ["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "United Kingdom",
+        "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway", "New Zealand", "Portugal", "Sweden", "United States" ]
+
+    var yaxis_names = this.displayData.name.map(function(d,z){
+        for(i=0; i<oecd_full.length; i++) {
+            if (d == oecd_full[i]){return oecd_abbr[i]}
+
+        }
+    });
+
+console.log(yaxis_names)
+
+
     var text = this.svg.selectAll(".text_oecd")
-        .data(oecd_abbr, function(d){return d})
+        .data(yaxis_names, function(d){return d})
 
     text.enter().append("g").append("text")
 
@@ -182,8 +195,8 @@ OECDBAR.prototype.selection= function (name){
 
 OECDBAR.prototype.filter = function(name){
 
-    var total_oecd = {"name":["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "United Kingdom",
-                            "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway", "New Zealand", "Portugal", "Sweden", "United States" ], "total": [], "type":[]};
+    name = name || "Argentina"
+    var total_oecd = {"name":[], "total": [], "type":[]};
 
 
 
@@ -209,6 +222,33 @@ OECDBAR.prototype.filter = function(name){
         })
     }
 
+    if(document.getElementById("Wage").checked){
+        total_oecd = {"name":[], "total": [], "type":[]};
+        var counter = 0;
+        that.data._children.map(function (d) {
+
+            if (d.wageI > 0) {
+                total_oecd.name[counter] = d.name;
+                counter++;
+            }
+        });
+
+        this.data._children.map(function(d){
+            for (i = 0; i <total_oecd.name.length; i++) {
+
+                var total_wage = 0;
+                if(d.name == total_oecd.name[i]) {
+                    //for (i = 0; i < 195; i++) {
+                       // total_wage = d.size* d.wageI;
+                    //}
+                    total_oecd.total[i] = d.size* d.wageI;
+                    total_oecd.type[i] = "Wage: "}
+            }
+
+        })
+    }
+
+    console.log(total_oecd)
 
     return total_oecd;
 
