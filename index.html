@@ -18,6 +18,7 @@
 <!-- add own vis classes-->
 <script src = "js/map.js"></script>
 <script src = "js/scatter.js"></script>
+<script src = "js/stackbar.js"></script>
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -86,9 +87,7 @@
         <p>Bar Graph: NON OECD Avg Wage vs Increased Avg Wage</p>
     </div>
 
-    <div  id = "graph_2" class="graph grid_8">
-        <p>Graph 2</p>
-        <p>Bar Graph: Top 10 Migration Countries by Migrant Stock </p>
+    <div  id = "stackbarVis" class="graph grid_8">
     </div>
     <p>
     <div  id = "scatterVis" class="graph grid_8">
@@ -133,11 +132,8 @@ $(function() {
         //Make a WorldMap via the worldmap object
         world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler);
 
-
-console.log(capitals)
-
         var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
-
+        var stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
 
 
 

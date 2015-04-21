@@ -75,15 +75,15 @@ body{
     float: left;
     margin: 1%;
     background-color: #efefef;
-    height: 35.4em;
+    height: 41.3em;
 
 }
 
 
 
- #graph_2{
+ #stackbarVis{
      width: 64%;
-     height: 14em;
+     height: 20em;
      float: left;
      margin: 1%;
      background-color: #efefef;
@@ -160,4 +160,8 @@ li.key {
     width: 10%;
     padding-left: 0;
     padding-right: 0;
+}
+
+.rect{
+    shape-rendering: crispEdges
 }
