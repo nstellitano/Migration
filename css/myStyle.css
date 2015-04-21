@@ -177,6 +177,9 @@ li.key {
     padding-right: 0;
 }
 
+.y_axis text{
+    color: white;
+}
 .rect{
     shape-rendering: crispEdges
 }
