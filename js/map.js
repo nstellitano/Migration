@@ -18,7 +18,6 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
         }]
 
 
-
     //Map Required Calculations
     this.projection = d3.geo.mercator()
         .translate([0, 0])
@@ -35,14 +34,8 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
     this.tooltip = d3.select("body").append("div").attr("class", "tooltip hidden");
 
 
-    this.heat_map = d3.scale.quantize()
-        .range(colorbrewer.Reds[9])
-
-    this.heat_map_oecd = d3.scale.quantize()
-        .range(colorbrewer.Reds[9]).domain([0, 6000000]);
-
-    this.heat_map_nonoecd = d3.scale.quantize()
-        .range(colorbrewer.Greens[9]).domain([-3000000, 0]);
+    this.heat_map = d3.scale.ordinal()
+        .range(colorbrewer.Set3[7]);
 
     this.initVis();
 
@@ -63,7 +56,7 @@ WorldMap.prototype.initVis = function(){
     this.svg.append("rect")
         .attr("width", that.width)
         .attr("height", that.height)
-        .style("fill", "white")
+        .style("fill", "steelblue")
 
 
     //Still working out what this is actually doing
@@ -105,12 +98,10 @@ WorldMap.prototype.initVis = function(){
             .style("stroke", "#111")
             .on("click", function (d) {
                 $(that.eventHandler).trigger("selection", d.properties.name)
-
             })
             .on("mousemove", function (d, i) {
 
-                //d3.select(this).style("stroke", "red")
-                //d.classed("country_hidden", true)
+                d3.select(this).style("stroke", "red")
                 var mouse = d3.mouse(that.svg.node()).map(function (d) {
                     return parseInt(d);
                 });
@@ -121,9 +112,8 @@ WorldMap.prototype.initVis = function(){
 
             })
             .on("mouseout", function (d, i) {
-                //d3.select(this).style("stroke", "#111")
+                d3.select(this).style("stroke", "#111")
                 that.tooltip.classed("hidden", true);
-                //d.classed("country_hidden", false)
             });
 
 
@@ -141,8 +131,41 @@ WorldMap.prototype.updateVis = function(){
     that = this;
 
 
+
+
+    //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
+    //Need to make a legend
+    //var colors = d3.scale.quantize()   //Quantifies the size of colors
+    //    .domain()
+    //    .range(colorbrewer.Greens[7]);
+    //
+    //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
+    //
+    //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
+
+
+
+
    //to draw out lines need to research d3.svg.line()
-   //
+
+    //This works....
+    //var arcs = this.svg.append("g")
+    //    .attr("class","arcs")
+    //    .attr("transform", "translate(" + (that.width-70) / 2 + "," + that.height / 2 + ")");
+    //
+    //
+    //arcs.selectAll("path")
+    //    .data(that.arcdata)
+    //    .enter()
+    //    .append("path")
+    //    .attr('d', function(d) {
+    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    //    }).transition().duration(2000)
+    //    .attr('d', function(d) {
+    //        return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    //    })
+    //    .style("stroke", "#111")
+
 
     var arcs =this.svg.selectAll(".arcs").data(that.arcdata);
 
@@ -152,19 +175,15 @@ WorldMap.prototype.updateVis = function(){
         .append("path")
         .attr("class", "arcs")
 
-    arcs.attr('d', function(d,i) {
-        return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+    arcs.attr('d', function(d) {
+                return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             }).transition().duration(2000)
             .attr('d', function(d) {
-            console.log(lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9)); return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
+                return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             })
-            .style("stroke", "black")
-
+            .style("stroke", "#111")
 
     arcs.exit().remove()
-
-
-
 
     //Zoom and scroll of the map.  Need to integrate the arcs if we want to have them move too
     //var zoom = d3.behavior.zoom()
@@ -188,37 +207,32 @@ WorldMap.prototype.draw_arcData = function(source_country){
     //Filter out the OECD country or NON OECD country and their "targets" or "sources"
 
     that = this;
-    var oecd_main = {"name": "Mexico"};
+    var oecd_main = ["Australia", "Austria", "Canada", "France","Germany", "Great Britain", "Greece", "Netherlands", "Norway", "United States" ]
 
-
-
-    that.arcdata = [
+    this.arcdata = [
         {
             sourceLocation: [0, 0],
             targetLocation: [0, 0]
         }]
 
-
-    var source_lat = 0
-    var source_long = 0;
+    d3.json("data/capitals.json", function(cdata) {
+        console.log(cdata)
+        var source_lat, source_long
         var target_lat=0
         var target_long=0;
-
-        for(z=0; z<1; z++ ) {
-            for (i = 0; i < 241; i++) {
-                if (source_country == that.ccapitals[i]["country"]) {
-                    source_lat = that.ccapitals[i]["lat"]
-                    source_long = that.ccapitals[i]["lon"]
+        for(z=0; z<oecd_main.length; z++ ) {
+            for (i = 0; i < cdata.length; i++) {
+                if (source_country == cdata[i]["country"]) {
+                    source_lat = cdata[i]["lat"]
+                    source_long = cdata[i]["lon"]
                 }
 
-                if (oecd_main.name == that.ccapitals[i]["country"]) {
-                    console.log("It compared correctly")
-                    target_lat = that.ccapitals[i]["lat"]
-                    target_long = that.ccapitals[i]["lon"]
+                if (oecd_main[z] == cdata[i]["country"]) {
+                    target_lat = cdata[i]["lat"]
+                    target_long = cdata[i]["lon"]
 
                 }
             }
-
             that.arcdata.push(
                 {
                     sourceLocation: [source_long, source_lat],
@@ -227,71 +241,41 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
         }
 
-        that.arcdata.splice(0,1)
-
-
+        //that.arcdata.splice(0,1)
+        console.log(that.arcdata)
         that.updateVis()
-
+    });
 }
 
 
     WorldMap.prototype.heatmap = function(radio) {
         that = this;
 
-        var min, max, range;
-
-
-
-        //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
-        //Need to make a legend
-
-
-        //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
-        //
-        //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
-
-
+        console.log(that.data)
         if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
 
-            var min=0;
-            var max=0;
-           // that.heat_map.domain([-3000000, 6000000]);
-
-
-
+            that.heat_map.domain([0, d3.max(that.data, function (d, i) {
+                return parseInt(d.data._children[i].size);
+            })])
 
             for (i = 0; i < 195; i++) {
 
                 var total=0;
                 that.data._children.map(function (d) {
-
+                    //console.log(d)
                     total = total + d._children[i].size
                 })
 
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_nonoecd(-1*total)});
-                if(total*-1 <min){min = -1*total};
-
-
-                //Need to subtract out outflows of OECD countries
-                for(z = 0; z<20; z++){
-                    if(total>max){max =that.data._children[z].size-total}
-                    if(that.data._children[z].name == that.data._children[1]._children[i].name) {
-                        $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
-                        console.log(that.data._children[1]._children[i].name)
-                        console.log(total)
-
-                    }
-                }
-
-
-
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(total)});
             }
 
+            for (i = 0; i < 20; i++) {
 
+                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(that.data._children[i].wage)
+            })
         }
 
-
-
+    }
 
         if(d3.select(radio).attr("value") == "Remittance" && d3.select(radio).node().checked) {
 
@@ -314,8 +298,11 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 remit_nonoecd.push(parseInt(total*(-1)))
             }
 
+            console.log(remit_nonoecd)
+            console.log(d3.min(remit_nonoecd,function(d,i){return d[i]}));
+            console.log(d3.max(remit_oecd, function (d, i) {return d[i];}))
 
-            //that.heat_map.domain([d3.min(remit_nonoecd,function(d,i){return d}), d3.max(remit_oecd, function (d, i) {return d;})])
+            that.heat_map.domain([-2000, 11000])
 
             for (i = 0; i < 195; i++) {
 
@@ -328,175 +315,10 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 })
             }
 
-            that.legend;
         }
 
-        if(d3.select(radio).attr("value") == "Aid" && d3.select(radio).node().checked) {
 
-            var aid_oecd = [];
-            var aid_nonoecd = [];
-
-            that.data._children.map(function(d){
-                var total = 0;
-                for (i = 0; i < 195; i++) {
-                    total = total + d._children[i]._children[3].size
-                }
-                aid_oecd.push(parseInt(total))
-            })
-
-            for (i = 0; i < 195; i++) {
-                var total = 0;
-                for(z =0; z<20; z++) {
-                    total = total + that.data._children[z]._children[i]._children[3].size
-                }
-                aid_nonoecd.push(parseInt(total*(-1)))
-            }
-
-            //that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
-
-            for (i = 0; i < 195; i++) {
-
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(aid_nonoecd[i])});
-            }
-
-            for (i = 0; i < 20; i++) {
-
-                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(aid_oecd[i])
-                })
-            }
-
-            that.legend;
-        }
-
-        if(d3.select(radio).attr("value") == "Wage" && d3.select(radio).node().checked) {
-
-            var wage_table = {"name": [], "TypeI": [], "TypeII": [], "TypeIII": [], "Avg": []}
-            var counter = 0;
-
-            for (i = 0; i < 195; i++) {
-
-                if (that.data._children[0]._children[i].wage_diffI > 0) {
-                    wage_table.name[counter] = that.data._children[0]._children[i].name
-                    wage_table.TypeI[counter] = that.data._children[0].wageI - that.data._children[1]._children[i].wage_diffI
-                    wage_table.TypeII[counter] = that.data._children[0].wageII - that.data._children[1]._children[i].wage_diffII
-                    wage_table.TypeIII[counter] = that.data._children[0].wageIII - that.data._children[1]._children[i].wage_diffIII
-                    counter = counter + 1
-                }
-            }
-
-            that.data._children.map(function (d) {
-
-                if (d.wageI > 0) {
-                    wage_table.name[counter] = d.name;
-                    wage_table.TypeI[counter] = parseInt(d.wageI);
-                    wage_table.TypeII[counter] = parseInt(d.wageII);
-                    wage_table.TypeIII[counter] = parseInt(d.wageIII);
-                    counter = counter + 1;
-
-                }
-            });
-
-
-            for (i = 0; i < wage_table.name.length; i++) {
-                wage_table.Avg[i] = (wage_table.TypeI[i] + wage_table.TypeII[i] + wage_table.TypeIII[i]) / 3;
-            }
-
-
-            range = d3.extent(wage_table.Avg, function (d) {
-                return d
-            });
-
-            that.heat_map.domain(range)
-
-            for (i = 0; i < wage_table.name.length; i++) {
-
-                $('[title="' + String(wage_table.name[i]) + '"]').css("fill", function () {
-                    return that.heat_map(wage_table.Avg[i])
-                });
-            }
-        }
-
-        min = range[0];
-        max = range[1];
-            that.legend(min, max);
-        };
-
-
-
-
-
-WorldMap.prototype.legend = function(min, max) {
-
-
-
-
-    var startValue = min;
-    var endValue = max;
-    var nElements = 9;
-    var stepSize = (endValue-startValue)/(nElements-1) -2;
-    var color_data =  []
-
-    for (var i = startValue+3; i <= endValue; i=i+stepSize) {
-        color_data.push(i);
-    }
-
-    var startValue1 = 0;
-    var endValue1 = 6000000;
-    var nElements1 = 9;
-    var stepSize1 = (endValue1-startValue1)/(nElements1-1) -2;
-    var color_data1 =  []
-
-    for (var i = startValue1+3; i <= endValue1; i=i+stepSize1) {
-        color_data1.push(i);
-    }
-
-
-
-
-    var legend = this.svg.selectAll(".legend")
-        .data(color_data, function(d){ return d})
-
-    legend.enter()
-        .append("g")
-        .attr("class", "legend")
-
-    legend.exit().remove()
-
-    var rect = legend.selectAll(".rect")
-        .data(function(d) {return [d]})
-
-    rect.enter().append("rect").attr("class", "rect");
-
-    var count = 8
-    rect.attr("x", function(d, i){return 10 ; } )
-        .attr("y", function(d,i) {count--; return count*20 +250})
-        .attr("width", function(d,i) {return 20})
-        .attr("height", 20)
-        .attr("fill", function(d,i){return that.heat_map(d)})
-
-    rect.exit()
-        .remove()
-
-    var label = legend.selectAll(".text")
-        .data(function(d){return[d]})
-
-    label.enter().append("text").attr("class", "text")
-
-    count =8;
-    label
-        .attr("x", function(d, i){return 35 ; } )
-        .attr("y", function(d,i) {count--; return count*20 +258})
-        .attr("font-size", "9px")
-         .attr("dy", ".35em")
-         .text(function(d) { return "< $" +  Math.round(d); });
-
-    label.exit()
-        .remove();
-    console.log(color_data)
-
-
-}
-
+    };
 
 //------------Helper Functions-------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -527,9 +349,7 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
     var sourceLngLat = d[sourceName],
         targetLngLat = d[targetName];
 
-
     if (targetLngLat && sourceLngLat) {
-
         var sourceXY = projection( sourceLngLat ),
             targetXY = projection( targetLngLat );
 
@@ -548,7 +368,7 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
         // To avoid a whirlpool effect, make the bend direction consistent regardless of whether the source is east or west of the target
         var west_of_source = (targetX - sourceX) < 0;
         if (west_of_source) return "M" + targetX + "," + targetY + "A" + dr + "," + dr + " 0 0,1 " + sourceX + "," + sourceY;
-        return  "M"+sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
+        return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
 
     } else {
         return "M0,0,l0,0z";
