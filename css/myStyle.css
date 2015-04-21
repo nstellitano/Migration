@@ -22,7 +22,7 @@ body{
     left: 0px;
     margin: 1%;
 
-    background-color: #efefef;
+    /*background-color: #efefef;*/
     z-index:10;
 }
 
@@ -31,10 +31,10 @@ body{
     margin: 1%;
     float: left;
     width: 97%;
-    background-color: #efefef;
-    height: 5em;
+    /*background-color: #efefef;*/
+    height: 2em;
     /*overflow: scroll;*/
-    border-bottom: 1px solid #efefef;
+    /*border-bottom: 1px solid #efefef;*/
     padding-bottom: 10px;
     /*width: 97%*/
     font-size: 20px
@@ -56,7 +56,7 @@ body{
     /*margin: 1%;*/
     float: left;
     width: 15%;
-    background-color: #efefef;
+    /*background-color: #efefef;*/
     height: 30em;
     overflow: scroll;
     margin:.5em 0 .5em 0
@@ -74,8 +74,8 @@ body{
     width: 31.3%;
     float: left;
     margin: 1%;
-    background-color: #efefef;
-    height: 41.3em;
+    background-color: white;
+    height: 52em;
 
 }
 
@@ -83,7 +83,7 @@ body{
 
  #graph_2{
      width: 64%;
-     height: 20em;
+     height: 25em;
      float: left;
      margin: 1%;
      background-color: #efefef;
@@ -92,10 +92,10 @@ body{
 
 #scatterVis{
     width: 64%;
-    height: 20em;
+    height: 25em;
     float: left;
     margin: 1%;
-    background-color: #efefef;
+    background-color: white;
 
 }
 
@@ -113,7 +113,7 @@ body{
 
 li {
     display: inline;
-    /*padding: 5em;*/
+    padding: 1em;
 }
 
 
@@ -130,8 +130,23 @@ div.tooltip {
     opacity: 0.9;
     position: absolute;
 }
+
+div.tooltip_oecd  {
+    color: #222;
+    background: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px 0px #a6a6a6;
+    opacity: 0.9;
+    position: absolute;
+}
 .hidden {
     display: none;
+}
+
+.country_hidden{
+    fill: "white";
 }
 
 .highlight{
@@ -162,6 +177,17 @@ li.key {
     padding-right: 0;
 }
 
-.rect{
-    shape-rendering: crispEdges
+.y_axis text {
+    color: white;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
