@@ -18,7 +18,6 @@
 <!-- add own vis classes-->
 <script src = "js/map.js"></script>
 <script src = "js/scatter.js"></script>
-<script src = "js/stackbar.js"></script>
 <script src = "js/OECDBAR.js"></script>
 
 <!--Stylesheets-->
@@ -56,17 +55,13 @@
 
         <div  id = "dashboard" class="dashboard">
             <form>
-               <label> Type of Country:</label>
-                <input type="radio" name="layout" value="OECD" id="OECD"/><label>OECD</label>
-                <input type="radio" name="layout" value="NONOECD"/> <label>NON-OECD</label>
 
-<p></p>
-                Characteristic:
-                <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant Stock</label>
-                <label><input type="radio" name="layout" value="Remittance" > Remittance</label>
-                <label><input type="radio" name="layout" value="Aid"> Aid</label>
-                <label><input type="radio" name="layout" value="Trade"> Trade</label>
-                <label><input type="radio" name="layout" value="Wage"> Wage Rate</label>
+                By:
+                <label><input type="radio" name="layout" value="Wage" id = "Wage" > Wage </label>
+                <label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>
+                <label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>
+                <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant</label>
+
             </form>
 
         </div>
@@ -84,11 +79,18 @@
     </div>
 
     <div  id = "graph_1" class="graph grid_8">
-        <p>Graph 1</p>
-        <p>Bar Graph: NON OECD Avg Wage vs Increased Avg Wage</p>
+        <!--<p>Graph 1</p>-->
+        <h3>Extra Annual Wage Earned</h3>
+        <b>Aggregated by:</b>
+        <form>
+            <label><input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock</label>
+            <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
+        </form>
     </div>
 
-    <div  id = "stackbarVis" class="graph grid_8">
+    <div  id = "graph_2" class="graph grid_8">
+        <p>Graph 2</p>
+        <p class = "oecd_title">Bar Graph: Top 10 Migration Countries by Migrant Stock </p>
     </div>
     <p>
     <div  id = "scatterVis" class="graph grid_8">
@@ -114,6 +116,7 @@ $(function() {
     var MyEventHandler = new Object();
 
     var cdata, ccapitals, alldata;
+    var last_name;
 
     //------------Load the Data and begin-------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,14 +130,21 @@ $(function() {
     //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
     function ready(error, countries, capitals, AllData) {
         cdata = countries;
-        ccapitals = capitals;
+        ccapitals = capitals
         alldata = AllData;
+
+
 
         //Make a WorldMap via the worldmap object
         world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler);
 
-        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
-        var stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
+
+
+
+       var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
+
+
+        var oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
 
@@ -142,22 +152,27 @@ $(function() {
     //-------------------------------------------------------------------------------------------------------------------------------------------------
 
     $(MyEventHandler).bind("selection", function (event, name) {
-        console.log(name);
-        //Draw Graphs
-        //Draw Lines from each country
-        world_map.draw_arcData(name)
-        changeDivHTML()
+
+        last_name = name;
+        world_map.draw_arcData(last_name)
+        oecd_bar.wrangledata([name])
+        changeDivHTML(last_name);
+
     });
 
     d3.selectAll("input").on("change", function()
     {
 
+        if(d3.select(this).attr("name")  == "oecd"){
+            oecd_bar.wrangledata(last_name)
+        }else {
             world_map.heatmap(this);
-            changeDivHTML(this);
+        }
+
 
     });
 
-    function changeDivHTML(radio)
+    function changeDivHTML(name)
     {
 
         //clear current list
@@ -166,23 +181,35 @@ $(function() {
         var previousInnerHTML = new String();
 
         previousInnerHTML = document.getElementById('country_list').innerHTML;
+        previousInnerHTML = previousInnerHTML.concat("<h5>" + name + "<h5>")
+//        if(d3.select(radio).attr("value") == "NONOECD") {
+//
+//            for (i = 0; i < 195; i++) {
+//                var check = true;
+//                for (z = 0; z < 20; z++) {
+//                    if (alldata._children[1]._children[i].name == alldata._children[z].name){ check=false}
+//
+//                }
+//                if (check==true) { previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");}
+//            }
+//        }
+//
+//        if(d3.select(radio).attr("value") == "OECD") {
+//
+//            for (i = 0; i < 20; i++) {
+//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
+//            }
+//
+//        }
+//
+//        if(d3.select(radio).attr("value") == "Migrant" || d3.select(radio).attr("value") == "Remittance" || d3.select(radio).attr("value") == "Aid") {
+//
+//            for (i = 0; i < 195; i++) {
+//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");
+//            }
+//
+//        }
 
-        if(d3.select(radio).attr("value") == "OECD") {
-            //Filter data maybe call world_map.migration() or something...
-            //but for now...)
-            for (i = 0; i < 20; i++) {
-                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
-            }
-
-        }
-
-        if(d3.select(radio).attr("value") == "Migrant" || d3.select(radio).attr("value") == "Remittance" || d3.select(radio).attr("value") == "Aid") {
-
-            for (i = 0; i < 195; i++) {
-                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");
-            }
-
-        }
         document.getElementById('country_list').innerHTML = previousInnerHTML;
 
     }
