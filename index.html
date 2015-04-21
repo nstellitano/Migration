@@ -19,6 +19,7 @@
 <script src = "js/map.js"></script>
 <script src = "js/scatter.js"></script>
 <script src = "js/OECDBAR.js"></script>
+<script src = "js/stackbar.js"></script>
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -79,6 +80,7 @@
     </div>
 
     <div  id = "graph_1" class="graph grid_8">
+
         <!--<p>Graph 1</p>-->
         <h3>Extra Annual Wage Earned</h3>
         <b>Aggregated by:</b>
@@ -88,9 +90,8 @@
         </form>
     </div>
 
-    <div  id = "graph_2" class="graph grid_8">
-        <p>Graph 2</p>
-        <p class = "oecd_title">Bar Graph: Top 10 Migration Countries by Migrant Stock </p>
+    <div  id = "stackbarVis" class="graph grid_8">
+
     </div>
     <p>
     <div  id = "scatterVis" class="graph grid_8">
@@ -142,8 +143,7 @@ $(function() {
 
 
        var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
-
-
+        var stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         var oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
