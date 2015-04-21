@@ -1,12 +1,11 @@
 /**
- * Created by samikadhikari on 4/16/15.
+ * Created by samikadhikari on 4/20/15.
  */
-
 
 //This file creates the scatter plot with avg wage differential on the y axis and total stock of migrants in the x axis
 
 
-ScatterVis = function(_parentElement, _alldata, _eventHandler){
+StackbarVis = function(_parentElement, _alldata, _eventHandler){
     this.parentElement = _parentElement;
     this.data = _alldata;
     this.displayData = [];
@@ -14,7 +13,7 @@ ScatterVis = function(_parentElement, _alldata, _eventHandler){
 
 
     this.width = getInnerWidth(this.parentElement)
-    this.height = (this.width) / 2.4
+    this.height = (this.width) / 2.2
 
     this.initVis();
 
@@ -24,7 +23,7 @@ ScatterVis = function(_parentElement, _alldata, _eventHandler){
 /**
  * Method that sets up the SVG and the variables
  */
-ScatterVis.prototype.initVis = function(){
+StackbarVis.prototype.initVis = function(){
 
     var that = this; // read about the this
 
@@ -38,31 +37,38 @@ ScatterVis.prototype.initVis = function(){
         .range([54, this.width-30]);
 
     this.y = d3.scale.linear()
-        .range([this.height-20,20]);
+        .range([20,this.height-68]);
+
+    this.yalt = d3.scale.linear()
+        .range([this.height-68,20]);
 
 
     this.color = d3.scale.category10();
 
     this.xAxis = d3.svg.axis()
         .scale(this.x)
+        .ticks(25)
+        .tickFormat(function(d){return that.displayData.country[d]})
         .orient("bottom");
 
     this.yAxis = d3.svg.axis()
-        .scale(this.y)
-        .ticks(5)
-        .orient("left");
+        .scale(this.yalt)
+        .orient("left")
+        //.ticks(5)
+        .tickFormat(d3.format(".2s"))
+
 
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
-        .style("font-size", "10px")
+        .style("font-size", "8px")
         .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + this.height/1.1 + ")")
-        .style("font-size", "10px")
+        .attr("transform", "translate(0,20)")
         .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+
 
     this.svg.append("text")
         .attr("x", (that.width / 2))
@@ -70,7 +76,7 @@ ScatterVis.prototype.initVis = function(){
         .attr("text-anchor", "middle")
         .style("font-size", "12px")
         .style("text-decoration", "underline")
-        .text("Scatter Plot of Average Wage Differentials and Migrant Stock");
+        .text("Average wage differentials in comparison to Remittances/Aid");
 
 
     // filter, aggregate, modify data
@@ -85,7 +91,7 @@ ScatterVis.prototype.initVis = function(){
  * Method to wrangle the data. In this case it takes an options object
  * @param _filterFunction - a function that filters data or "null" if none
  */
-ScatterVis.prototype.wrangleData= function(_filterFunction){
+StackbarVis.prototype.wrangleData= function(_filterFunction){
 
     // displayData should hold the data which is visualized
     this.displayData = this.filterAndAggregate(_filterFunction);
@@ -103,15 +109,17 @@ ScatterVis.prototype.wrangleData= function(_filterFunction){
 /**
  * the drawing function - should use the D3 selection, enter, exit
  */
-ScatterVis.prototype.updateVis = function(){
+StackbarVis.prototype.updateVis = function(){
 
     var that = this;
 
 
     // updates scales
 
-    this.x.domain([0,d3.max(that.displayData.size_low)]);
-    this.y.domain([0,50000]);
+    this.x.domain([0,25]);
+    this.yalt.domain([0,2000000000000]);
+    console.log(that.displayData.total_wage_differential);
+    this.y.domain([0,2000000000000]);
 
     // updates axis
     this.svg.select(".y.axis")
@@ -121,76 +129,40 @@ ScatterVis.prototype.updateVis = function(){
     this.svg.select(".x.axis")
         .call(this.xAxis)
 
+    this.svg.select(".x.axis")
+        .attr("transform", "translate(5,205)")
+        .call(that.xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .style("font-size", "9px")
+        .attr("dx", ".1em")
+        .attr("dy", ".40em")
+        .attr("transform", function(d) {
+            return "rotate(-60)"
+        });
 
-    //Low-Low
-    // on enter
-    var dots = this.svg.selectAll(".circle")
+
+    //Bar
+    var bar = this.svg.selectAll(".rect")
         .data(that.displayData.country);
 
+    bar.enter().append("g").append("rect");
 
-    dots.enter().append("g").append("circle")
+    // Add attributes (position) to bars
+    bar
+        .attr("class", "rect")
+        .attr("fill", "orange")
 
-    dots
-        .attr("class","circle")
-
-
-    dots.exit()
+    bar.exit()
         .remove();
 
-    // on update
-    dots.select("circle")
-        .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_low[i])})
-        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
-        .style("fill", "black")
-        .attr("r", 5);
-
-    //Low-Low
-    // on enter
-    var dots2 = this.svg.selectAll(".circle1")
-        .data(that.displayData.country);
-
-
-    dots2.enter().append("g").append("circle")
-
-    dots2
-        .attr("class","circle")
-
-
-    dots2.exit()
-        .remove();
-
-    // on update
-    dots2.select("circle")
-        .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_medium[i])})
-        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_medium[i])})
-        .style("fill", "red")
-        .attr("r", 5);
-
-    //Low-Low
-    // on enter
-    var dots3 = this.svg.selectAll(".circle2")
-        .data(that.displayData.country);
-
-
-    dots3.enter().append("g").append("circle")
-
-    dots3
-        .attr("class","circle")
-
-
-    dots3.exit()
-        .remove();
-
-    // on update
-    dots3.select("circle")
-        .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_high[i])})
-        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_high[i])})
-        .style("fill", "green")
-        .attr("r", 5);
-
+    bar.select("rect")
+        .attr("x", function(d,i){ return 5 + that.x(i)})
+        .attr("y", function(d,i){ return  that.height - 48 - that.y(that.displayData.total_wage_differential[i])})
+        .attr("width", 10)
+        .attr("height", function(d, i) {
+            return that.y(that.displayData.total_wage_differential[i]) - 20 ;
+        });
 
 
 }
@@ -202,7 +174,7 @@ ScatterVis.prototype.updateVis = function(){
  * be defined here.
  * @param selection
  */
-ScatterVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
+StackbarVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
 
     //var filter = {"start": selectionStart, "end": selectionEnd}
 
@@ -229,7 +201,7 @@ ScatterVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
  * @param _filter - A filter can be, e.g.,  a function that is only true for data of a given time range
  * @returns {Array|*}
  */
-ScatterVis.prototype.filterAndAggregate = function(_filter){
+StackbarVis.prototype.filterAndAggregate = function(_filter){
 
 
 
@@ -252,16 +224,25 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
     var sizeII = []
     var sizeIII = []
 
+    var totaldifferential = []
+
+    var totalremittance = []
+
     var country=[]
 
     for (i = 0; i < 195; i++) {
         var lowskill=0
         var medskill=0
         var highskill=0
+        var totalskill=0
 
         var lowwage=0
         var medwage=0
         var highwage=0
+        var totalwage=0
+
+        var totalwagediff=0
+        var totalrem = 0
         name=""
 
         for(z =0; z<20; z++) {
@@ -271,9 +252,17 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
                 medskill= medskill + +that.data._children[z]._children[i]._children[1].size
                 highskill= highskill + +that.data._children[z]._children[i]._children[2].size
 
+                totalskill = lowskill + medskill + highskill
+
                 lowwage= lowwage + +that.data._children[z]._children[i].wage_diffI
                 medwage= medwage + +that.data._children[z]._children[i].wage_diffII
                 highwage= highwage + +that.data._children[z]._children[i].wage_diffIII
+
+                totalwage = lowwage + medwage + highwage
+
+                totalwagediff = totalskill * totalwage
+
+                totalrem= totalrem + +that.data._children[z]._children[i]._children[4].size
 
                 name = that.data._children[z]._children[i].name
 
@@ -287,6 +276,9 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
         avg_wage_diffI.push(parseInt(lowwage)/20)
         avg_wage_diffII.push(parseInt(medwage)/20)
         avg_wage_diffIII.push(parseInt(highwage)/20)
+
+        totaldifferential.push(parseInt(totalwagediff))
+        totalremittance.push(parseInt(totalrem))
 
         country.push(name)
     }
@@ -309,6 +301,12 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
     var avg_wage_diffIII = avg_wage_diffIII.filter(function(v) {
         return v !== 0;
     });
+    var totaldifferential = totaldifferential.filter(function(v) {
+        return v !== 0;
+    });
+    var totalremittance = totalremittance.filter(function(v) {
+        return v !== 0;
+    });
     var country = country.filter(function(v) {
         return v !== "";
     });
@@ -319,7 +317,10 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
         "size_high":sizeIII,
         "wage_diff_low": avg_wage_diffI,
         "wage_diff_medium":avg_wage_diffII,
-        "wage_diff_high":avg_wage_diffIII}
+        "wage_diff_high":avg_wage_diffIII,
+        "total_remit": totalremittance,
+        "total_wage_differential":totaldifferential
+    }
 
     return sc;
     //this.updateVis(sc);
