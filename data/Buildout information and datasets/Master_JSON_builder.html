@@ -99,8 +99,10 @@
                 }
 
 
+
                 if( isNaN(parseInt(aid[ro][col]))) {AID =0} else {AID = parseInt(aid[ro][col])}
 
+              //  console.log(AID)
                 var totalI = 0;
                 var totalII = 0;
                 var totalIII = 0;
@@ -336,9 +338,11 @@
 
                         for (zz = 0; zz < template.length; zz++) {
                             if (year1._children[z].name == template[zz][1] && year1._children[z]._children[i].name == template[zz][0]) {
-                                year1._children[z]._children[i]._children[3].size = template[zz][3] //Aid
-                                year1._children[z]._children[i]._children[4].size = template[zz][4] //Remittance
-                                year1._children[z]._children[i]._children[5].size = 0  //template[zz][2] //Trade
+                                year1._children[z]._children[i]._children[3].size = template[zz][3]; //Aid
+
+                                year1._children[z]._children[i]._children[4].size = template[zz][4]; //Remittance
+                                year1._children[z]._children[i]._children[5].size = 0;  //template[zz][2] //Trade
+
                             }
 
                         }

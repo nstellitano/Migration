@@ -195,7 +195,9 @@ OECDBAR.prototype.selection= function (name){
 
 OECDBAR.prototype.filter = function(name){
 
-    name = name || "Argentina"
+    console.log(name)
+    selected_name = [name] || ["Argentina"]
+    console.log(selected_name)
     var total_oecd = {"name":[], "total": [], "type":[]};
 
 
@@ -228,20 +230,49 @@ OECDBAR.prototype.filter = function(name){
         that.data._children.map(function (d) {
 
             if (d.wageI > 0) {
-                total_oecd.name[counter] = d.name;
-                counter++;
+                for(i=0; i<3; i++) {
+                    total_oecd.name[counter] = d.name;
+                    counter++;
+                }
             }
         });
 
         this.data._children.map(function(d){
             for (i = 0; i <total_oecd.name.length; i++) {
 
-                var total_wage = 0;
+                var total_wageI = 0;
+                var total_wageII = 0;
+                var total_wageIII = 0;
+                var total_popI = 0;
+                var total_popII = 0;
+                var total_popIII = 0;
                 if(d.name == total_oecd.name[i]) {
-                    //for (i = 0; i < 195; i++) {
-                       // total_wage = d.size* d.wageI;
-                    //}
-                    total_oecd.total[i] = d.size* d.wageI;
+                    for (z = 0; z < 195; z++) {
+                       selected_name.map(function(selection) {
+
+                               total_wageI = total_wageI + (d._children[z]._children[0].size * d._children[z].wage_diffI)
+                               total_wageII = total_wageII + (d._children[z]._children[1].size * d._children[z].wage_diffII)
+                               total_wageIII = total_wageIII + (d._children[z]._children[1].size * d._children[z].wage_diffIII);
+
+
+                               total_popI = d._children[z]._children[0].size ;
+                               total_popII = d._children[z]._children[1].size;
+                               total_popIII = d._children[z]._children[2].size ;
+
+
+                       })
+                    }
+
+                    if(document.getElementById("migrant_stock").checked) {
+                        total_oecd.total[i] = total_wageI
+                        total_oecd.total[i+1] =total_wageII
+                        total_oecd.total[i+2] =total_wageIII
+                    } else{
+                        total_oecd.total[i] = total_wageI/total_popI
+                        total_oecd.total[i+1] = total_wageII/total_popII
+                        total_oecd.total[i+2] = total_wageIII/total_popIII
+                    };
+
                     total_oecd.type[i] = "Wage: "}
             }
 
