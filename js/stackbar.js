@@ -148,7 +148,7 @@ StackbarVis.prototype.updateVis = function(){
 
     bar.enter().append("g").append("rect");
 
-    // Add attributes (position) to  bars
+    // Add attributes (position) to bars
     bar
         .attr("class", "rect")
         .attr("fill", "orange")
