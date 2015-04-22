@@ -1,4 +1,4 @@
-{
+ {
 "name": "Year",
 "size": 37198512,
 "_children": [
@@ -130756,9 +130756,9 @@
 "name": "Great Britain",
 "size": 2346545,
 "population": 0,
-"wageI": 0,
-"wageII": 0,
-"wageIII": 0,
+"wageI": "21294",
+"wageII": "41559.99",
+"wageIII": "25725.88",
 "_children": [
 {
 "name": "Afghanistan",
@@ -131166,14 +131166,14 @@
 "name": "Argentina",
 "size": 0,
 "population": "40913584",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "16794.896",
+"wage_diffII": "30512.56",
+"wage_diffIII": "19275.325",
 "_children": [
 {
 "name": "Level I",
 "size": 1655,
-"wage": 0,
+"wage": "4499.104",
 "_children": [
 {
 "name": "Male",
@@ -131188,7 +131188,7 @@
 {
 "name": "Level II",
 "size": 921,
-"wage": 0,
+"wage": "11047.43",
 "_children": [
 {
 "name": "Male",
@@ -131203,7 +131203,7 @@
 {
 "name": "Level III",
 "size": 6031,
-"wage": 0,
+"wage": "6450.555",
 "_children": [
 {
 "name": "Male",
@@ -132439,14 +132439,14 @@
 "name": "Bulgaria",
 "size": 572,
 "population": "7204687",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19420.08",
+"wage_diffII": "36050.131",
+"wage_diffIII": "22134.846",
 "_children": [
 {
 "name": "Level I",
 "size": 875,
-"wage": 0,
+"wage": "1873.92",
 "_children": [
 {
 "name": "Male",
@@ -132461,7 +132461,7 @@
 {
 "name": "Level II",
 "size": 495,
-"wage": 0,
+"wage": "5509.859",
 "_children": [
 {
 "name": "Male",
@@ -132476,7 +132476,7 @@
 {
 "name": "Level III",
 "size": 4999,
-"wage": 0,
+"wage": "3591.034",
 "_children": [
 {
 "name": "Male",
@@ -133310,14 +133310,14 @@
 "name": "Colombia",
 "size": 0,
 "population": "45644023",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19319.45",
+"wage_diffII": "31977.636",
+"wage_diffIII": "22320.281",
 "_children": [
 {
 "name": "Level I",
 "size": 4851,
-"wage": 0,
+"wage": "1974.55",
 "_children": [
 {
 "name": "Male",
@@ -133332,7 +133332,7 @@
 {
 "name": "Level II",
 "size": 1491,
-"wage": 0,
+"wage": "9582.354",
 "_children": [
 {
 "name": "Male",
@@ -133347,7 +133347,7 @@
 {
 "name": "Level III",
 "size": 6797,
-"wage": 0,
+"wage": "3405.599",
 "_children": [
 {
 "name": "Male",
@@ -134181,14 +134181,14 @@
 "name": "Dominican Republic",
 "size": 0,
 "population": "9650054",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "18864.006",
+"wage_diffII": "34849.564",
+"wage_diffIII": "22359.494",
 "_children": [
 {
 "name": "Level I",
 "size": 243,
-"wage": 0,
+"wage": "2429.994",
 "_children": [
 {
 "name": "Male",
@@ -134203,7 +134203,7 @@
 {
 "name": "Level II",
 "size": 39,
-"wage": 0,
+"wage": "6710.426",
 "_children": [
 {
 "name": "Male",
@@ -134218,7 +134218,7 @@
 {
 "name": "Level III",
 "size": 193,
-"wage": 0,
+"wage": "3366.386",
 "_children": [
 {
 "name": "Male",
@@ -134248,14 +134248,14 @@
 "name": "Ecuador",
 "size": 0,
 "population": "14573101",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19014.011",
+"wage_diffII": "34414.443",
+"wage_diffIII": "22246.417",
 "_children": [
 {
 "name": "Level I",
 "size": 1042,
-"wage": 0,
+"wage": "2279.989",
 "_children": [
 {
 "name": "Male",
@@ -134270,7 +134270,7 @@
 {
 "name": "Level II",
 "size": 341,
-"wage": 0,
+"wage": "7145.547",
 "_children": [
 {
 "name": "Male",
@@ -134285,7 +134285,7 @@
 {
 "name": "Level III",
 "size": 1209,
-"wage": 0,
+"wage": "3479.463",
 "_children": [
 {
 "name": "Male",
@@ -134650,14 +134650,14 @@
 "name": "Ethiopia",
 "size": 0,
 "population": "85237338",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "21107.056",
+"wage_diffII": "40454.442",
+"wage_diffIII": "25209.0222",
 "_children": [
 {
 "name": "Level I",
 "size": 2702,
-"wage": 0,
+"wage": "186.944",
 "_children": [
 {
 "name": "Male",
@@ -134672,7 +134672,7 @@
 {
 "name": "Level II",
 "size": 939,
-"wage": 0,
+"wage": "1105.548",
 "_children": [
 {
 "name": "Male",
@@ -134687,7 +134687,7 @@
 {
 "name": "Level III",
 "size": 4977,
-"wage": 0,
+"wage": "516.8578",
 "_children": [
 {
 "name": "Male",
@@ -135789,14 +135789,14 @@
 "name": "Honduras",
 "size": 0,
 "population": "7792854",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19054.402",
+"wage_diffII": "31646.003",
+"wage_diffIII": "21946.093",
 "_children": [
 {
 "name": "Level I",
 "size": 180,
-"wage": 0,
+"wage": "2239.598",
 "_children": [
 {
 "name": "Male",
@@ -135811,7 +135811,7 @@
 {
 "name": "Level II",
 "size": 30,
-"wage": 0,
+"wage": "9913.987",
 "_children": [
 {
 "name": "Male",
@@ -135826,7 +135826,7 @@
 {
 "name": "Level III",
 "size": 184,
-"wage": 0,
+"wage": "3779.787",
 "_children": [
 {
 "name": "Male",
@@ -136057,14 +136057,14 @@
 "name": "Indonesia",
 "size": 0,
 "population": "240271522",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20697.1675",
+"wage_diffII": "38541.661",
+"wage_diffIII": "24128.222",
 "_children": [
 {
 "name": "Level I",
 "size": 1934,
-"wage": 0,
+"wage": "596.8325",
 "_children": [
 {
 "name": "Male",
@@ -136079,7 +136079,7 @@
 {
 "name": "Level II",
 "size": 701,
-"wage": 0,
+"wage": "3018.329",
 "_children": [
 {
 "name": "Male",
@@ -136094,7 +136094,7 @@
 {
 "name": "Level III",
 "size": 4765,
-"wage": 0,
+"wage": "1597.658",
 "_children": [
 {
 "name": "Male",
@@ -136593,14 +136593,14 @@
 "name": "Jordan",
 "size": 0,
 "population": "6342948",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "17264.048",
+"wage_diffII": "29229.65",
+"wage_diffIII": "17612.908",
 "_children": [
 {
 "name": "Level I",
 "size": 497,
-"wage": 0,
+"wage": "4029.952",
 "_children": [
 {
 "name": "Male",
@@ -136615,7 +136615,7 @@
 {
 "name": "Level II",
 "size": 212,
-"wage": 0,
+"wage": "12330.34",
 "_children": [
 {
 "name": "Male",
@@ -136630,7 +136630,7 @@
 {
 "name": "Level III",
 "size": 2681,
-"wage": 0,
+"wage": "8112.972",
 "_children": [
 {
 "name": "Male",
@@ -137129,14 +137129,14 @@
 "name": "Latvia",
 "size": 0,
 "population": "2231503",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20728.4731",
+"wage_diffII": "27740.19",
+"wage_diffIII": "17807.736",
 "_children": [
 {
 "name": "Level I",
 "size": 1109,
-"wage": 0,
+"wage": "565.5269",
 "_children": [
 {
 "name": "Male",
@@ -137151,7 +137151,7 @@
 {
 "name": "Level II",
 "size": 210,
-"wage": 0,
+"wage": "13819.8",
 "_children": [
 {
 "name": "Male",
@@ -137166,7 +137166,7 @@
 {
 "name": "Level III",
 "size": 1267,
-"wage": 0,
+"wage": "7918.144",
 "_children": [
 {
 "name": "Male",
@@ -137531,14 +137531,14 @@
 "name": "Lithuania",
 "size": 0,
 "population": "3555179",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20446.4619",
+"wage_diffII": "39434.005",
+"wage_diffIII": "24428.111",
 "_children": [
 {
 "name": "Level I",
 "size": 1334,
-"wage": 0,
+"wage": "847.5381",
 "_children": [
 {
 "name": "Male",
@@ -137553,7 +137553,7 @@
 {
 "name": "Level II",
 "size": 338,
-"wage": 0,
+"wage": "2125.985",
 "_children": [
 {
 "name": "Male",
@@ -137568,7 +137568,7 @@
 {
 "name": "Level III",
 "size": 1656,
-"wage": 0,
+"wage": "1297.769",
 "_children": [
 {
 "name": "Male",
@@ -137799,14 +137799,14 @@
 "name": "Malawi",
 "size": 3410,
 "population": "14268711",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20697.4555",
+"wage_diffII": "33977.92",
+"wage_diffIII": "24369.026",
 "_children": [
 {
 "name": "Level I",
 "size": 6795,
-"wage": 0,
+"wage": "596.5445",
 "_children": [
 {
 "name": "Male",
@@ -137821,7 +137821,7 @@
 {
 "name": "Level II",
 "size": 940,
-"wage": 0,
+"wage": "7582.07",
 "_children": [
 {
 "name": "Male",
@@ -137836,7 +137836,7 @@
 {
 "name": "Level III",
 "size": 6579,
-"wage": 0,
+"wage": "1356.854",
 "_children": [
 {
 "name": "Male",
@@ -138268,14 +138268,14 @@
 "name": "Mauritius",
 "size": 16769,
 "population": "1284264",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19277.639",
+"wage_diffII": "31075.7",
+"wage_diffIII": "20976.828",
 "_children": [
 {
 "name": "Level I",
 "size": 12657,
-"wage": 0,
+"wage": "2016.361",
 "_children": [
 {
 "name": "Male",
@@ -138290,7 +138290,7 @@
 {
 "name": "Level II",
 "size": 2451,
-"wage": 0,
+"wage": "10484.29",
 "_children": [
 {
 "name": "Male",
@@ -138305,7 +138305,7 @@
 {
 "name": "Level III",
 "size": 20270,
-"wage": 0,
+"wage": "4749.052",
 "_children": [
 {
 "name": "Male",
@@ -138603,14 +138603,14 @@
 "name": "Mongolia",
 "size": 0,
 "population": "3041142",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20705.8546",
+"wage_diffII": "38315.956",
+"wage_diffIII": "23778.567",
 "_children": [
 {
 "name": "Level I",
 "size": 47,
-"wage": 0,
+"wage": "588.1454",
 "_children": [
 {
 "name": "Male",
@@ -138625,7 +138625,7 @@
 {
 "name": "Level II",
 "size": 26,
-"wage": 0,
+"wage": "3244.034",
 "_children": [
 {
 "name": "Male",
@@ -138640,7 +138640,7 @@
 {
 "name": "Level III",
 "size": 228,
-"wage": 0,
+"wage": "1947.313",
 "_children": [
 {
 "name": "Male",
@@ -139005,14 +139005,14 @@
 "name": "Nepal",
 "size": 0,
 "population": "28563377",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20698.3401",
+"wage_diffII": "38562.727",
+"wage_diffIII": "24556.259",
 "_children": [
 {
 "name": "Level I",
 "size": 2605,
-"wage": 0,
+"wage": "595.6599",
 "_children": [
 {
 "name": "Male",
@@ -139027,7 +139027,7 @@
 {
 "name": "Level II",
 "size": 523,
-"wage": 0,
+"wage": "2997.263",
 "_children": [
 {
 "name": "Male",
@@ -139042,7 +139042,7 @@
 {
 "name": "Level III",
 "size": 2174,
-"wage": 0,
+"wage": "1169.621",
 "_children": [
 {
 "name": "Male",
@@ -139340,14 +139340,14 @@
 "name": "Nigeria",
 "size": 19299,
 "population": "149229090",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20937.0631",
+"wage_diffII": "39432.893",
+"wage_diffIII": "25630.66754",
 "_children": [
 {
 "name": "Level I",
 "size": 23949,
-"wage": 0,
+"wage": "356.9369",
 "_children": [
 {
 "name": "Male",
@@ -139362,7 +139362,7 @@
 {
 "name": "Level II",
 "size": 6593,
-"wage": 0,
+"wage": "2127.097",
 "_children": [
 {
 "name": "Male",
@@ -139377,7 +139377,7 @@
 {
 "name": "Level III",
 "size": 79647,
-"wage": 0,
+"wage": "95.21246",
 "_children": [
 {
 "name": "Male",
@@ -139608,14 +139608,14 @@
 "name": "Pakistan",
 "size": 116544,
 "population": "176242949",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20415.7137",
+"wage_diffII": "38353.584",
+"wage_diffIII": "24039.889",
 "_children": [
 {
 "name": "Level I",
 "size": 213825,
-"wage": 0,
+"wage": "878.2863",
 "_children": [
 {
 "name": "Male",
@@ -139630,7 +139630,7 @@
 {
 "name": "Level II",
 "size": 13368,
-"wage": 0,
+"wage": "3206.406",
 "_children": [
 {
 "name": "Male",
@@ -139645,7 +139645,7 @@
 {
 "name": "Level III",
 "size": 93239,
-"wage": 0,
+"wage": "1685.991",
 "_children": [
 {
 "name": "Male",
@@ -139742,14 +139742,14 @@
 "name": "Panama",
 "size": 0,
 "population": "3360474",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19445.278",
+"wage_diffII": "30920.32",
+"wage_diffIII": "20638.036",
 "_children": [
 {
 "name": "Level I",
 "size": 90,
-"wage": 0,
+"wage": "1848.722",
 "_children": [
 {
 "name": "Male",
@@ -139764,7 +139764,7 @@
 {
 "name": "Level II",
 "size": 37,
-"wage": 0,
+"wage": "10639.67",
 "_children": [
 {
 "name": "Male",
@@ -139779,7 +139779,7 @@
 {
 "name": "Level III",
 "size": 387,
-"wage": 0,
+"wage": "5087.844",
 "_children": [
 {
 "name": "Male",
@@ -139876,14 +139876,14 @@
 "name": "Paraguay",
 "size": 0,
 "population": "6995655",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19115.452",
+"wage_diffII": "34550.304",
+"wage_diffIII": "21845.036",
 "_children": [
 {
 "name": "Level I",
 "size": 132,
-"wage": 0,
+"wage": "2178.548",
 "_children": [
 {
 "name": "Male",
@@ -139898,7 +139898,7 @@
 {
 "name": "Level II",
 "size": 34,
-"wage": 0,
+"wage": "7009.686",
 "_children": [
 {
 "name": "Male",
@@ -139913,7 +139913,7 @@
 {
 "name": "Level III",
 "size": 218,
-"wage": 0,
+"wage": "3880.844",
 "_children": [
 {
 "name": "Male",
@@ -139943,14 +139943,14 @@
 "name": "Peru",
 "size": 0,
 "population": "29546963",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20012.548",
+"wage_diffII": "36031.807",
+"wage_diffIII": "22568.174",
 "_children": [
 {
 "name": "Level I",
 "size": 1242,
-"wage": 0,
+"wage": "1281.452",
 "_children": [
 {
 "name": "Male",
@@ -139965,7 +139965,7 @@
 {
 "name": "Level II",
 "size": 497,
-"wage": 0,
+"wage": "5528.183",
 "_children": [
 {
 "name": "Male",
@@ -139980,7 +139980,7 @@
 {
 "name": "Level III",
 "size": 3344,
-"wage": 0,
+"wage": "3157.706",
 "_children": [
 {
 "name": "Male",
@@ -140412,14 +140412,14 @@
 "name": "Rwanda",
 "size": 0,
 "population": "10473282",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20909.0576",
+"wage_diffII": "35543.169",
+"wage_diffIII": "23922.132",
 "_children": [
 {
 "name": "Level I",
 "size": 842,
-"wage": 0,
+"wage": "384.9424",
 "_children": [
 {
 "name": "Male",
@@ -140434,7 +140434,7 @@
 {
 "name": "Level II",
 "size": 280,
-"wage": 0,
+"wage": "6016.821",
 "_children": [
 {
 "name": "Male",
@@ -140449,7 +140449,7 @@
 {
 "name": "Level III",
 "size": 801,
-"wage": 0,
+"wage": "1803.748",
 "_children": [
 {
 "name": "Male",
@@ -141551,14 +141551,14 @@
 "name": "South Africa",
 "size": 38198,
 "population": "49052489",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "19878.071",
+"wage_diffII": "20675.03",
+"wage_diffIII": "22186.057",
 "_children": [
 {
 "name": "Level I",
 "size": 31927,
-"wage": 0,
+"wage": "1415.929",
 "_children": [
 {
 "name": "Male",
@@ -141573,7 +141573,7 @@
 {
 "name": "Level II",
 "size": 19907,
-"wage": 0,
+"wage": "20884.96",
 "_children": [
 {
 "name": "Male",
@@ -141588,7 +141588,7 @@
 {
 "name": "Level III",
 "size": 92377,
-"wage": 0,
+"wage": "3539.823",
 "_children": [
 {
 "name": "Male",
@@ -142422,14 +142422,14 @@
 "name": "Timor Leste",
 "size": 0,
 "population": 0,
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20725.2036",
+"wage_diffII": "35231.813",
+"wage_diffIII": "23745.626",
 "_children": [
 {
 "name": "Level I",
 "size": 0,
-"wage": 0,
+"wage": "568.7964",
 "_children": [
 {
 "name": "Male",
@@ -142444,7 +142444,7 @@
 {
 "name": "Level II",
 "size": 0,
-"wage": 0,
+"wage": "6328.177",
 "_children": [
 {
 "name": "Male",
@@ -142459,7 +142459,7 @@
 {
 "name": "Level III",
 "size": 0,
-"wage": 0,
+"wage": "1980.254",
 "_children": [
 {
 "name": "Male",
@@ -143293,14 +143293,14 @@
 "name": "Uruguay",
 "size": 0,
 "population": "3494382",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "17435.268",
+"wage_diffII": "26573.96",
+"wage_diffIII": "18810.471",
 "_children": [
 {
 "name": "Level I",
 "size": 318,
-"wage": 0,
+"wage": "3858.732",
 "_children": [
 {
 "name": "Male",
@@ -143315,7 +143315,7 @@
 {
 "name": "Level II",
 "size": 160,
-"wage": 0,
+"wage": "14986.03",
 "_children": [
 {
 "name": "Male",
@@ -143330,7 +143330,7 @@
 {
 "name": "Level III",
 "size": 816,
-"wage": 0,
+"wage": "6915.409",
 "_children": [
 {
 "name": "Male",
@@ -143695,14 +143695,14 @@
 "name": "Zambia",
 "size": 3024,
 "population": "11862740",
-"wage_diffI": 0,
-"wage_diffII": 0,
-"wage_diffIII": 0,
+"wage_diffI": "20908.0088",
+"wage_diffII": "33842.729",
+"wage_diffIII": "22925.53",
 "_children": [
 {
 "name": "Level I",
 "size": 7167,
-"wage": 0,
+"wage": "385.9912",
 "_children": [
 {
 "name": "Male",
@@ -143717,7 +143717,7 @@
 {
 "name": "Level II",
 "size": 2497,
-"wage": 0,
+"wage": "7717.261",
 "_children": [
 {
 "name": "Male",
@@ -143732,7 +143732,7 @@
 {
 "name": "Level III",
 "size": 17627,
-"wage": 0,
+"wage": "2800.35",
 "_children": [
 {
 "name": "Male",

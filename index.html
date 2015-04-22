@@ -83,11 +83,17 @@
 
         <!--<p>Graph 1</p>-->
         <h3>Extra Annual Wage Earned</h3>
-        <b>Aggregated by:</b>
         <form>
-            <label><input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock</label>
-            <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
+            <b>
+               Compare: <input name="compare" value="compare" id = "compare" type="radio">
+                Don't Compare: <input name="compare" value="dcompare" id = "dcompare" type="radio" check>
+            </b>
         </form>
+        <b>Aggregated by:
+        <form>
+            <input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock
+            <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
+        </form></b>
     </div>
 
     <div  id = "stackbarVis" class="graph grid_8">
@@ -163,7 +169,7 @@ $(function() {
     d3.selectAll("input").on("change", function()
     {
 
-        if(d3.select(this).attr("name")  == "oecd"){
+        if(d3.select(this).attr("name")  == "oecd" || d3.select(this).attr("name")  == "compare"){
             oecd_bar.wrangledata(last_name)
         }else {
             world_map.heatmap(this);
