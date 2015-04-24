@@ -105,7 +105,8 @@ OECDBAR.prototype.updatevis = function(){
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +21 ; })
         .attr("height", 20)
-        .transition().duration(1500)
+        .attr("width", function(d,i) {return that.x(0)})
+        .transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
     rect
