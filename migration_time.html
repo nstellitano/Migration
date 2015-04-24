@@ -25,9 +25,22 @@
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "http://d3js.org/queue.v1.min.js"></script>
+
+<div  id = "dashboard" class="dashboard">
+    <form>
+
+        Year:
+        <label><input type="radio" name="year" value="_2010" id = "_2010" checked > 2010 </label>
+        <label><input type="radio" name="year" value="_2005" id = "_2005" > 2005</label>
+
+
+    </form>
+
+</div>
 <script>
 
-    var margin = {top: 20, right: 120, bottom: 20, left: 120},
+    var margin = {top: 0, right: 0, bottom: 0, left: 0},
             width = 960 - margin.right - margin.left,
             height = 800 - margin.top - margin.bottom;
 
@@ -44,7 +57,47 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("data/master_data_set.json", function(error, flare) {
+     var scale_x = d3.scale.linear()
+             .range([0,width])
+             .domain([-10, 50])
+
+     var xAxis = d3.svg.axis()
+            .scale(scale_x)
+            .orient("bottom")
+
+
+    svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(50,"+ (height/2) + ")")
+
+    svg.select(".x.axis")
+            .call(xAxis)
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)"})
+
+    queue()
+            .defer(d3.json, "data/_2010_ed.json")
+            .defer(d3.json, "data/_2005_ed.json")
+            .await(prep);
+
+    var _2010 = 0
+    var _2005 =0;
+    var flare ;
+
+    function prep (error, d2010, d2005){
+        _2010 = d2010;
+        _2005 = d2005;
+
+
+        var_main_data = d2010
+        update1(var_main_data)
+    }
+
+    function update1 (flare) {
         root = flare;
 
         //Starting point for animation
@@ -59,68 +112,81 @@
             }
         }
 
-        //Data set is already collapsed so this is technically not needed
+       // Data set is already collapsed so this is technically not needed
         root._children.forEach(collapse);
 
         //Initialize update
         update(root);
-    });
+    };
 
+    var nodes;
+    var node;
     d3.select(self.frameElement).style("height", "800px");
 
     function update(source) {
 
         // Compute the new tree layout.
-        var nodes = tree.nodes(root).reverse()
+        nodes = tree.nodes(root).reverse()
 
 
-        console.log(nodes)
+
         // Normalize for fixed-depth.
-        nodes.forEach(function(d) { d.y = d.depth * 180; });
+        //nodes.forEach(function(d) { d.y = 180; });
 
 
-        console.log(nodes)
+
         // Update the nodes…
-        var node = svg.selectAll("g.node")
+        node = svg.selectAll("g.node")
                 .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("g")
                 .attr("class", "node")
-                .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+                //.attr("transform", function(d) { return "translate(" +50+ "," + height/2 + ")"; })
                 .on("click", click);
 
         nodeEnter.append("circle")
-                .attr("r", 1e-6)
-                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+                .attr("r",function(d){return d.size / 6000000})
+                .attr("cx", function(d) {console.log(d.change) ; return scale_x(d.change) +50})
+                .attr("cy", height/2 -100)
+                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
+                .style("fill-opacity",.5);;
 
         nodeEnter.append("text")
-                .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+//                .attr("x", function(d) { return d.children || d._children ? -0 : 10; })
+                .attr("x", function(d) { return d.change })
+                .attr("y", function(d) { return d.children || d._children ? height/2 - 100 : height/2 + 100 })
                 .attr("dy", ".35em")
                 .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
                 .text(function(d) { return d.name; })
                 .style("fill-opacity", 1e-6);
 
+        //nodes.forEach(function(d,i) { d.x = i*20; });
+
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
                 .duration(duration)
-                .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+                //.attr("transform", function(d) { return "translate(" + scale_x(d.change) + "," + d.x + ")"; });
 
         nodeUpdate.select("circle")
-                .attr("r", 4.5)
-                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+                .attr("r", function(d){return d.size / 600000})
+                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
+                .attr("cx", function(d) {console.log(d.change) ; return scale_x(d.change) +50})
+                .attr("cy", height/2 -100);
 
         nodeUpdate.select("text")
-                .style("fill-opacity", 1);
-
+                .style("fill-opacity", 1)
+                .attr("x", function(d) { return d.change })
+                .attr("y", function(d) { return d.children || d._children ? height/2 - 100 : height/2 - 100 });
+//
         // Transition exiting nodes to the parent's new position.
         var nodeExit = node.exit().transition()
                 .duration(duration)
-                .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+                //.attr("transform", function(d) { return "translate(" + 250 + "," + scale_x(d.change) + ")"; })
                 .remove();
 
         nodeExit.select("circle")
-                .attr("r", 1e-6);
+                .attr("r", function(d){return d.size / 600000});
 
         nodeExit.select("text")
                 .style("fill-opacity", 1e-6);
@@ -146,4 +212,73 @@
         update(d);
     }
 
+    d3.selectAll("input").on("change", function()
+    {
+        if(d3.select(this).attr("value")  == "_2005"){
+
+            d3.json("data/_2005_ed.json", (function(error, data){
+                for (i=0; i<nodes.length; i++){
+
+                    if(nodes[i].name == "2010" ){nodes[i].size = data.size; nodes[i].change = data.change}
+                    for(z=0; z<data._children.length; z++){
+                        if(nodes[i].name == data._children[z].name){
+                            nodes[i].size = data._children[z].size
+                            nodes[i].change = data._children[z].change}
+                    }
+                }
+                update3()
+            }))
+
+        }
+        if(d3.select(this).attr("value")  == "_2010"){
+           d3.json("data/_2010_ed.json", (function(error, data){
+            for (i=0; i<nodes.length; i++){
+
+                if(nodes[i].name == "2005" ){nodes[i].size = data.size; nodes[i].change = data.change }
+                for(z=0; z<data._children.length; z++){
+                    if(nodes[i].name == data._children[z].name){
+                        nodes[i].size = data._children[z].size;
+                        nodes[i].change = data._children[z].change}
+                }
+            }
+            update3()
+           }))
+        }
+
+
+
+    });
+
+    function update3 (){
+        var nodeUpdate = node.transition()
+                .duration(duration)
+                //.attr("transform", function(d) { console.log(d); return "translate(" + d.change + "," + d.x + ")"; });
+
+        nodeUpdate.select("circle")
+                .attr("r", function(d){console.log(d.size);return d.size / 600000})
+                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+        nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+//
+        // Transition exiting nodes to the parent's new position.
+        var nodeExit = node.exit().transition()
+//                .duration(duration)
+//                .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+                .remove();
+
+        nodeExit.select("circle")
+                .attr("r", function(d){return d.size / 600000});
+
+        nodeExit.select("text")
+                .style("fill-opacity", 1e-6);
+
+
+
+        // Stash the old positions for transition.
+        nodes.forEach(function(d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+        });
+    }
 </script>
