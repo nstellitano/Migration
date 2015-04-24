@@ -158,15 +158,47 @@ $(function() {
     //------------Events-------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-    $(MyEventHandler).bind("selection", function (event, name) {
+    $(MyEventHandler).bind("map_selection", function (event, name) { //input name is 1 country in array format
 
         last_name = name;
         world_map.draw_arcData(last_name)
         oecd_bar.wrangledata([name])
+        //stack
+        //scatter
         changeDivHTML(last_name);
 
     });
 
+        $(MyEventHandler).bind("oecd_selection", function (event, name) { //input name is 1 country in array format
+
+//            world_map.draw_arcData(last_name)
+//            oecd_bar.wrangledata([name])
+//            //stack
+//            //scatter
+//            changeDivHTML(last_name);
+
+    });
+
+        $(MyEventHandler).bind("scatter_selection", function (event, name) {//input name will be an array of names -> singular array or multiple array
+
+//            world_map.draw_arcData(last_name)
+//            oecd_bar.wrangledata([name])
+//            //stack
+//            //scatter
+//            changeDivHTML(last_name);
+
+
+        });
+
+        $(MyEventHandler).bind("selection", function (event, name) {//{input name is 1 country in array format
+
+//            world_map.draw_arcData(last_name)
+//            oecd_bar.wrangledata([name])
+//            //stack
+//            //scatter
+//            changeDivHTML(last_name);
+
+        });
     d3.selectAll("input").on("change", function()
     {
 

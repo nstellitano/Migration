@@ -104,7 +104,7 @@ WorldMap.prototype.initVis = function(){
             .style("fill", "#ccc")
             .style("stroke", "#111")
             .on("click", function (d) {
-                $(that.eventHandler).trigger("selection", d.properties.name)
+                $(that.eventHandler).trigger("map_selection", d.properties.name)
 
             })
             .on("mousemove", function (d, i) {

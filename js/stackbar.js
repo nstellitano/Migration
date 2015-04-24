@@ -72,7 +72,7 @@ StackbarVis.prototype.initVis = function(){
 
     this.svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0,20)")
+        //.attr("transform", "translate(0,20)")
         .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
 
@@ -141,7 +141,7 @@ StackbarVis.prototype.updateVis = function(){
         .call(this.xAxis)
 
     this.svg.select(".x.axis")
-        .attr("transform", "translate(5,218)")
+        .attr("transform", "translate(5,"+ (that.height - 68) +")")
         .call(that.xAxis)
         .selectAll("text")
         .style("text-anchor", "end")

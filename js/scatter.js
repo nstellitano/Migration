@@ -125,7 +125,7 @@ ScatterVis.prototype.updateVis = function(){
 
     this.svg.select(".x.axis")
         .call(this.xAxis)
-        .attr("transform", "translate(5,230)")
+        //.attr("transform", "translate(5,230)")
 
     //Low-Low
     // on enter
