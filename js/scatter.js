@@ -43,6 +43,11 @@ ScatterVis.prototype.initVis = function(){
 
     this.color = d3.scale.category10();
 
+    this.color_hash = {  0 : ["No Education", "Black"],
+        1 : ["Secondary Education", "Green"],
+        2 : ["Post-Secondary Education", "Red"]
+    }
+
     this.xAxis = d3.svg.axis()
         .scale(this.x)
         .orient("bottom");
@@ -120,10 +125,13 @@ ScatterVis.prototype.updateVis = function(){
 
     this.svg.select(".x.axis")
         .call(this.xAxis)
-
+        .attr("transform", "translate(5,230)")
 
     //Low-Low
     // on enter
+
+    if(document.getElementById("low").checked){
+
     var dots = this.svg.selectAll(".circle")
         .data(that.displayData.country);
 
@@ -140,58 +148,99 @@ ScatterVis.prototype.updateVis = function(){
     // on update
     dots.select("circle")
         .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_low[i])})
+        .attr("cx", function(d,i){ return 5 + that.x(that.displayData.size_low[i])})
         .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
         .style("fill", "black")
         .attr("r", 5);
 
-    //Low-Low
+    }
+
+    //Med-Med
     // on enter
-    var dots2 = this.svg.selectAll(".circle1")
-        .data(that.displayData.country);
+    if(document.getElementById("medium").checked) {
+        var dots2 = this.svg.selectAll(".circle1")
+            .data(that.displayData.country);
 
 
-    dots2.enter().append("g").append("circle")
+        dots2.enter().append("g").append("circle")
 
-    dots2
-        .attr("class","circle")
-
-
-    dots2.exit()
-        .remove();
-
-    // on update
-    dots2.select("circle")
-        .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_medium[i])})
-        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_medium[i])})
-        .style("fill", "red")
-        .attr("r", 5);
-
-    //Low-Low
-    // on enter
-    var dots3 = this.svg.selectAll(".circle2")
-        .data(that.displayData.country);
+        dots2
+            .attr("class", "circle")
 
 
-    dots3.enter().append("g").append("circle")
+        dots2.exit()
+            .remove();
 
-    dots3
-        .attr("class","circle")
+        // on update
+        dots2.select("circle")
+            .transition()
+            .attr("cx", function (d, i) {
+                return 5 + that.x(that.displayData.size_medium[i])
+            })
+            .attr("cy", function (d, i) {
+                return that.y(that.displayData.wage_diff_medium[i])
+            })
+            .style("fill", "red")
+            .attr("r", 5);
+
+    }
+
+    if(document.getElementById("high").checked) {
+        //High-High
+        // on enter
+        var dots3 = this.svg.selectAll(".circle2")
+            .data(that.displayData.country);
 
 
-    dots3.exit()
-        .remove();
+        dots3.enter().append("g").append("circle")
 
-    // on update
-    dots3.select("circle")
-        .transition()
-        .attr("cx", function(d,i){ return that.x(that.displayData.size_high[i])})
-        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_high[i])})
-        .style("fill", "green")
-        .attr("r", 5);
+        dots3
+            .attr("class", "circle")
 
 
+        dots3.exit()
+            .remove();
+
+        // on update
+        dots3.select("circle")
+            .transition()
+            .attr("cx", function (d, i) {
+                return 5 + that.x(that.displayData.size_high[i])
+            })
+            .attr("cy", function (d, i) {
+                return that.y(that.displayData.wage_diff_high[i])
+            })
+            .style("fill", "green")
+            .attr("r", 5);
+
+    }
+
+    // add legend
+    var legend = this.svg.selectAll(".legend")
+        .data(that.displayData.country)
+
+
+    legend
+        .enter()
+        .append("g")
+        .each(function(d, i) {
+            if (i<3) {
+                var g = d3.select(this);
+                g.append("circle")
+                    .attr("cx", 475)
+                    .attr("cy", (i + 2) * 12)
+                    .attr("r", 5)
+                    .style("fill", that.color_hash[String(i)][1]);
+
+                g.append("text")
+                    .attr("x", 485)
+                    .attr("y", (i + 2) * 12 + 8)
+                    .attr("height", 2)
+                    .attr("width", 2)
+                    // .style("fill", that.color_hash[String(i)][1])
+                    .text(that.color_hash[String(i)][0]);
+            }
+        });
 
 }
 
@@ -284,9 +333,9 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
         sizeII.push(parseInt(medskill))
         sizeIII.push(parseInt(highskill))
 
-        avg_wage_diffI.push(parseInt(lowwage)/20)
-        avg_wage_diffII.push(parseInt(medwage)/20)
-        avg_wage_diffIII.push(parseInt(highwage)/20)
+        avg_wage_diffI.push(parseInt(lowwage)/8)
+        avg_wage_diffII.push(parseInt(medwage)/8)
+        avg_wage_diffIII.push(parseInt(highwage)/8)
 
         country.push(name)
     }

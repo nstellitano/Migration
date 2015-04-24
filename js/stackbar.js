@@ -13,11 +13,12 @@ StackbarVis = function(_parentElement, _alldata, _eventHandler){
 
 
     this.width = getInnerWidth(this.parentElement)
-    this.height = (this.width) / 2.2
+    this.height = (this.width) / 2.1
 
     this.initVis();
 
 }
+
 
 
 /**
@@ -39,15 +40,20 @@ StackbarVis.prototype.initVis = function(){
     this.y = d3.scale.linear()
         .range([20,this.height-68]);
 
+    this.z = d3.scale.ordinal().range(["orange", "blue", "green"])
+
     this.yalt = d3.scale.linear()
         .range([this.height-68,20]);
 
 
-    this.color = d3.scale.category10();
+    this.color_hash = {  0 : ["Wage Differential", "Blue"],
+        1 : ["Aid", "Orange"],
+        2 : ["Remittance", "Red"]
+    }
 
     this.xAxis = d3.svg.axis()
         .scale(this.x)
-        .ticks(25)
+        .ticks(21)
         .tickFormat(function(d){return that.displayData.country[d]})
         .orient("bottom");
 
@@ -79,12 +85,15 @@ StackbarVis.prototype.initVis = function(){
         .text("Average wage differentials in comparison to Remittances/Aid");
 
 
+
+
     // filter, aggregate, modify data
     this.wrangleData(null);
 
     // call the update method
     this.updateVis();
 }
+
 
 
 /**
@@ -113,13 +122,15 @@ StackbarVis.prototype.updateVis = function(){
 
     var that = this;
 
+    //console.log(that.displayData);
+
 
     // updates scales
 
-    this.x.domain([0,25]);
-    this.yalt.domain([0,2000000000000]);
-    console.log(that.displayData.total_wage_differential);
-    this.y.domain([0,2000000000000]);
+    this.x.domain([0,21])
+    this.y.domain([0,300000000000])
+    this.yalt.domain([0,300000000000])
+    console.log(that.displayData.country)
 
     // updates axis
     this.svg.select(".y.axis")
@@ -130,7 +141,7 @@ StackbarVis.prototype.updateVis = function(){
         .call(this.xAxis)
 
     this.svg.select(".x.axis")
-        .attr("transform", "translate(5,205)")
+        .attr("transform", "translate(5,218)")
         .call(that.xAxis)
         .selectAll("text")
         .style("text-anchor", "end")
@@ -142,7 +153,24 @@ StackbarVis.prototype.updateVis = function(){
         });
 
 
-    //Bar
+    //// Add a group for each column.
+    //var valgroup = this.svg.selectAll("g.valgroup")
+    //    .data(that.displayData)
+    //    .enter().append("svg:g")
+    //    .attr("class", "valgroup")
+    //    .style("fill", function(d, i) { return that.z(i); })
+    //    .style("stroke", function(d, i) { return d3.rgb(that.z(i)).darker(); });
+    //
+    //// Add a rect for each date.
+    //var rect = valgroup.selectAll("rect")
+    //    .data(function(d){return that.displayData})
+    //    .enter().append("svg:rect")
+    //    .attr("x", function(d,i) { return  5 + that.x(i); })
+    //    .attr("y", function(d, i,j) { return - that.y(that.displayData[i][j].y0) - that.y(that.displayData[i][j].y); })
+    //    .attr("height", function(d,i,j) { return that.y(that.displayData[i][j].y); })
+    //    .attr("width", 10);
+
+    //Differential
     var bar = this.svg.selectAll(".rect")
         .data(that.displayData.country);
 
@@ -151,19 +179,91 @@ StackbarVis.prototype.updateVis = function(){
     // Add attributes (position) to all bars
     bar
         .attr("class", "rect")
-        .attr("fill", "orange")
+        .attr("fill", "blue")
 
     bar.exit()
         .remove();
 
     bar.select("rect")
         .attr("x", function(d,i){ return 5 + that.x(i)})
-        .attr("y", function(d,i){ return  that.height - 48 - that.y(that.displayData.total_wage_differential[i])})
-        .attr("width", 10)
+        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_differential[i])})
+        .attr("width", 6)
         .attr("height", function(d, i) {
-            return that.y(that.displayData.total_wage_differential[i]) - 20 ;
+            return that.y(that.displayData.total_differential[i]) - 20 ;
         });
 
+    //Aid
+    var bar2 = this.svg.selectAll(".rect2")
+        .data(that.displayData.country);
+
+    bar2.enter().append("g").append("rect");
+
+    // Add attributes (position) to all bars
+    bar2
+        .attr("class", "rect")
+        .attr("fill", "orange")
+
+    bar2.exit()
+        .remove();
+
+    bar2.select("rect")
+        .attr("x", function(d,i){ return 11 + that.x(i)})
+        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_aid[i])})
+        .attr("width", 6)
+        .attr("height", function(d, i) {
+            return that.y(that.displayData.total_aid[i]) - 20 ;
+        });
+
+    //Aid
+    var bar3 = this.svg.selectAll(".rect3")
+        .data(that.displayData.country);
+
+    bar3.enter().append("g").append("rect");
+
+    // Add attributes (position) to all bars
+    bar3
+        .attr("class", "rect")
+        .attr("fill", "red")
+
+    bar3.exit()
+        .remove();
+
+    bar3.select("rect")
+        .attr("x", function(d,i){ return 17 + that.x(i)})
+        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_remit[i])})
+        .attr("width", 6)
+        .attr("height", function(d, i) {
+            return that.y(that.displayData.total_remit[i]) - 20 ;
+        });
+
+    // add legend
+    var legend = this.svg.selectAll(".legend")
+        .data(that.displayData.country)
+
+
+
+    legend
+        .enter()
+        .append("g")
+        .each(function(d, i) {
+            if (i<3) {
+                var g = d3.select(this);
+                g.append("rect")
+                    .attr("x", 475)
+                    .attr("y", (i + 2) * 12)
+                    .attr("width", 10)
+                    .attr("height", 5)
+                    .style("fill", that.color_hash[String(i)][1]);
+
+                g.append("text")
+                    .attr("x", 495)
+                    .attr("y", (i + 2) * 12 + 8)
+                    .attr("height", 3)
+                    .attr("width", 3)
+                    // .style("fill", that.color_hash[String(i)][1])
+                    .text(that.color_hash[String(i)][0]);
+            }
+        });
 
 }
 
@@ -228,6 +328,8 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
 
     var totalremittance = []
 
+    var totaid = []
+
     var country=[]
 
     for (i = 0; i < 195; i++) {
@@ -242,32 +344,36 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         var totalwage=0
 
         var totalwagediff=0
+        var totalaid=0
         var totalrem = 0
         name=""
 
         for(z =0; z<20; z++) {
-            if (that.data._children[z]._children[i].wage_diffI !=0)
-            {
-                lowskill= lowskill + +that.data._children[z]._children[i]._children[0].size
-                medskill= medskill + +that.data._children[z]._children[i]._children[1].size
-                highskill= highskill + +that.data._children[z]._children[i]._children[2].size
+            if (that.data._children[z]._children[i].wage_diffI !=0) {
 
-                totalskill = lowskill + medskill + highskill
+                if (that.data._children[z]._children[i]._children[3].size != 0) {
+                    lowskill = lowskill + +that.data._children[z]._children[i]._children[0].size
+                    medskill = medskill + +that.data._children[z]._children[i]._children[1].size
+                    highskill = highskill + +that.data._children[z]._children[i]._children[2].size
 
-                lowwage= lowwage + +that.data._children[z]._children[i].wage_diffI
-                medwage= medwage + +that.data._children[z]._children[i].wage_diffII
-                highwage= highwage + +that.data._children[z]._children[i].wage_diffIII
+                    totalskill = lowskill + medskill + highskill
 
-                totalwage = lowwage + medwage + highwage
+                    lowwage = lowwage + +that.data._children[z]._children[i].wage_diffI
+                    medwage = medwage + +that.data._children[z]._children[i].wage_diffII
+                    highwage = highwage + +that.data._children[z]._children[i].wage_diffIII
 
-                totalwagediff = totalskill * totalwage
+                    totalwage = lowwage + medwage + highwage
 
-                totalrem= totalrem + +that.data._children[z]._children[i]._children[4].size
+                    totalwagediff = totalskill * totalwage
 
-                name = that.data._children[z]._children[i].name
+                    totalaid = totalaid + +that.data._children[z]._children[i]._children[3].size
 
+                    totalrem = totalrem + +that.data._children[z]._children[i]._children[4].size
+
+                    name = that.data._children[z]._children[i].name
+
+                }
             }
-
         }
         sizeI.push(parseInt(lowskill))
         sizeII.push(parseInt(medskill))
@@ -278,7 +384,8 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         avg_wage_diffIII.push(parseInt(highwage)/20)
 
         totaldifferential.push(parseInt(totalwagediff))
-        totalremittance.push(parseInt(totalrem))
+        totaid.push(parseInt(totalaid) * 100)
+        totalremittance.push(parseInt(totalrem) * 1000000)
 
         country.push(name)
     }
@@ -301,12 +408,16 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
     var avg_wage_diffIII = avg_wage_diffIII.filter(function(v) {
         return v !== 0;
     });
+    var totaid = totaid.filter(function(v) {
+            return v !== 0
+    });
+    var totalremittance = totalremittance.filter(function(v) {
+            return v !== 0;
+    });
     var totaldifferential = totaldifferential.filter(function(v) {
         return v !== 0;
     });
-    var totalremittance = totalremittance.filter(function(v) {
-        return v !== 0;
-    });
+
     var country = country.filter(function(v) {
         return v !== "";
     });
@@ -318,11 +429,58 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         "wage_diff_low": avg_wage_diffI,
         "wage_diff_medium":avg_wage_diffII,
         "wage_diff_high":avg_wage_diffIII,
-        "total_remit": totalremittance,
-        "total_wage_differential":totaldifferential
-    }
+        "total_aid": totaid,
+        "total_remit":  totalremittance,
+        "total_differential": totaldifferential}
 
     return sc;
+
+    //var sc=[];
+    //
+    //for (x =0; x<21; x++){
+    //    sc[x] =
+    //    {
+    //        "index":x,
+    //    "country": country[x],
+    //    "size_low": sizeI[x],
+    //    "size_medium": sizeII[x],
+    //        "size_high": sizeIII[x],
+    //    "wage_diff_low":  avg_wage_diffI[x],
+    //    "wage_diff_medium": avg_wage_diffII[x],
+    //    "wage_diff_high": avg_wage_diffIII[x],
+    //    "total_aid": totaid[x],
+    //    "total_remit":  totalremittance[x],
+    //    "total_differential": totaldifferential[x],
+    //}};
+    //
+    ////st = [totaldifferential,totaid,totalremittance]
+    ////console.log(st);
+    //
+    //
+    //map1=[];
+    //map2=[];
+    //
+    //
+    //for(a=0; a<21; a++) {
+    //    map1[a] = [sc[a].total_aid,sc[a].total_remit,sc[a].total_differential]
+    //    map2[a] = [sc[a].index,sc[a].total_aid,sc[a].total_remit,sc[a].total_differential]
+    //}
+    //
+    //
+    //console.log(map2);
+    //
+    //    var remapped = map1.map(function (dat, i) {
+    //        return map2.map(function (d, ii) {
+    //            return {x: ii, y: d[i + 1]};
+    //        })
+    //    });
+    //
+    ////console.log(remapped);
+    //
+    //var stacked = d3.layout.stack()(remapped)
+    ////console.log(stacked);
+    //
+    //return stacked;
     //this.updateVis(sc);
 
 

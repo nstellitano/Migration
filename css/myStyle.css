@@ -84,7 +84,7 @@ body{
 
  #stackbarVis{
      width: 64%;
-     height: 20em;
+     height: 25.5em;
      float: left;
      margin: 1%;
      background-color: white;
@@ -93,7 +93,7 @@ body{
 
 #scatterVis{
     width: 64%;
-    height: 20em;
+    height: 25.5em;
     float: left;
     margin: 1%;
     background-color: white;
@@ -205,4 +205,11 @@ li.key {
 
 .rect{
     shape-rendering: crispEdges
+}
+
+.legend {
+    padding: 5px;
+    font: 4px sans-serif;
+    background: yellow;
+    box-shadow: 2px 2px 1px #888;
 }
