@@ -60,14 +60,14 @@ ScatterVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
-        .style("font-size", "10px")
-        .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+       // .style("font-size", "10px")
+       // .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + this.height/1.1 + ")")
-        .style("font-size", "10px")
-        .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+       // .style("font-size", "10px")
+       // .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("text")
         .attr("x", (that.width / 2))

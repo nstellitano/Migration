@@ -4,6 +4,7 @@ OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.parentElement = _parentelement;
     this.data = _alldata;
     this.displayData =[]
+    this.olddisplayData = [];
 
     this.eventhandler = eventhandler;
 
@@ -75,6 +76,7 @@ OECDBAR.prototype.updatevis = function(){
 
     //What is selected?
     this.x.domain([0, d3.max(that.displayData.total)]);
+    //this.x.domain([0, 60000]);
     this.y.domain([0,that.displayData.total.length]); //Can change if we just do wages
 
     var offsetL = document.getElementById("graph_1").offsetLeft;
@@ -101,16 +103,17 @@ OECDBAR.prototype.updatevis = function(){
 
     rect.enter().append("g").append("rect").attr("class", "rect")
 
+    var check = 0;
     rect.select("rect")
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +21 ; })
         .attr("height", 20)
-        .attr("width", function(d,i) {return that.x(0)})
+        .attr("width", function(d,i) {if(check == 0){check++; return that.x(0)}else{return that.x(that.olddisplayData.total[i])}})
         .transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
     rect
-        .attr("fill", function(d,i){return that.color(i)})
+        .attr("fill", function(d,i){if(i%3==0){return that.color(4)}else if(i%2==0){return that.color(8)}else{return that.color(1)}})
         .attr("opacity",1)
         .on("click", function (d, i) {
             $(that.eventHandler).trigger("selection", that.displayData.name[i])
@@ -178,6 +181,7 @@ OECDBAR.prototype.updatevis = function(){
 
 
 
+
     text2.select("text")
         .transition().duration(500)
         .text(function(d,i) {return that.displayData.type[i] })
@@ -210,6 +214,7 @@ OECDBAR.prototype.selection= function (name){
 OECDBAR.prototype.filter = function(name){
 
 
+    this.olddisplayData = this.displayData;
     selected_name = [name] || ["Argentina"]
 
     var total_oecd = {"name":[], "total": [], "type":[]};

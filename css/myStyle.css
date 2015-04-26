@@ -16,6 +16,12 @@ body{
 
 }
 
+#data_layout {
+
+    /*overflow: auto;*/
+
+}
+
 #header{
     position: relative;
     top: 0px;
@@ -53,6 +59,17 @@ body{
 
 
 #country_list{
+    position: relative;
+    /*margin: 1%;*/
+    float: left;
+    width: 99%;
+    /*background-color: #efefef;*/
+    height: 5em;
+    overflow: scroll;
+    margin:.5em 0 .5em 0
+}
+
+#description{
     position: relative;
     /*margin: 1%;*/
     float: left;
@@ -212,4 +229,22 @@ li.key {
     font: 4px sans-serif;
     background: yellow;
     box-shadow: 2px 2px 1px #888;
+}
+
+.node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+}
+.node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+}
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+}
+.link:hover {
+    stroke-opacity: .5;
 }

@@ -1,17 +1,483 @@
+node_Master_JSON_builder.html:122 {
+"nodes": [
 {
-  "nodes":[
-    {"node":0,"name":"node0"},
-    {"node":1,"name":"node1"},
-    {"node":2,"name":"node2"},
-    {"node":3,"name":"node3"},
-    {"node":4,"name":"node4"}
-  ],
-  "links":[
-    {"source":0,"target":2,"value":2},
-    {"source":1,"target":2,"value":2},
-    {"source":1,"target":3,"value":2},
-    {"source":0,"target":4,"value":2},
-    {"source":2,"target":3,"value":2},
-    {"source":2,"target":4,"value":2},
-    {"source":3,"target":4,"value":4}
-  ]}
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 7732948
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 3052799
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 3540070
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 9749575
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 3637187
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 2870520
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 17482523
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 6689986
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 6410590
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 8507332
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 3444032
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 4751047
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 9774263
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 4709447
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 4062969
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 18281595
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 8153479
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 8814016
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 7960994
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 4354438
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 5745934
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 8627673
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 4609997
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 4870348
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 16588667
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 8964435
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 10616282
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 8035239
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 5714231
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 6806486
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 9504297
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 5336931
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 6300153
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 17539536
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 11051162
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 13106639
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 9734331
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 6729781
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 8653792
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 10202193
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 6735107
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 8130671
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 19936524
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 13464888
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 16784463
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 10455186
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 9156300
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 11743048
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 11208123
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 8863864
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 11809523
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 21663309
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 18020164
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 23552571
+}
+]
+}
+node_Master_JSON_builder.html:122 {
+"nodes": [
+{
+"name": "Male"
+},
+{
+"name": "Female"
+},
+{
+"name": "Ed LVL I"
+},
+{
+"name": "Ed LVL II"
+},
+{
+"name": "Ed LVL III"
+},
+{
+"name": "OECD"
+}
+],
+"links": [
+{
+"source": "Male",
+"target": "Ed LVL I",
+"value": 11395189
+},
+{
+"source": "Male",
+"target": "Ed LVL II",
+"value": 10667654
+},
+{
+"source": "Male",
+"target": "Ed LVL III",
+"value": 14194359
+},
+{
+"source": "Female",
+"target": "Ed LVL I",
+"value": 11890368
+},
+{
+"source": "Female",
+"target": "Ed LVL II",
+"value": 10047154
+},
+{
+"source": "Female",
+"target": "Ed LVL III",
+"value": 15017105
+},
+{
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 23285557
+},
+{
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 20714808
+},
+{
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 29211464
+}
+]
+}

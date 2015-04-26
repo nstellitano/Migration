@@ -42,7 +42,7 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
         .range(colorbrewer.Reds[9]).domain([0, 6000000]);
 
     this.heat_map_nonoecd = d3.scale.quantize()
-        .range(colorbrewer.Greens[9]).domain([-3000000, 0]);
+        .range(colorbrewer.PuBu[9]).domain([-3000000, 0]);
 
     this.initVis();
 
@@ -238,7 +238,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
     WorldMap.prototype.heatmap = function(radio) {
         that = this;
 
-        var min, max, range;
+        var min, max, test, range=[0,2], range1 = [0,2];
 
 
 
@@ -246,16 +246,19 @@ WorldMap.prototype.draw_arcData = function(source_country){
         //Need to make a legend
 
 
-        //that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
-        //
-        //that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
+        that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
+
+        that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
 
 
         if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
 
-            var min=0;
-            var max=0;
-           // that.heat_map.domain([-3000000, 6000000]);
+            test = 0;
+            range1 = [-3000000, 0]
+
+            range  = [0, 6000000]
+
+
 
 
 
@@ -278,7 +281,6 @@ WorldMap.prototype.draw_arcData = function(source_country){
                     if(that.data._children[z].name == that.data._children[1]._children[i].name) {
                         $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
                         console.log(that.data._children[1]._children[i].name)
-                        console.log(total)
 
                     }
                 }
@@ -293,87 +295,20 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
 
 
-        if(d3.select(radio).attr("value") == "Remittance" && d3.select(radio).node().checked) {
-
-            var remit_oecd = []
-            var remit_nonoecd = []
-
-            that.data._children.map(function(d){
-                var total = 0;
-                for (i = 0; i < 195; i++) {
-                    total = total + d._children[i]._children[4].size
-                }
-                remit_oecd.push(parseInt(total))
-            })
-
-            for (i = 0; i < 195; i++) {
-                var total = 0;
-                for(z =0; z<20; z++) {
-                    total = total + that.data._children[z]._children[i]._children[4].size
-                }
-                remit_nonoecd.push(parseInt(total*(-1)))
-            }
 
 
-            //that.heat_map.domain([d3.min(remit_nonoecd,function(d,i){return d}), d3.max(remit_oecd, function (d, i) {return d;})])
-
-            for (i = 0; i < 195; i++) {
-
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(remit_nonoecd[i])});
-            }
-
-            for (i = 0; i < 20; i++) {
-
-                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(remit_oecd[i])
-                })
-            }
-
-            that.legend;
-        }
-
-        if(d3.select(radio).attr("value") == "Aid" && d3.select(radio).node().checked) {
-
-            var aid_oecd = [];
-            var aid_nonoecd = [];
-
-            that.data._children.map(function(d){
-                var total = 0;
-                for (i = 0; i < 195; i++) {
-                    total = total + d._children[i]._children[3].size
-                }
-                aid_oecd.push(parseInt(total))
-            })
-
-            for (i = 0; i < 195; i++) {
-                var total = 0;
-                for(z =0; z<20; z++) {
-                    total = total + that.data._children[z]._children[i]._children[3].size
-                }
-                aid_nonoecd.push(parseInt(total*(-1)))
-            }
-
-            //that.heat_map.domain([d3.min(aid_nonoecd,function(d,i){return d}), d3.max(aid_oecd, function (d, i) {return d;})])
-
-            for (i = 0; i < 195; i++) {
-
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map(aid_nonoecd[i])});
-            }
-
-            for (i = 0; i < 20; i++) {
-
-                $('[title="' + that.data._children[i].name + '"]').css("fill", function(){return that.heat_map(aid_oecd[i])
-                })
-            }
-
-            that.legend;
-        }
 
         if(d3.select(radio).attr("value") == "Wage" && d3.select(radio).node().checked) {
 
+            test = 1;
             var wage_table = {"name": [], "TypeI": [], "TypeII": [], "TypeIII": [], "Avg": []}
             var counter = 0;
 
             for (i = 0; i < 195; i++) {
+
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return "whitesmoke"});
+
+
 
                 if (that.data._children[0]._children[i].wage_diffI > 0) {
                     wage_table.name[counter] = that.data._children[0]._children[i].name
@@ -414,18 +349,24 @@ WorldMap.prototype.draw_arcData = function(source_country){
                     return that.heat_map(wage_table.Avg[i])
                 });
             }
+
+
         }
 
-        min = range[0];
-        max = range[1];
-            that.legend(min, max);
+        min = range[0] || 0;
+        max = range[1] || 2;
+
+        min1 = range1[0] || 0;
+        max1 = range1[1] || 2;
+
+            that.legend(min, max, min1, max1, test);
         };
 
 
 
 
 
-WorldMap.prototype.legend = function(min, max) {
+WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
 
 
@@ -440,15 +381,15 @@ WorldMap.prototype.legend = function(min, max) {
         color_data.push(i);
     }
 
-    var startValue1 = 0;
-    var endValue1 = 6000000;
+    var startValue1 = min1;
+    var endValue1 = max1;
     var nElements1 = 9;
     var stepSize1 = (endValue1-startValue1)/(nElements1-1) -2;
     var color_data1 =  []
 
-    for (var i = startValue1+3; i <= endValue1; i=i+stepSize1) {
+    if(test==0){for (var i = startValue1+3; i <= endValue1; i=i+stepSize1) {
         color_data1.push(i);
-    }
+    }}else (color_data1 = 0)
 
 
 
@@ -472,10 +413,38 @@ WorldMap.prototype.legend = function(min, max) {
         .attr("y", function(d,i) {count--; return count*20 +250})
         .attr("width", function(d,i) {return 20})
         .attr("height", 20)
-        .attr("fill", function(d,i){return that.heat_map(d)})
+        .attr("fill", function(d,i){if (test == 1){return that.heat_map(d)} else {return that.heat_map_oecd(d)}})
 
     rect.exit()
         .remove()
+
+
+        var legend1 = this.svg.selectAll(".legend1")
+            .data(color_data1, function(d){ return d})
+
+        legend1.enter()
+            .append("g")
+            .attr("class", "legend1")
+
+        legend1.exit().remove()
+
+        var rect1 = legend1.selectAll(".rect1")
+            .data(function(d) {return [d]})
+
+        rect1.enter().append("rect").attr("class", "rect1");
+
+        var count1 = 0
+        rect1.attr("x", function(d, i){return 90 ; } )
+            .attr("y", function(d,i) {console.log(count1); count1++; return count1*20 +210})
+            .attr("width", function(d,i) {return 20})
+            .attr("height", 20)
+            .attr("fill", function(d,i){return that.heat_map_nonoecd(d)})
+
+        rect1.exit()
+            .remove()
+
+
+
 
     var label = legend.selectAll(".text")
         .data(function(d){return[d]})
@@ -488,11 +457,47 @@ WorldMap.prototype.legend = function(min, max) {
         .attr("y", function(d,i) {count--; return count*20 +258})
         .attr("font-size", "9px")
          .attr("dy", ".35em")
-         .text(function(d) { return "< $" +  Math.round(d); });
+         .text(function(d) { if(test ==1){return "< $" +  Math.round(d);} else {return " " + Math.round(d+3)} });
 
     label.exit()
         .remove();
-    console.log(color_data)
+
+
+        var label1 = legend1.selectAll(".text1")
+            .data(function(d){return[d]})
+
+        label1.enter().append("text").attr("class", "text1")
+
+        count1 =8;
+        label1
+            .attr("x", function(d, i){return 115 ; } )
+            .attr("y", function(d,i) {count1--; return count1*20 +258})
+            .attr("font-size", "9px")
+            .attr("dy", ".35em")
+            .text(function(d) { return "< " + Math.round(d-3); });
+
+        label1.exit()
+            .remove();
+
+
+    if(test == 1) {var label2 = legend.selectAll(".text2")
+        .data(function(d){return[d]})}
+    else {var label2 = legend1.selectAll(".text2")
+        .data(function(d){return[d]})}
+
+    label2.enter().append("text").attr("class", "text2")
+
+
+    label2
+        .attr("x", function(d, i){return 0 ; } )
+        .attr("y", function(d,i) { return 218})
+        .attr("font-size", "10px")
+        .attr("dy", ".35em")
+        .text(function(d) {if(test == 1){return "Annual Avg Wage"} else {return "Outflows vs Inflows of Migrant Stock" }});
+
+    label2.exit()
+        .remove();
+
 
 
 }

@@ -1,0 +1,69 @@
+{
+  "nodes": [
+    {
+      "name": "Male"
+    },
+    {
+      "name": "Female"
+    },
+    {
+      "name": "Ed LVL I"
+    },
+    {
+      "name": "Ed LVL II"
+    },
+    {
+      "name": "Ed LVL III"
+    },
+    {
+      "name": "OECD"
+    }
+  ],
+  "links": [
+    {
+      "source": "Male",
+      "target": "Ed LVL I",
+      "value": 7732948
+    },
+    {
+      "source": "Male",
+      "target": "Ed LVL II",
+      "value": 3052799
+    },
+    {
+      "source": "Male",
+      "target": "Ed LVL III",
+      "value": 3540070
+    },
+    {
+      "source": "Female",
+      "target": "Ed LVL I",
+      "value": 9749575
+    },
+    {
+      "source": "Female",
+      "target": "Ed LVL II",
+      "value": 3637187
+    },
+    {
+      "source": "Female",
+      "target": "Ed LVL III",
+      "value": 2870520
+    },
+    {
+      "source": "Ed LVL I",
+      "target": "OECD",
+      "value": 17482523
+    },
+    {
+      "source": "Ed LVL II",
+      "target": "OECD",
+      "value": 6689986
+    },
+    {
+      "source": "Ed LVL III",
+      "target": "OECD",
+      "value": 6410590
+    }
+  ]
+}

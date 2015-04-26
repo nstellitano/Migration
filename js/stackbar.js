@@ -67,13 +67,13 @@ StackbarVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
-        .style("font-size", "8px")
-        .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+        //.style("font-size", "8px")
+        //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
         //.attr("transform", "translate(0,20)")
-        .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+        //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
 
     this.svg.append("text")

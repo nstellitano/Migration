@@ -58,7 +58,7 @@
         <div  id = "dashboard" class="dashboard">
             <form>
 
-                By:
+
                 <label><input type="radio" name="layout" value="Wage" id = "Wage" > Wage </label>
                 <!--<label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>-->
                 <!--<label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>-->
@@ -69,9 +69,9 @@
         </div>
 
 
-    <div  id = "country_list" class="country_list">
-        <p><b><u>Selected Countries</u></b></p>
-
+    <div  id = "description" class="description">
+        <p><b><u>Utilize for Story telling</u></b></p>
+        <p>
             Displays Selected Countries
 
         </p>
@@ -80,36 +80,45 @@
     <div  id = "world_map" class="world_map">
     </div>
 
-    <div  id = "graph_1" class="graph grid_8">
-
-        <!--<p>Graph 1</p>-->
-        <h3>Extra Annual Wage Earned</h3>
-        <form>
-            <b>
-               Compare: <input name="compare" value="compare" id = "compare" type="radio">
-                Don't Compare: <input name="compare" value="dcompare" id = "dcompare" type="radio" check>
-            </b>
-        </form>
-        <b>Aggregated by:
-        <form>
-            <input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock
-            <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
-        </form></b>
+    <div  id = "country_list" class="country_list">
+        <p><b><u>Selected Countries</u></b></p>
+        <p>
+            Displays Selected Countries
+        </p>
     </div>
 
-    <div  id = "stackbarVis" class="graph grid_8">
+    <div id="data_layout" class = "data_layout">
+        <div  id = "graph_1" class="graph grid_8">
 
-    </div>
-    <p>
-    <div  id = "scatterVis" class="graph grid_8">
-        <b>Skill Level:</b>
-        <input name="a" id = "low" value="lowskill" type="checkbox" checked>Low Skill
-        <input name="a" id = "medium" value="medskill" type="checkbox" checked >Medium Skill
-        <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
-    </div>
-    </p>
-    <div  id = "footers" class = "footers" >
-        <p>Copyright etc...</p>
+            <!--<p>Graph 1</p>-->
+            <h3>Extra Annual Wage Earned</h3>
+            <form>
+                <b>
+                   Compare: <input name="compare" value="compare" id = "compare" type="radio">
+                    Don't Compare: <input name="compare" value="dcompare" id = "dcompare" type="radio" check>
+                </b>
+            </form>
+            <b>Aggregated by:
+            <form>
+                <input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock
+                <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
+            </form></b>
+        </div>
+
+        <div  id = "stackbarVis" class="graph grid_8">
+
+        </div>
+        <p>
+        <div  id = "scatterVis" class="graph grid_8">
+            <b>Skill Level:</b>
+            <input name="a" id = "low" value="lowskill" type="checkbox" checked>Low Skill
+            <input name="a" id = "medium" value="medskill" type="checkbox" checked >Medium Skill
+            <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
+        </div>
+        </p>
+        <div  id = "footers" class = "footers" >
+            <p>Copyright etc...</p>
+        </div>
     </div>
 </div>
 
@@ -125,6 +134,9 @@ $(function() {
 
     var cdata, ccapitals, alldata;
     var last_name;
+    var scatter_vis
+    var stackbar_vis
+    var oecd_bar, oecd_bar1
 
     //------------Load the Data and begin-------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -147,11 +159,6 @@ $(function() {
         world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler);
 
 
-
-
-       var scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
-        var stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
-        var oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
 
@@ -208,7 +215,19 @@ $(function() {
             world_map.heatmap(this);
         }
 
+        if(d3.select(this).attr("name")  == "layout" && d3.select(this).attr("id")  == "Migrant"){
+            console.log("test")
+            //oecd_bar1 = new OECDBAR(d3.select("#data_layout"), alldata, MyEventHandler)
 
+        }
+
+        if(d3.select(this).attr("name")  == "layout" && d3.select(this).attr("id")  == "Wage") {
+
+            scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
+            stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
+            oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
+
+        }
     });
 
     function changeDivHTML(name)
