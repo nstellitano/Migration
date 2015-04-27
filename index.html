@@ -23,6 +23,7 @@
 <script  src= "js/sankey.js"></script>
 <script  src = "js/migration_time_sankey.js"></script>
 
+
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/colorbrewer.css">
@@ -222,8 +223,9 @@ $(function() {
 
     });
 
-        $(MyEventHandler).bind("scatter_selection", function (event, name) {//input name will be an array of names -> singular array or multiple array
-
+        $(MyEventHandler).bind("scatter_selection", function (event, name, name1) {//input name will be an array of names -> singular array or multiple array
+                console.log(name);
+            console.log(name1);
 //            world_map.draw_arcData(last_name)
 //            oecd_bar.wrangledata([name])
 //            //stack

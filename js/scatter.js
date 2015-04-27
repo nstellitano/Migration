@@ -60,25 +60,16 @@ ScatterVis.prototype.initVis = function(){
         .ticks(5)
         .orient("left");
 
+    this.brush = this.svg.append("g")
+        .attr("class", "brush")
 
-    this.brush = d3.svg.brush()
-        .x(this.x)
-        .y(this.y)
-        .on("brush", brushmove());
+
+        //.on("brush", brushmove);
             //$(that.eventHandler).trigger("selectionChanged",that.brush.extent());
 
-    function brushmove(p) {
-        var e = that.brush.extent();
-        countryname = that.svg.selectAll("circle").classed("hidden", function(d) {
-            return e[0][0] > d[p.x] || d[p.x] > e[1][0]
-                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
-        });
-        console.log(countryname);
-    }
 
 
-    this.svg.append("g")
-        .attr("class", "brush");
+
 
 
     this.svg.append("g")
@@ -178,7 +169,7 @@ ScatterVis.prototype.updateVis = function(){
         .attr("cx", function(d,i){ return 5 + that.x(that.displayData.size_low[i])})
         .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
         .style("fill", "black")
-        .attr("r", 5);
+        .attr("r", 3);
 
         dots
             .on("click", function (d, i) { console.log([that.displayData.country[i]])
@@ -229,7 +220,7 @@ ScatterVis.prototype.updateVis = function(){
                 return that.y(that.displayData.wage_diff_medium[i])
             })
             .style("fill", "red")
-            .attr("r", 5);
+            .attr("r", 3);
 
         dots2
             .on("click", function (d, i) { console.log([that.displayData.country[i]])
@@ -279,7 +270,7 @@ ScatterVis.prototype.updateVis = function(){
                 return that.y(that.displayData.wage_diff_high[i])
             })
             .style("fill", "green")
-            .attr("r", 5)
+            .attr("r", 3)
 
         dots3
             .on("click", function (d, i) { console.log([that.displayData.country[i]])
@@ -305,12 +296,54 @@ ScatterVis.prototype.updateVis = function(){
 
 
 
+    var unique = function(origArr) {
+        var newArr = [],
+            origLen = origArr.length,
+            found, x, y;
 
-    this.brush.x(this.x);
-    this.svg.select(".brush")
-        .call(this.brush)
-        .selectAll("rect")
-        .attr("height", that.height-20);
+        for (x = 0; x < origLen; x++) {
+            found = undefined;
+            for (y = 0; y < newArr.length; y++) {
+                if (origArr[x] === newArr[y]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                newArr.push(origArr[x]);
+            }
+        }
+        return newArr;
+    }
+
+
+    this.brush.call(d3.svg.brush()
+        .x(that.x)
+        .y(that.y)
+        .on("brush", function() {
+            var extent = d3.event.target.extent();
+            console.log(extent);
+            compare=[];
+            for(z =0; z<20; z++) {
+                if(extent[0][0] <= that.displayData.size_high[z] && that.displayData.wage_diff_high[z] < extent[1][0]
+                        && extent[0][1] <= that.displayData.size_high[z] && that.displayData.wage_diff_high[z] < extent[1][1]) {
+                    compare.push(that.displayData.country[z])
+                }
+                if(extent[0][0] <= that.displayData.size_medium[z] && that.displayData.wage_diff_medium[z] < extent[1][0]
+                    && extent[0][1] <= that.displayData.size_medium[z] && that.displayData.wage_diff_medium[z] < extent[1][1]) {
+                    compare.push(that.displayData.country[z])
+                }
+                if(extent[0][0] <= that.displayData.size_low[z] && that.displayData.wage_diff_low[z] < extent[1][0]
+                    && extent[0][1] <= that.displayData.size_low[z] && that.displayData.wage_diff_low[z] < extent[1][1]) {
+                    compare.push(that.displayData.country[z]);
+                }
+                compare = unique(compare);
+
+            }
+            $(that.eventHandler).trigger("scatter_selection",compare);
+        }
+    ));
+
 
     // add legend
     var legend = this.svg.selectAll(".legend")
@@ -411,18 +444,19 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
         name=""
 
         for(z =0; z<20; z++) {
-            if (that.data._children[z]._children[i].wage_diffI !=0)
-            {
-                lowskill= lowskill + +that.data._children[z]._children[i]._children[0].size
-                medskill= medskill + +that.data._children[z]._children[i]._children[1].size
-                highskill= highskill + +that.data._children[z]._children[i]._children[2].size
+            if (that.data._children[z]._children[i].wage_diffI !=0) {
+                if (that.data._children[z]._children[i]._children[3].size != 0) {
+                    lowskill = lowskill + +that.data._children[z]._children[i]._children[0].size
+                    medskill = medskill + +that.data._children[z]._children[i]._children[1].size
+                    highskill = highskill + +that.data._children[z]._children[i]._children[2].size
 
-                lowwage= lowwage + +that.data._children[z]._children[i].wage_diffI
-                medwage= medwage + +that.data._children[z]._children[i].wage_diffII
-                highwage= highwage + +that.data._children[z]._children[i].wage_diffIII
+                    lowwage = lowwage + +that.data._children[z]._children[i].wage_diffI
+                    medwage = medwage + +that.data._children[z]._children[i].wage_diffII
+                    highwage = highwage + +that.data._children[z]._children[i].wage_diffIII
 
-                name = that.data._children[z]._children[i].name
+                    name = that.data._children[z]._children[i].name
 
+                }
             }
 
         }
