@@ -30,6 +30,8 @@ OECDBAR.prototype.initvis = function(){
         .append("g")
         .attr("class", 'graph')
 
+        //this.svg.style(" preserveAspectRatio", "xMidYMid meet")
+
 
 
     this.x = d3.scale.linear()

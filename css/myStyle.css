@@ -4,6 +4,14 @@
     text-align: center;
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body{
     width: 90%;
     margin: 0 auto;
@@ -19,6 +27,8 @@ body{
 #data_layout {
 
     /*overflow: auto;*/
+
+  transition:500ms linear;
 
 }
 
@@ -69,6 +79,28 @@ body{
     margin:.5em 0 .5em 0
 }
 
+#sankey_dash{
+    position: relative;
+    /*margin: 1%;*/
+    float: left;
+    width: 99%;
+    /*background-color: #efefef;*/
+    height: 5em;
+    overflow: scroll;
+    margin:.5em 0 .5em 0;
+
+}
+
+#sankey {
+    width: 100%;
+    float: left;
+    margin: 1%;
+    background-color: white;
+    height: 30em;
+    transition:500ms linear;
+
+}
+
 #description{
     position: relative;
     /*margin: 1%;*/
@@ -94,6 +126,7 @@ body{
     margin: 1%;
     background-color: white;
     height: 52em;
+    transition:500ms linear;
 
 }
 
