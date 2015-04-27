@@ -2,8 +2,9 @@
 //------------World Map Object Function -------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
+WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler, _1980, _1985, _1990, _1995, _2000, _2005, _2010) {
 
+    that = this;
     this.parentElement = _parentElement;
     this.data = alldata;
     this.eventHandler = _eventHandler;
@@ -16,6 +17,13 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
             sourceLocation: [0, 0],
             targetLocation: [0, 0]
         }]
+    that.d1980 = _1980;
+    that.d1985 = _1985;
+    that.d1990 = _1990;
+    that.d1995 = _1995;
+    that.d2000 = _2000;
+    that.d2005 = _2005;
+    that.d2010 = _2010;
 
 
 
@@ -44,7 +52,9 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler) {
     this.heat_map_nonoecd = d3.scale.quantize()
         .range(colorbrewer.PuBu[9]).domain([-3000000, 0]);
 
-    this.initVis();
+
+        this.initVis();
+
 
 
 }
@@ -156,7 +166,6 @@ WorldMap.prototype.updateVis = function(){
         return lngLatToArc( d, that.projection, 'sourceLocation', 'sourceLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             }).transition().duration(2000)
             .attr('d', function(d) {
-            console.log(lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9)); return lngLatToArc(d, that.projection, 'sourceLocation', 'targetLocation',.9); // A bend of 5 looks nice and subtle, but this will depend on the length of your arcs and the visual look your visualization requires. Higher number equals less bend.
             })
             .style("stroke", "black")
 
@@ -212,7 +221,6 @@ WorldMap.prototype.draw_arcData = function(source_country){
                 }
 
                 if (oecd_main.name == that.ccapitals[i]["country"]) {
-                    console.log("It compared correctly")
                     target_lat = that.ccapitals[i]["lat"]
                     target_long = that.ccapitals[i]["lon"]
 
@@ -238,6 +246,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
     WorldMap.prototype.heatmap = function(radio) {
         that = this;
 
+
         var min, max, test, range=[0,2], range1 = [0,2];
 
 
@@ -246,12 +255,9 @@ WorldMap.prototype.draw_arcData = function(source_country){
         //Need to make a legend
 
 
-        that.heat_map.domain(d3.extent(that.cdata, function(d) { return parseInt(d.gdp_md_est); }))
-
-        that.country.style("fill", function(d,i){return that.heat_map(that.cdata[i].gdp_md_est)})
-
 
         if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
+
 
             test = 0;
             range1 = [-3000000, 0]
@@ -271,6 +277,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
                     total = total + d._children[i].size
                 })
 
+
                 $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_nonoecd(-1*total)});
                 if(total*-1 <min){min = -1*total};
 
@@ -280,7 +287,88 @@ WorldMap.prototype.draw_arcData = function(source_country){
                     if(total>max){max =that.data._children[z].size-total}
                     if(that.data._children[z].name == that.data._children[1]._children[i].name) {
                         $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
-                        console.log(that.data._children[1]._children[i].name)
+
+
+                    }
+                }
+
+
+
+            }
+
+
+        }
+
+        if(d3.select(radio).attr("name") == "slider-time") {
+
+
+            var slider_year = parseInt(d3.select("#slider-time").property("value"));
+
+            if(slider_year == "1980")
+            {
+                that.data = that.d1980;
+            }
+
+            if(slider_year == "1985")
+            {
+                that.data = that.d1985;
+            }
+
+            if(slider_year == "1990")
+            {
+                that.data = that.d1990;
+            }
+
+            if(slider_year == "1995")
+            {
+                that.data = that.d1995;
+            }
+
+            if(slider_year == "2000")
+            {
+                that.data = that.d2000;
+
+            }
+
+            if(slider_year == "2005")
+            {
+                that.data = that.d2005;
+            }
+
+            if(slider_year == "2010")
+            {
+                that.data = that.d2005;
+            }
+
+            test = 0;
+            range1 = [-3000000, 0]
+
+            range  = [0, 6000000]
+
+
+
+
+
+
+            for (i = 0; i < 195; i++) {
+
+                var total=0;
+                that.data._children.map(function (d) {
+
+                    total = total + d._children[i].size
+                })
+
+
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_nonoecd(-1*total)});
+                if(total*-1 <min){min = -1*total};
+
+
+                //Need to subtract out outflows of OECD countries
+                for(z = 0; z<20; z++){
+                    if(total>max){max =that.data._children[z].size-total}
+                    if(that.data._children[z].name == that.data._children[1]._children[i].name) {
+                        $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
+
 
                     }
                 }
@@ -296,15 +384,15 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
 
 
+        if(d3.select(radio).attr("id") == "Wage" && d3.select(radio).node().checked) {
 
 
-        if(d3.select(radio).attr("value") == "Wage" && d3.select(radio).node().checked) {
 
-            test = 1;
             var wage_table = {"name": [], "TypeI": [], "TypeII": [], "TypeIII": [], "Avg": []}
             var counter = 0;
 
             for (i = 0; i < 195; i++) {
+
 
                 $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return "whitesmoke"});
 
@@ -333,6 +421,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
 
             for (i = 0; i < wage_table.name.length; i++) {
+
                 wage_table.Avg[i] = (wage_table.TypeI[i] + wage_table.TypeII[i] + wage_table.TypeIII[i]) / 3;
             }
 
@@ -346,7 +435,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
             for (i = 0; i < wage_table.name.length; i++) {
 
                 $('[title="' + String(wage_table.name[i]) + '"]').css("fill", function () {
-                    return that.heat_map(wage_table.Avg[i])
+                    console.log(that.heat_map(wage_table.Avg[i])); return that.heat_map(wage_table.Avg[i])
                 });
             }
 
@@ -435,7 +524,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
         var count1 = 0
         rect1.attr("x", function(d, i){return 90 ; } )
-            .attr("y", function(d,i) {console.log(count1); count1++; return count1*20 +210})
+            .attr("y", function(d,i) { count1++; return count1*20 +210})
             .attr("width", function(d,i) {return 20})
             .attr("height", 20)
             .attr("fill", function(d,i){return that.heat_map_nonoecd(d)})
