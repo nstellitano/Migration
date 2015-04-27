@@ -57,6 +57,16 @@ ScatterVis.prototype.initVis = function(){
         .ticks(5)
         .orient("left");
 
+    this.brush = d3.svg.brush()
+        .on("brush", function(){
+            $(that.eventHandler).trigger("selectionChanged",that.brush.extent());
+            //console.log(that.brush.extent());
+        });
+
+    this.svg.append("g")
+        .attr("class", "brush");
+
+
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
@@ -214,6 +224,12 @@ ScatterVis.prototype.updateVis = function(){
             .attr("r", 5);
 
     }
+
+    this.brush.x(this.x);
+    this.svg.select(".brush")
+        .call(this.brush)
+        .selectAll("rect")
+        .attr("height", that.height-20);
 
     // add legend
     var legend = this.svg.selectAll(".legend")

@@ -231,6 +231,12 @@ li.key {
     box-shadow: 2px 2px 1px #888;
 }
 
+.brush{
+    fill: darkgrey;
+    fill-opacity: .5;
+    pointer-events: none;
+}
+
 .node rect {
     cursor: move;
     fill-opacity: .9;
