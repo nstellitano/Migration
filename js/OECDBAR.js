@@ -110,8 +110,8 @@ OECDBAR.prototype.updatevis = function(){
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +21 ; })
         .attr("height", 20)
-        .attr("width", function(d,i) {if(check == 0){check++; return that.x(0)}else{return that.x(that.olddisplayData.total[i])}})
-        .transition().duration(1000)
+       //.attr("width", function(d,i) {if(check == 0){check++; return that.x(0)}else{return that.x(that.olddisplayData.total[i])}})
+        //.transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
     rect
@@ -259,6 +259,7 @@ OECDBAR.prototype.filter = function(name){
             }
         });
 
+        console.log(that.data)
         this.data._children.map(function(d){
             var check =1;
             for (i = 0; i <total_oecd.name.length-2; i=i+3) {
@@ -281,9 +282,9 @@ OECDBAR.prototype.filter = function(name){
                             selected_name.map(function (selection) {
 
                                 if (selection == d._children[z].name) {
-                                    total_wageI = total_wageI + (d._children[z]._children[0].size * d._children[z].wage_diffI)
-                                    total_wageII = total_wageII + (d._children[z]._children[1].size * d._children[z].wage_diffII)
-                                    total_wageIII = total_wageIII + (d._children[z]._children[2].size * d._children[z].wage_diffIII);
+                                    total_wageI = total_wageI + (d._children[z]._children[0].size * (d.wageI - d._children[z]._children[0].wage))
+                                    total_wageII = total_wageII + (d._children[z]._children[1].size * (d.wageII - d._children[z]._children[0].wage))
+                                    total_wageIII = total_wageIII + (d._children[z]._children[2].size * (d.wageIII - d._children[z]._children[0].wage));
 
                                     aid = aid + d._children[z]._children[3].size;
                                     rem = rem + (d._children[z]._children[4].size*1000000);

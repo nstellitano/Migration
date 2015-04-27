@@ -352,8 +352,8 @@
                                 for(sss=0; sss<wage_oecd.length; sss++) {
                                     if(oecd_main[ss] == wage_oecd[sss]["country"] && test == 0) {
                                         year1._children[z].wageI = wage_oecd[sss]["yearly_wage_dollar"]
-                                        year1._children[z].wageII = wage_oecd[sss + 1]["yearly_wage_dollar"]
-                                        year1._children[z].wageIII = wage_oecd[sss + 2]["yearly_wage_dollar"]
+                                        year1._children[z].wageII = wage_oecd[sss + 2]["yearly_wage_dollar"]
+                                        year1._children[z].wageIII = wage_oecd[sss + 1]["yearly_wage_dollar"]
                                         test = 1
                                     }
                                 }
@@ -368,12 +368,12 @@
                                     if(non_oecd_wage[s] == wage_non[sss]["country"] && year1._children[z].name == wage_non[sss]["oecd_country"] && test1==0) {
 
                                         year1._children[z]._children[i]._children[0].wage = wage_non[sss]["yearly_wage_dollar"]
-                                        year1._children[z]._children[i]._children[1].wage = wage_non[sss + 1]["yearly_wage_dollar"]
-                                        year1._children[z]._children[i]._children[2].wage = wage_non[sss + 2]["yearly_wage_dollar"]
+                                        year1._children[z]._children[i]._children[1].wage = wage_non[sss + 2]["yearly_wage_dollar"]
+                                        year1._children[z]._children[i]._children[2].wage = wage_non[sss + 1]["yearly_wage_dollar"]
 
                                         year1._children[z]._children[i].wage_diffI = wage_non[sss]["avg_wage_differential"]
-                                        year1._children[z]._children[i].wage_diffII = wage_non[sss + 1]["avg_wage_differential"]
-                                        year1._children[z]._children[i].wage_diffIII = wage_non[sss + 2]["avg_wage_differential"]
+                                        year1._children[z]._children[i].wage_diffII = wage_non[sss + 2]["avg_wage_differential"]
+                                        year1._children[z]._children[i].wage_diffIII = wage_non[sss + 1]["avg_wage_differential"]
 
 
 
@@ -407,7 +407,7 @@
             _5_adjustment = _5_adjustment + 4;
 
         }
-        var str = JSON.stringify(year_1985, null, 1); // spacing level = 2
+        var str = JSON.stringify(year_2010, null, 1); // spacing level = 2
         console.log(str)
 
     }
