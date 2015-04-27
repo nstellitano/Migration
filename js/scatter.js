@@ -16,6 +16,9 @@ ScatterVis = function(_parentElement, _alldata, _eventHandler){
     this.width = getInnerWidth(this.parentElement)
     this.height = (this.width) / 2.4
 
+    //To show country names when hovering over the country
+    this.tooltip_nonoecd = d3.select("body").append("div").attr("class", "tooltip hidden");
+
     this.initVis();
 
 }
@@ -44,8 +47,8 @@ ScatterVis.prototype.initVis = function(){
     this.color = d3.scale.category10();
 
     this.color_hash = {  0 : ["No Education", "Black"],
-        1 : ["Secondary Education", "Green"],
-        2 : ["Post-Secondary Education", "Red"]
+        1 : ["Secondary Education", "Red"],
+        2 : ["Post-Secondary Education", "Green"]
     }
 
     this.xAxis = d3.svg.axis()
@@ -57,11 +60,22 @@ ScatterVis.prototype.initVis = function(){
         .ticks(5)
         .orient("left");
 
+
     this.brush = d3.svg.brush()
-        .on("brush", function(){
-            $(that.eventHandler).trigger("selectionChanged",that.brush.extent());
-            //console.log(that.brush.extent());
+        .x(this.x)
+        .y(this.y)
+        .on("brush", brushmove());
+            //$(that.eventHandler).trigger("selectionChanged",that.brush.extent());
+
+    function brushmove(p) {
+        var e = that.brush.extent();
+        countryname = that.svg.selectAll("circle").classed("hidden", function(d) {
+            return e[0][0] > d[p.x] || d[p.x] > e[1][0]
+                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
         });
+        console.log(countryname);
+    }
+
 
     this.svg.append("g")
         .attr("class", "brush");
@@ -128,6 +142,9 @@ ScatterVis.prototype.updateVis = function(){
     this.x.domain([0,d3.max(that.displayData.size_low)]);
     this.y.domain([0,50000]);
 
+    var offsetL = document.getElementById("scatterVis").offsetLeft;
+    var offsetT = document.getElementById("scatterVis").offsetTop;
+
     // updates axis
     this.svg.select(".y.axis")
         .call(this.yAxis)
@@ -163,6 +180,27 @@ ScatterVis.prototype.updateVis = function(){
         .style("fill", "black")
         .attr("r", 5);
 
+        dots
+            .on("click", function (d, i) { console.log([that.displayData.country[i]])
+                $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+            })
+            .on("mousemove", function (d, i) {
+                var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                    return parseInt(d);
+                });
+
+                that.tooltip_nonoecd.classed("hidden", false)
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .html(that.displayData.country[i])
+
+            })
+            .on("mouseout", function (d, i) {
+
+                that.tooltip_nonoecd.classed("hidden", true);
+            });
+
+
     }
 
     //Med-Med
@@ -193,6 +231,26 @@ ScatterVis.prototype.updateVis = function(){
             .style("fill", "red")
             .attr("r", 5);
 
+        dots2
+            .on("click", function (d, i) { console.log([that.displayData.country[i]])
+                $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+            })
+            .on("mousemove", function (d, i) {
+                var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                    return parseInt(d);
+                });
+
+                that.tooltip_nonoecd.classed("hidden", false)
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .html(that.displayData.country[i])
+
+            })
+            .on("mouseout", function (d, i) {
+
+                that.tooltip_nonoecd.classed("hidden", true);
+            });
+
     }
 
     if(document.getElementById("high").checked) {
@@ -221,9 +279,32 @@ ScatterVis.prototype.updateVis = function(){
                 return that.y(that.displayData.wage_diff_high[i])
             })
             .style("fill", "green")
-            .attr("r", 5);
+            .attr("r", 5)
+
+        dots3
+            .on("click", function (d, i) { console.log([that.displayData.country[i]])
+                $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+            })
+            .on("mousemove", function (d, i) {
+                var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                    return parseInt(d);
+                });
+
+                that.tooltip_nonoecd.classed("hidden", false)
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .html(that.displayData.country[i])
+
+            })
+            .on("mouseout", function (d, i) {
+
+                that.tooltip_nonoecd.classed("hidden", true);
+            });
 
     }
+
+
+
 
     this.brush.x(this.x);
     this.svg.select(".brush")
@@ -435,3 +516,12 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
 
 
 }
+
+//function brushmove(p) {
+//    var e = this.brush.extent();
+//    countryname = that.svg.selectAll("circle").classed("hidden", function(d) {
+//        return e[0][0] > d[p.x] || d[p.x] > e[1][0]
+//            || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+//    });
+//    console.log(countryname);
+//}

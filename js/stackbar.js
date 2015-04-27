@@ -15,6 +15,9 @@ StackbarVis = function(_parentElement, _alldata, _eventHandler){
     this.width = getInnerWidth(this.parentElement)
     this.height = (this.width) / 2.1
 
+    //To show country names when hovering over the country
+    this.tooltip_nonoecd = d3.select("body").append("div").attr("class", "tooltip hidden");
+
     this.initVis();
 
 }
@@ -128,9 +131,12 @@ StackbarVis.prototype.updateVis = function(){
     // updates scales
 
     this.x.domain([0,21])
-    this.y.domain([0,300000000000])
-    this.yalt.domain([0,300000000000])
+    this.y.domain([0,d3.max(that.displayData.total_differential)])
+    this.yalt.domain([0,d3.max(that.displayData.total_differential)])
     console.log(that.displayData.country)
+
+    var offsetL = document.getElementById("stackbarVis").offsetLeft;
+    var offsetT = document.getElementById("stackbarVis").offsetTop;
 
     // updates axis
     this.svg.select(".y.axis")
@@ -192,6 +198,26 @@ StackbarVis.prototype.updateVis = function(){
             return that.y(that.displayData.total_differential[i]) - 20 ;
         });
 
+    bar
+        .on("click", function (d, i) { console.log([that.displayData.country[i]])
+            $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+        })
+        .on("mousemove", function (d, i) {
+            var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                return parseInt(d);
+            });
+
+            that.tooltip_nonoecd.classed("hidden", false)
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                .html(that.displayData.country[i] + ":" +that.displayData.total_differential[i])
+
+        })
+        .on("mouseout", function (d, i) {
+
+            that.tooltip_nonoecd.classed("hidden", true);
+        });
+
     //Aid
     var bar2 = this.svg.selectAll(".rect2")
         .data(that.displayData.country);
@@ -214,6 +240,26 @@ StackbarVis.prototype.updateVis = function(){
             return that.y(that.displayData.total_aid[i]) - 20 ;
         });
 
+    bar2
+        .on("click", function (d, i) { console.log([that.displayData.country[i]])
+            $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+        })
+        .on("mousemove", function (d, i) {
+            var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                return parseInt(d);
+            });
+
+            that.tooltip_nonoecd.classed("hidden", false)
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                .html(that.displayData.country[i] + ":" +that.displayData.total_aid[i])
+
+        })
+        .on("mouseout", function (d, i) {
+
+            that.tooltip_nonoecd.classed("hidden", true);
+        });
+
     //Aid
     var bar3 = this.svg.selectAll(".rect3")
         .data(that.displayData.country);
@@ -234,6 +280,26 @@ StackbarVis.prototype.updateVis = function(){
         .attr("width", 6)
         .attr("height", function(d, i) {
             return that.y(that.displayData.total_remit[i]) - 20 ;
+        });
+
+    bar3
+        .on("click", function (d, i) { console.log([that.displayData.country[i]])
+            $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+        })
+        .on("mousemove", function (d, i) {
+            var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                return parseInt(d);
+            });
+
+            that.tooltip_nonoecd.classed("hidden", false)
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                .html(that.displayData.country[i] + ":" +that.displayData.total_remit[i])
+
+        })
+        .on("mouseout", function (d, i) {
+
+            that.tooltip_nonoecd.classed("hidden", true);
         });
 
     // add legend
@@ -384,7 +450,7 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         avg_wage_diffIII.push(parseInt(highwage)/20)
 
         totaldifferential.push(parseInt(totalwagediff))
-        totaid.push(parseInt(totalaid) * 100)
+        totaid.push(parseInt(totalaid))
         totalremittance.push(parseInt(totalrem) * 1000000)
 
         country.push(name)
@@ -432,6 +498,8 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         "total_aid": totaid,
         "total_remit":  totalremittance,
         "total_differential": totaldifferential}
+
+    console.log(sc);
 
     return sc;
 
