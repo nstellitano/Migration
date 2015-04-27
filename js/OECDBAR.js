@@ -98,7 +98,7 @@ OECDBAR.prototype.updatevis = function(){
         .call(that.yAxis)
 
     //Need to put innerHTML to input Title that will change depending on what has been selected
-
+console.log(that.displayData)
 
     var rect = this.svg.selectAll(".rect")
         .data(that.displayData.total, function(d){return d})
@@ -219,6 +219,7 @@ OECDBAR.prototype.filter = function(name){
     this.olddisplayData = this.displayData;
     selected_name = [name] || ["Argentina"]
 
+    console.log(selected_name)
     var total_oecd = {"name":[], "total": [], "type":[]};
 
 
