@@ -22,6 +22,7 @@
 <script src = "js/stackbar.js"></script>
 <script  src= "js/sankey.js"></script>
 <script  src = "js/migration_time_sankey.js"></script>
+<script  src = "js/INFO.js"></script>
 
 
 <!--Stylesheets-->
@@ -75,7 +76,6 @@
     <div  id = "description" class="description">
         <p><b><u>Utilize for Story telling</u></b></p>
         <p>
-            Displays Selected Countries
 
         </p>
     </div>
@@ -197,6 +197,7 @@ $(function() {
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
+        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
 
 
     //------------Events-------------------------------------------------------------------------------------------------------------------------------

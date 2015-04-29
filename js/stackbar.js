@@ -88,7 +88,8 @@ StackbarVis.prototype.initVis = function(){
         .text("Average wage differentials in comparison to Remittances/Aid");
 
 
-
+    //Slider
+    this.addSlider(this.svg)
 
     // filter, aggregate, modify data
     this.wrangleData(null);
@@ -96,7 +97,6 @@ StackbarVis.prototype.initVis = function(){
     // call the update method
     this.updateVis();
 }
-
 
 
 StackbarVis.prototype.wrangleData= function(country_select){
@@ -592,6 +592,78 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
     //
     //});
 
+}
+
+StackbarVis.prototype.addSlider = function(svg, country_select){
+    var that = this;
+
+    this.displayData = this.filterAndAggregate(country_select);
+
+    // TODO: Think of what is domain and what is range for the y axis slider !!
+    var sliderScale = d3.scale.linear()
+        .domain([0,d3.max(that.displayData.total_differential)])
+        .range([0,200])
+
+    var sliderDragged = function(){
+        var value = Math.max(0, Math.min(200,d3.event.y));
+
+        var sliderValue = sliderScale.invert(value);
+
+        // TODO: do something here to deform the y scale
+        console.log("Y Axis Slider value: ", sliderValue);
+
+        that.y = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total_differential))
+            .range([20,that.height-68])
+
+        that.yalt = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total_differential))
+            .range([that.height-68,20])
+
+        that.yAxis = d3.svg.axis()
+            .scale(that.yalt)
+            .orient("left")
+            //.ticks(5)
+            .tickFormat(d3.format(".2s"))
+
+        // function rescale() {
+        //     this.y.domain([0,sliderValue])
+        //     vis.select(".y.axis")
+        //             .transition().duration(10) // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+        //             .call(this.yAxis);
+        //             vis.select("y axis")
+        // }
+
+        d3.select(this)
+            .attr("y", function () {
+                return sliderScale(sliderValue);
+            })
+
+        that.updateVis({});
+    }
+    var sliderDragBehaviour = d3.behavior.drag()
+        .on("drag", sliderDragged)
+
+    var sliderGroup = svg.append("g").attr({
+        class:"sliderGroup",
+        "transform":"translate("+0+","+30+")"
+    })
+
+    sliderGroup.append("rect").attr({
+        class:"sliderBg",
+        x:5,
+        width:10,
+        height:200
+    }).style({
+        fill:"lightgray"
+    })
+
+    sliderGroup.append("rect").attr({
+        "class":"sliderHandle",
+        y:200,
+        width:20,
+        height:10,
+    }).style({
+        fill:"#333333"
+    }).call(sliderDragBehaviour)
 
 
 }
