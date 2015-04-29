@@ -21,7 +21,7 @@
 <script src = "js/OECDBAR.js"></script>
 <script src = "js/stackbar.js"></script>
 <script  src= "js/sankey.js"></script>
-<script  src = "js/migration_time_sankey.js"></script>
+<script  src = "js/boe.js"></script>
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -91,15 +91,22 @@
 
     <div  id = "sankey_dash" class="sankey_dash">
         <p>
-            <label>
-                <text id="year">Selected Year</text>
-                <input type="range" name="slider-time" min="1980" max="2010" step="5" value="0" id="slider-time" oninput=";">
+            1980: <input name="slider-time" value= 1980 id = "_1980" type="radio" checked>
+            1985: <input name="slider-time" value= 1985 id = "_1985" type="radio" >
+            1990: <input name="slider-time" value= 1990 id = "_1990" type="radio" >
+            1995: <input name="slider-time" value= 1995 id = "_1995" type="radio" >
+            2000: <input name="slider-time" value= 2000 id = "_2000" type="radio" >
+            2005: <input name="slider-time" value= 2005 id = "_2005" type="radio" >
+            2010: <input name="slider-time" value= 2010 id = "_2010" type="radio" >
+            <!--<label>-->
+                <!--<text id="year">Selected Year</text>-->
+                <!--<input type="range" name="slider-time" min="1980" max="2010" step="5" value="0" id="slider-time" oninput=";">-->
 
-            </label>
+            <!--</label>-->
         </p>
         <form>
             <b>
-                By Education: <input name="sankey_type" value="sankey_ed" id = "sankey_ed" type="radio" check>
+                By Education: <input name="sankey_type" value="sankey_ed" id = "sankey_ed" type="radio" checked>
                 By OECD: <input name="sankey_type" value="sankey_oecd" id = "sankey_oecd" type="radio" >
             </b>
         </form>
@@ -155,6 +162,7 @@ $(function() {
    // d3.select.("#country_list").write("test");
     //Create EventHandler
     var MyEventHandler = new Object();
+    sank = new sankey_chart(d3.select("#sankey"))
     document.getElementById("sankey_dash").style.display = "none";
     document.getElementById("sankey").style.display = "none";
 
@@ -171,6 +179,7 @@ $(function() {
             .defer(d3.csv, "data/countries-data.csv")
             .defer(d3.json, "data/capitals.json")
             .defer(d3.json, "data/master_data_set.json")
+            .defer(d3.json, "data/world-topo-110m.json")
             .defer(d3.json, "data/_1980.json")
             .defer(d3.json, "data/_1985.json")
             .defer(d3.json, "data/_1990.json")
@@ -180,7 +189,7 @@ $(function() {
             .defer(d3.json, "data/_2010.json")
             .await(ready)
     //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
-    function ready(error, countries, capitals, AllData, _1980, _1985, _1990, _1995, _2000, _2005, _2010) {
+    function ready(error, countries, capitals, AllData, topo, _1980, _1985, _1990, _1995, _2000, _2005, _2010) {
         cdata = countries;
         ccapitals = capitals
         alldata = AllData;
@@ -188,7 +197,7 @@ $(function() {
 
 
         //Make a WorldMap via the worldmap object
-        world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler, _1980, _1985, _1990, _1995, _2000, _2005, _2010);
+        world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler, topo, _1980, _1985, _1990, _1995, _2000, _2005, _2010);
 
 
 //        world_map.heatmap(document.getElementById("Wage"));
@@ -198,13 +207,14 @@ $(function() {
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
 
 
+
     //------------Events-------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------
 
     $(MyEventHandler).bind("map_selection", function (event, name) { //input name is 1 country in array format
 
         last_name = name;
-        world_map.draw_arcData(last_name)
+        //world_map.draw_arcData(last_name)
         oecd_bar.wrangledata([name])
         //stack
         //scatter
@@ -225,45 +235,43 @@ $(function() {
         $(MyEventHandler).bind("scatter_selection", function (event, name) {//input name will be an array of names -> singular array or multiple array
 
 //            world_map.draw_arcData(last_name)
-//            oecd_bar.wrangledata([name])
+            oecd_bar.wrangledata([name])
 //            //stack
 //            //scatter
-//            changeDivHTML(last_name);
+            changeDivHTML(name);
 
 
         });
 
-        $(MyEventHandler).bind("selection", function (event, name) {//{input name is 1 country in array format
+        $(MyEventHandler).bind("non_oecd_selection", function (event, name) {//{input name is 1 country in array format
 
 //            world_map.draw_arcData(last_name)
-//            oecd_bar.wrangledata([name])
+            oecd_bar.wrangledata([name])
 //            //stack
 //            //scatter
-//            changeDivHTML(last_name);
+            changeDivHTML(name);
 
         });
     d3.selectAll("input").on("change", function()
     {
-        console.log("1")
 
-        console.log(this)
         if(d3.select(this).attr("name")  == "oecd" || d3.select(this).attr("name")  == "compare"){
 
-            console.log("2")
             oecd_bar.wrangledata(last_name)
         }
 
         if(d3.select(this).attr("name")  == "layout" && d3.select(this).attr("id")  == "Migrant"){
 
-            console.log("3")
+
+
+            document.getElementById("sankey_dash").style.display = "";
+            document.getElementById("sankey").style.display = "";
 
             document.getElementById("data_layout").style.display = "none";
             document.getElementById("country_list").style.display = "none";
-            document.getElementById("sankey_dash").style.display = "";
-            document.getElementById("sankey").style.display = "";
-            world_map.heatmap(this)
-            if(count ==0 ){sank = new sankey_chart(d3.select("#sankey"))}
-            count++
+
+            world_map.heatmap()
+
 
 
 
@@ -271,22 +279,32 @@ $(function() {
 
         if(d3.select(this).attr("name")  == "layout" && d3.select(this).attr("id")  == "Wage") {
 
-            console.log("4")
+
+            world_map.heatmap();
+
             document.getElementById("sankey_dash").style.display = "none";
             document.getElementById("sankey").style.display = "none";
+
             document.getElementById("data_layout").style.display = "";
             document.getElementById("country_list").style.display = "";
-            world_map.heatmap(this);
-
 
 
         }
 
-        if(d3.select(this).attr("name")  == "slider-time" ){
+                if (d3.select(this).attr("name") == "slider-time") {
 
-            world_map.heatmap(this)
-           sank.update();
+                    sank.update();
+
+                    world_map.heatmap()
+                }
+
+        if (d3.select(this).attr("name") == "sankey_type") {
+
+            sank.update();
+
+            world_map.heatmap()
         }
+
 
     });
 

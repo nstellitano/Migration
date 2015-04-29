@@ -2,6 +2,7 @@
     font-family: Arial, Verdana, sans-serif;
     color: #665544;
     text-align: center;
+    background-image: url('light_grey.png');
 }
 
 html {
@@ -96,7 +97,7 @@ body{
     float: left;
     margin: 1%;
     background-color: white;
-    height: 30em;
+    height: 50em;
     transition:500ms linear;
 
 }
@@ -287,3 +288,6 @@ li.key {
 .link:hover {
     stroke-opacity: .5;
 }
+
+
+

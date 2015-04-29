@@ -1,0 +1,502 @@
+{
+"nodes": [
+{
+"id": 1,
+"name": "Male"
+},
+{
+"id": 2,
+"name": "Female"
+},
+{
+"id": 3,
+"name": "Ed LVL I"
+},
+{
+"id": 4,
+"name": "Ed LVL II"
+},
+{
+"id": 5,
+"name": "Ed LVL III"
+},
+{
+"id": 6,
+"name": "Australia"
+},
+{
+"id": 7,
+"name": "Austria"
+},
+{
+"id": 8,
+"name": "Canada"
+},
+{
+"id": 9,
+"name": "Switzerland"
+},
+{
+"id": 10,
+"name": "Chile"
+},
+{
+"id": 11,
+"name": "Germany"
+},
+{
+"id": 12,
+"name": "Denmark"
+},
+{
+"id": 13,
+"name": "Spain"
+},
+{
+"id": 14,
+"name": "Finland"
+},
+{
+"id": 15,
+"name": "France"
+},
+{
+"id": 16,
+"name": "Great Britain"
+},
+{
+"id": 17,
+"name": "Greece"
+},
+{
+"id": 18,
+"name": "Ireland"
+},
+{
+"id": 19,
+"name": "Luxembourg"
+},
+{
+"id": 20,
+"name": "Netherlands"
+},
+{
+"id": 21,
+"name": "Norway"
+},
+{
+"id": 22,
+"name": "New Zealand"
+},
+{
+"id": 23,
+"name": "Portugal"
+},
+{
+"id": 24,
+"name": "Sweden"
+},
+{
+"id": 25,
+"name": "United States"
+}
+],
+"links": [
+{
+"id": 1,
+"source": "Male",
+"target": "Ed LVL I",
+"value": 10455186
+},
+{
+"id": 2,
+"source": "Male",
+"target": "Ed LVL II",
+"value": 9156300
+},
+{
+"id": 3,
+"source": "Male",
+"target": "Ed LVL III",
+"value": 11743048
+},
+{
+"id": 4,
+"source": "Female",
+"target": "Ed LVL I",
+"value": 11208123
+},
+{
+"id": 5,
+"source": "Female",
+"target": "Ed LVL II",
+"value": 8863864
+},
+{
+"id": 6,
+"source": "Female",
+"target": "Ed LVL III",
+"value": 11809523
+},
+{
+"id": 7,
+"source": "Ed LVL I",
+"target": "Australia",
+"value": 959456
+},
+{
+"id": 8,
+"source": "Ed LVL II",
+"target": "Australia",
+"value": 960661
+},
+{
+"id": 9,
+"source": "Ed LVL III",
+"target": "Australia",
+"value": 1872405
+},
+{
+"id": 10,
+"source": "Ed LVL I",
+"target": "Austria",
+"value": 377690
+},
+{
+"id": 11,
+"source": "Ed LVL II",
+"target": "Austria",
+"value": 374146
+},
+{
+"id": 12,
+"source": "Ed LVL III",
+"target": "Austria",
+"value": 163500
+},
+{
+"id": 13,
+"source": "Ed LVL I",
+"target": "Canada",
+"value": 1090212
+},
+{
+"id": 14,
+"source": "Ed LVL II",
+"target": "Canada",
+"value": 1135971
+},
+{
+"id": 15,
+"source": "Ed LVL III",
+"target": "Canada",
+"value": 3269359
+},
+{
+"id": 16,
+"source": "Ed LVL I",
+"target": "Switzerland",
+"value": 606145
+},
+{
+"id": 17,
+"source": "Ed LVL II",
+"target": "Switzerland",
+"value": 390532
+},
+{
+"id": 18,
+"source": "Ed LVL III",
+"target": "Switzerland",
+"value": 270944
+},
+{
+"id": 19,
+"source": "Ed LVL I",
+"target": "Chile",
+"value": 270540
+},
+{
+"id": 20,
+"source": "Ed LVL II",
+"target": "Chile",
+"value": 590463
+},
+{
+"id": 21,
+"source": "Ed LVL III",
+"target": "Chile",
+"value": 249756
+},
+{
+"id": 22,
+"source": "Ed LVL I",
+"target": "Germany",
+"value": 2322041
+},
+{
+"id": 23,
+"source": "Ed LVL II",
+"target": "Germany",
+"value": 1639010
+},
+{
+"id": 24,
+"source": "Ed LVL III",
+"target": "Germany",
+"value": 913492
+},
+{
+"id": 25,
+"source": "Ed LVL I",
+"target": "Denmark",
+"value": 111051
+},
+{
+"id": 26,
+"source": "Ed LVL II",
+"target": "Denmark",
+"value": 101613
+},
+{
+"id": 27,
+"source": "Ed LVL III",
+"target": "Denmark",
+"value": 78335
+},
+{
+"id": 28,
+"source": "Ed LVL I",
+"target": "Spain",
+"value": 918035
+},
+{
+"id": 29,
+"source": "Ed LVL II",
+"target": "Spain",
+"value": 1762228
+},
+{
+"id": 30,
+"source": "Ed LVL III",
+"target": "Spain",
+"value": 872307
+},
+{
+"id": 31,
+"source": "Ed LVL I",
+"target": "Finland",
+"value": 59587
+},
+{
+"id": 32,
+"source": "Ed LVL II",
+"target": "Finland",
+"value": 33521
+},
+{
+"id": 33,
+"source": "Ed LVL III",
+"target": "Finland",
+"value": 30146
+},
+{
+"id": 34,
+"source": "Ed LVL I",
+"target": "France",
+"value": 2567106
+},
+{
+"id": 35,
+"source": "Ed LVL II",
+"target": "France",
+"value": 349768
+},
+{
+"id": 36,
+"source": "Ed LVL III",
+"target": "France",
+"value": 730707
+},
+{
+"id": 37,
+"source": "Ed LVL I",
+"target": "Great Britain",
+"value": 2047332
+},
+{
+"id": 38,
+"source": "Ed LVL II",
+"target": "Great Britain",
+"value": 321620
+},
+{
+"id": 39,
+"source": "Ed LVL III",
+"target": "Great Britain",
+"value": 1696258
+},
+{
+"id": 40,
+"source": "Ed LVL I",
+"target": "Greece",
+"value": 334163
+},
+{
+"id": 41,
+"source": "Ed LVL II",
+"target": "Greece",
+"value": 348788
+},
+{
+"id": 42,
+"source": "Ed LVL III",
+"target": "Greece",
+"value": 264137
+},
+{
+"id": 43,
+"source": "Ed LVL I",
+"target": "Ireland",
+"value": 134965
+},
+{
+"id": 44,
+"source": "Ed LVL II",
+"target": "Ireland",
+"value": 79754
+},
+{
+"id": 45,
+"source": "Ed LVL III",
+"target": "Ireland",
+"value": 151608
+},
+{
+"id": 46,
+"source": "Ed LVL I",
+"target": "Luxembourg",
+"value": 83432
+},
+{
+"id": 47,
+"source": "Ed LVL II",
+"target": "Luxembourg",
+"value": 11204
+},
+{
+"id": 48,
+"source": "Ed LVL III",
+"target": "Luxembourg",
+"value": 25383
+},
+{
+"id": 49,
+"source": "Ed LVL I",
+"target": "Netherlands",
+"value": 675182
+},
+{
+"id": 50,
+"source": "Ed LVL II",
+"target": "Netherlands",
+"value": 341143
+},
+{
+"id": 51,
+"source": "Ed LVL III",
+"target": "Netherlands",
+"value": 318612
+},
+{
+"id": 52,
+"source": "Ed LVL I",
+"target": "Norway",
+"value": 52208
+},
+{
+"id": 53,
+"source": "Ed LVL II",
+"target": "Norway",
+"value": 135438
+},
+{
+"id": 54,
+"source": "Ed LVL III",
+"target": "Norway",
+"value": 91581
+},
+{
+"id": 55,
+"source": "Ed LVL I",
+"target": "New Zealand",
+"value": 138474
+},
+{
+"id": 56,
+"source": "Ed LVL II",
+"target": "New Zealand",
+"value": 197397
+},
+{
+"id": 57,
+"source": "Ed LVL III",
+"target": "New Zealand",
+"value": 301731
+},
+{
+"id": 58,
+"source": "Ed LVL I",
+"target": "Portugal",
+"value": 275522
+},
+{
+"id": 59,
+"source": "Ed LVL II",
+"target": "Portugal",
+"value": 169359
+},
+{
+"id": 60,
+"source": "Ed LVL III",
+"target": "Portugal",
+"value": 146674
+},
+{
+"id": 61,
+"source": "Ed LVL I",
+"target": "Sweden",
+"value": 332957
+},
+{
+"id": 62,
+"source": "Ed LVL II",
+"target": "Sweden",
+"value": 329786
+},
+{
+"id": 63,
+"source": "Ed LVL III",
+"target": "Sweden",
+"value": 261399
+},
+{
+"id": 64,
+"source": "Ed LVL I",
+"target": "United States",
+"value": 8307211
+},
+{
+"id": 65,
+"source": "Ed LVL II",
+"target": "United States",
+"value": 8747762
+},
+{
+"id": 66,
+"source": "Ed LVL III",
+"target": "United States",
+"value": 11844237
+}
+]
+}

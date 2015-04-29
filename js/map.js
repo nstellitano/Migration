@@ -2,7 +2,7 @@
 //------------World Map Object Function -------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler, _1980, _1985, _1990, _1995, _2000, _2005, _2010) {
+WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler, topo,_1980, _1985, _1990, _1995, _2000, _2005, _2010) {
 
     that = this;
     this.parentElement = _parentElement;
@@ -10,6 +10,7 @@ WorldMap = function(_parentElement, _cdata, _capitals, alldata, _eventHandler, _
     this.eventHandler = _eventHandler;
     this.width = getInnerWidth(this.parentElement);
     this.height = (this.width) / 2.15;
+    this.topo = topo
     this.cdata =_cdata
     this.ccapitals = _capitals
     this.arcdata = [
@@ -73,7 +74,7 @@ WorldMap.prototype.initVis = function(){
     this.svg.append("rect")
         .attr("width", that.width)
         .attr("height", that.height)
-        .style("fill", "white")
+        .style("fill", "#bce8f1")
 
 
     //Still working out what this is actually doing
@@ -84,15 +85,12 @@ WorldMap.prototype.initVis = function(){
     //Makes the borders of the countries
     this.g.style("stroke-width", 1).attr("transform", "");
 
-//pulling out the applicable topojson data and making the countries
-    d3.json("data/world-topo-110m.json", function(error, world) {
-
 
         //Pulls out the individual countries features describing what arcs are needed to build the visual
-        var topo = topojson.feature(world, world.objects.countries).features;
+        this.topon = topojson.feature(that.topo, that.topo.objects.countries).features;
 
         //Preparing to build the countries
-        that.country = d3.select("#innerg").selectAll(".country").data(topo);
+        this.country = d3.select("#innerg").selectAll(".country").data(that.topon);
 
         //I think it has to do with centering purposes...adjusting for any positioning of the div
         var offsetL = document.getElementById("world_map").offsetLeft;
@@ -102,7 +100,7 @@ WorldMap.prototype.initVis = function(){
 
 
         //build the countries
-        that.country.enter().append("path")
+        this.country.enter().append("path")
             .attr("class", "country")
             .attr("d", that.path)
             .attr("id", function (d, i) {
@@ -113,8 +111,9 @@ WorldMap.prototype.initVis = function(){
             })
             .style("fill", "#ccc")
             .style("stroke", "#111")
-            .on("click", function (d) {
-                $(that.eventHandler).trigger("map_selection", d.properties.name)
+
+            this.country.on("click", function (d) {console.log([d.properties.name]);
+                $(that.eventHandler).trigger("map_selection", [d.properties.name])
 
             })
             .on("mousemove", function (d, i) {
@@ -127,7 +126,8 @@ WorldMap.prototype.initVis = function(){
 
                 that.tooltip.classed("hidden", false)
                     .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT-25) + "px" )
-                    .html(d.properties.name)
+                    .html(that.topon[i].properties.name)
+
 
             })
             .on("mouseout", function (d, i) {
@@ -138,7 +138,7 @@ WorldMap.prototype.initVis = function(){
 
 
         that.updateVis();
-    })
+
 
 
 };
@@ -243,7 +243,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
 }
 
 
-    WorldMap.prototype.heatmap = function(radio) {
+    WorldMap.prototype.heatmap = function() {
         that = this;
 
 
@@ -251,58 +251,17 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
 
 
-        //Update the colors on the the map depending on Selection of Radio Buttons..or have a function for each button...
-        //Need to make a legend
+        if(document.getElementById("Migrant").checked) {
 
 
-
-        if(d3.select(radio).attr("value") == "Migrant" && d3.select(radio).node().checked) {
-
-
-            test = 0;
-            range1 = [-3000000, 0]
-
-            range  = [0, 6000000]
-
-
-
-
-
-
-            for (i = 0; i < 195; i++) {
-
-                var total=0;
-                that.data._children.map(function (d) {
-
-                    total = total + d._children[i].size
-                })
-
-
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_nonoecd(-1*total)});
-                if(total*-1 <min){min = -1*total};
-
-
-                //Need to subtract out outflows of OECD countries
-                for(z = 0; z<20; z++){
-                    if(total>max){max =that.data._children[z].size-total}
-                    if(that.data._children[z].name == that.data._children[1]._children[i].name) {
-                        $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return that.heat_map_oecd(that.data._children[z].size - total)});
-
-
-                    }
+            var slider_year = 1980
+            var slider = document.getElementsByName("slider-time")
+            for(i=0; i< slider.length; i++){
+                if(slider[i].checked){
+                    slider_year = parseInt(slider[i].value)
                 }
-
-
-
             }
 
-
-        }
-
-        if(d3.select(radio).attr("name") == "slider-time") {
-
-
-            var slider_year = parseInt(d3.select("#slider-time").property("value"));
 
             if(slider_year == "1980")
             {
@@ -384,17 +343,20 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
 
 
-        if(d3.select(radio).attr("id") == "Wage" && d3.select(radio).node().checked) {
+
+        if(document.getElementById("Wage").checked) {
+
+            that.data = that.d2010
 
 
-
+            test = 1;
             var wage_table = {"name": [], "TypeI": [], "TypeII": [], "TypeIII": [], "Avg": []}
             var counter = 0;
 
             for (i = 0; i < 195; i++) {
 
 
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){return "whitesmoke"});
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){console.log('[title="' + String(that.data._children[1]._children[i].name) + '"]'); return "whitesmoke"});
 
 
 
@@ -432,10 +394,12 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
             that.heat_map.domain(range)
 
+            console.log(that.data)
+            console.log(wage_table)
             for (i = 0; i < wage_table.name.length; i++) {
 
                 $('[title="' + String(wage_table.name[i]) + '"]').css("fill", function () {
-                    console.log(that.heat_map(wage_table.Avg[i])); return that.heat_map(wage_table.Avg[i])
+                     return that.heat_map(wage_table.Avg[i])
                 });
             }
 
@@ -466,10 +430,10 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
     var stepSize = (endValue-startValue)/(nElements-1) -2;
     var color_data =  []
 
+
     for (var i = startValue+3; i <= endValue; i=i+stepSize) {
         color_data.push(i);
     }
-
     var startValue1 = min1;
     var endValue1 = max1;
     var nElements1 = 9;
@@ -535,10 +499,10 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
 
 
-    var label = legend.selectAll(".text")
+    var label = legend.selectAll(".text1")
         .data(function(d){return[d]})
 
-    label.enter().append("text").attr("class", "text")
+    label.enter().append("text").attr("class", "text1")
 
     count =8;
     label
@@ -546,7 +510,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
         .attr("y", function(d,i) {count--; return count*20 +258})
         .attr("font-size", "9px")
          .attr("dy", ".35em")
-         .text(function(d) { if(test ==1){return "< $" +  Math.round(d);} else {return " " + Math.round(d+3)} });
+         .text(function(d) { if(test ==1){return "< $" +  Math.round(d);} else {return "> " + Math.round(d+13)} });
 
     label.exit()
         .remove();
@@ -563,7 +527,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
             .attr("y", function(d,i) {count1--; return count1*20 +258})
             .attr("font-size", "9px")
             .attr("dy", ".35em")
-            .text(function(d) { return "< " + Math.round(d-3); });
+            .text(function(d) { return "< " + Math.round(-1*(d-3)); });
 
         label1.exit()
             .remove();
@@ -648,4 +612,5 @@ function lngLatToArc(d, projection, sourceName, targetName, bend){
         return "M0,0,l0,0z";
     }
 }
+
 

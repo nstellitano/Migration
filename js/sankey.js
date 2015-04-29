@@ -1,6 +1,8 @@
 /**
  * Created by nicholasstellitano on 4/23/15.
  */
+
+var count = 0;
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = 24,
@@ -103,6 +105,10 @@ d3.sankey = function() {
                 d3.sum(node.sourceLinks, value),
                 d3.sum(node.targetLinks, value)
             );
+            console.log(node.name)
+            console.log(node.value)
+            console.log(d3.sum(node.sourceLinks, value))
+            console.log(d3.sum(node.targetLinks, value))
         });
     }
 
@@ -183,6 +189,7 @@ d3.sankey = function() {
                 nodes.forEach(function(node, i) {
                     node.y = i;
                     node.dy = node.value * ky;
+
                 });
             });
 
@@ -230,7 +237,7 @@ d3.sankey = function() {
                     i;
 
                 // Push any overlapping nodes down.
-                nodes.sort(ascendingDepth);
+                //nodes.sort(ascendingDepth);
                 for (i = 0; i < n; ++i) {
                     node = nodes[i];
                     dy = y0 - node.y;
@@ -260,10 +267,15 @@ d3.sankey = function() {
     }
 
     function computeLinkDepths() {
-        nodes.forEach(function(node) {
-            node.sourceLinks.sort(ascendingTargetDepth);
-            node.targetLinks.sort(ascendingSourceDepth);
-        });
+
+
+            nodes.forEach(function (node) {
+                node.sourceLinks.sort(ascendingTargetDepth);
+                node.targetLinks.sort(ascendingSourceDepth);
+            });
+            count++;
+
+
         nodes.forEach(function(node) {
             var sy = 0, ty = 0;
             node.sourceLinks.forEach(function(link) {
@@ -287,6 +299,7 @@ d3.sankey = function() {
 
     function center(node) {
         return node.y + node.dy / 2;
+
     }
 
     function value(link) {

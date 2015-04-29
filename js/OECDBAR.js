@@ -3,13 +3,16 @@
 OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.parentElement = _parentelement;
     this.data = _alldata;
-    this.displayData =[]
+    this.displayData;
     this.olddisplayData = [];
 
     this.eventhandler = eventhandler;
 
     this.width = getInnerWidth(this.parentElement);
     this.height = 500;
+
+    this.units =0;
+    this.formatNumber = d3.format(",.0f");  // zero decimal places
 
 
     //To show country names when hovering over the country
@@ -77,9 +80,10 @@ OECDBAR.prototype.updatevis = function(){
     var that = this;
 
     //What is selected?
-    this.x.domain([0, d3.max(that.displayData.total)]);
-    //this.x.domain([0, 60000]);
-    this.y.domain([0,that.displayData.total.length]); //Can change if we just do wages
+
+
+    this.y.domain([0,that.displayData.total.length])
+    if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
 
     var offsetL = document.getElementById("graph_1").offsetLeft;
     var offsetT = document.getElementById("graph_1").offsetTop;
@@ -94,41 +98,51 @@ OECDBAR.prototype.updatevis = function(){
             return "rotate(-65)"})
 
 
+
     this.svg.select(".y.axis")
         .call(that.yAxis)
 
     //Need to put innerHTML to input Title that will change depending on what has been selected
-console.log(that.displayData)
+
 
     var rect = this.svg.selectAll(".rect")
         .data(that.displayData.total, function(d){return d})
 
     rect.enter().append("g").append("rect").attr("class", "rect")
 
-    var check = 0;
+
     rect.select("rect")
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +21 ; })
         .attr("height", 20)
-       //.attr("width", function(d,i) {if(check == 0){check++; return that.x(0)}else{return that.x(that.olddisplayData.total[i])}})
-        //.transition().duration(1000)
+       .attr("width", function(d,i) {return that.x(0)})
+        .transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
+
+
+
     rect
-        .attr("fill", function(d,i){if(i%3==0){return that.color(4)}else if(i%2==0){return that.color(8)}else{return that.color(1)}})
+        .attr("fill", function(d,i){
+            if(that.displayData.type[i] == "W" || that.displayData.type[i] == "I"  ){return that.color(4)}
+            else if(that.displayData.type[i] == "A" || that.displayData.type[i] == "II"  ){return that.color(8)}
+            else{ return that.color(1)}})
         .attr("opacity",1)
-        .on("click", function (d, i) {
-            $(that.eventHandler).trigger("selection", that.displayData.name[i])
+        .on("click", function (d, i) {console.log([that.displayData.name[i]]);
+            $(that.eventHandler).trigger("oecd_selection", [that.displayData.name[i]])
 
         })
         .on("mousemove", function (d, i) {
             var mouse = d3.mouse(that.svg.node()).map(function (d) {
                 return parseInt(d);
             });
-
+            if(document.getElementById("per_capita").checked ){that.units = "per Migrant"}else{that.units = ""}
+            if(document.getElementById("per_capita").checked && that.displayData.type[i] == "R" ){that.units = "per Migrant"}
+            if(document.getElementById("per_capita").checked && that.displayData.type[i] == "W" ){that.units = "per Migrant"}
+            if(document.getElementById("per_capita").checked && that.displayData.type[i] == "A"){that.units = "per capita"};
             that.tooltip_oecd.classed("hidden", false)
                 .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
-                .html(that.displayData.tool[i] + d)
+                .html(that.displayData.tool[i] +" $" +that.formatNumber(d) + " " + that.units);
 
         })
         .on("mouseout", function (d, i) {
@@ -216,10 +230,10 @@ OECDBAR.prototype.selection= function (name){
 OECDBAR.prototype.filter = function(name){
 
 
-    this.olddisplayData = this.displayData;
+    this.olddisplayData = this.displayData || 1;
     selected_name = [name] || ["Argentina"]
 
-    console.log(selected_name)
+
     var total_oecd = {"name":[], "total": [], "type":[]};
 
 
@@ -260,7 +274,7 @@ OECDBAR.prototype.filter = function(name){
             }
         });
 
-        console.log(that.data)
+
         this.data._children.map(function(d){
             var check =1;
             for (i = 0; i <total_oecd.name.length-2; i=i+3) {

@@ -1,69 +1,84 @@
 {
-  "nodes": [
-    {
-      "name": "Male"
-    },
-    {
-      "name": "Female"
-    },
-    {
-      "name": "Ed LVL I"
-    },
-    {
-      "name": "Ed LVL II"
-    },
-    {
-      "name": "Ed LVL III"
-    },
-    {
-      "name": "OECD"
-    }
-  ],
-  "links": [
-    {
-      "source": "Male",
-      "target": "Ed LVL I",
-      "value": 8507332
-    },
-    {
-      "source": "Male",
-      "target": "Ed LVL II",
-      "value": 3444032
-    },
-    {
-      "source": "Male",
-      "target": "Ed LVL III",
-      "value": 4751047
-    },
-    {
-      "source": "Female",
-      "target": "Ed LVL I",
-      "value": 9774263
-    },
-    {
-      "source": "Female",
-      "target": "Ed LVL II",
-      "value": 4709447
-    },
-    {
-      "source": "Female",
-      "target": "Ed LVL III",
-      "value": 4062969
-    },
-    {
-      "source": "Ed LVL I",
-      "target": "OECD",
-      "value": 18281595
-    },
-    {
-      "source": "Ed LVL II",
-      "target": "OECD",
-      "value": 8153479
-    },
-    {
-      "source": "Ed LVL III",
-      "target": "OECD",
-      "value": 8814016
-    }
-  ]
+"nodes": [
+{
+"id": 1,
+"name": "Male"
+},
+{
+"id": 2,
+"name": "Female"
+},
+{
+"id": 3,
+"name": "Ed LVL I"
+},
+{
+"id": 4,
+"name": "Ed LVL II"
+},
+{
+"id": 5,
+"name": "Ed LVL III"
+},
+{
+"id": 6,
+"name": "OECD"
+}
+],
+"links": [
+{
+"id": 1,
+"source": "Male",
+"target": "Ed LVL I",
+"value": 8507332
+},
+{
+"id": 2,
+"source": "Male",
+"target": "Ed LVL II",
+"value": 3444032
+},
+{
+"id": 3,
+"source": "Male",
+"target": "Ed LVL III",
+"value": 4751047
+},
+{
+"id": 4,
+"source": "Female",
+"target": "Ed LVL I",
+"value": 9774263
+},
+{
+"id": 5,
+"source": "Female",
+"target": "Ed LVL II",
+"value": 4709447
+},
+{
+"id": 6,
+"source": "Female",
+"target": "Ed LVL III",
+"value": 4062969
+},
+{
+"id": 7,
+"source": "Ed LVL I",
+"target": "OECD",
+"value": 18281595
+},
+{
+"id": 8,
+"source": "Ed LVL II",
+"target": "OECD",
+"value": 8153479
+},
+{
+"id": 9,
+"source": "Ed LVL III",
+"target": "OECD",
+"value": 8814016
+}
+]
 }

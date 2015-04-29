@@ -4,12 +4,12 @@ sankey_chart = function(parent_element)
 {
     that = this;
     var units = "Migrants";
-    var slider_year = parseInt(d3.select("#slider-time").property("value"));
-    document.getElementById("year").innerHTML = slider_year.toString();
+    //var slider_year = parseInt(d3.select("#slider-time").property("value"));
+    //document.getElementById("year").innerHTML = slider_year.toString();
 
-    var margin = {top: 10, right: 10, bottom: 10, left: 10}
-    this.width = 1100 - margin.left - margin.right
-    this.height = 500 - margin.top - margin.bottom;
+    this.margin = {top: 10, right: 10, bottom: 10, left: 10}
+    this.width = 1100 - that.margin.left - that.margin.right
+    this.height = 700 - that.margin.top - that.margin.bottom;
 
     this.formatNumber = d3.format(",.0f");  // zero decimal places
       this.format = function (d) {
@@ -19,11 +19,11 @@ sankey_chart = function(parent_element)
 
     // append the svg canvas to the page
     this.svg = parent_element.append("svg")
-        .attr("width", that.width + margin.left + margin.right)
-        .attr("height", that.height + margin.top + margin.bottom)
+        .attr("width", that.width + that.margin.left + that.margin.right)
+        .attr("height", that.height +1000+ that.margin.top + that.margin.bottom)
         .append("g")
         .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + that.margin.left + "," + that.margin.top + ")");
 
     // Set the sankey diagram properties
     this.sankey = d3.sankey()
@@ -51,9 +51,16 @@ sankey_chart.prototype.initVis = function() {
         .defer(d3.json, "data/sankey_2000.json")
         .defer(d3.json, "data/sankey_2005.json")
         .defer(d3.json, "data/sankey_2010.json")
+        .defer(d3.json, "data/sankey_1980_oecd.json")
+        .defer(d3.json, "data/sankey_1985_oecd.json")
+        .defer(d3.json, "data/sankey_1990_oecd.json")
+        .defer(d3.json, "data/sankey_1995_oecd.json")
+        .defer(d3.json, "data/sankey_2000_oecd.json")
+        .defer(d3.json, "data/sankey_2005_oecd.json")
+        .defer(d3.json, "data/sankey_2010_oecd.json")
         .await(ready);
 
-    function ready(error, d_1980, d_1985, d_1990, d_1995, d_2000, d_2005, d_2010) {
+    function ready(error, d_1980, d_1985, d_1990, d_1995, d_2000, d_2005, d_2010, oecd_1980,oecd_1985,oecd_1990,oecd_1995,oecd_2000,oecd_2005, oecd_2010) {
         that._1980 = JSON.parse(JSON.stringify(d_1980, null, 1));
         that._1985 = JSON.parse(JSON.stringify(d_1985, null, 1));
         that._1990 = JSON.parse(JSON.stringify(d_1990, null, 1));
@@ -61,16 +68,16 @@ sankey_chart.prototype.initVis = function() {
         that._2000 = JSON.parse(JSON.stringify(d_2000, null, 1));
         that._2005 = JSON.parse(JSON.stringify(d_2005, null, 1));
         that._2010 = JSON.parse(JSON.stringify(d_2010, null, 1));
+        that.oecd_1980 = JSON.parse(JSON.stringify(oecd_1980, null, 1));
+        that.oecd_1985 = JSON.parse(JSON.stringify(oecd_1985, null, 1));
+        that.oecd_1990 = JSON.parse(JSON.stringify(oecd_1990, null, 1));
+        that.oecd_1995 = JSON.parse(JSON.stringify(oecd_1995, null, 1));
+        that.oecd_2000 = JSON.parse(JSON.stringify(oecd_2000, null, 1));
+        that.oecd_2005 = JSON.parse(JSON.stringify(oecd_2005, null, 1));
+        that.oecd_2010 = JSON.parse(JSON.stringify(oecd_2010, null, 1));
 
-        _1980 = JSON.parse(JSON.stringify(d_1980, null, 1));
-        _1985 = JSON.parse(JSON.stringify(d_1985, null, 1));
-        _1990 = JSON.parse(JSON.stringify(d_1990, null, 1));
-        _1995 = JSON.parse(JSON.stringify(d_1995, null, 1));
-        _2000 = JSON.parse(JSON.stringify(d_2000, null, 1));
-        _2005 = JSON.parse(JSON.stringify(d_2005, null, 1));
-        _2010 = JSON.parse(JSON.stringify(d_2010, null, 1));
 
-        //Use if you have sankey named json files
+        _1980 = JSON.parse(JSON.stringify(that._1980, null, 1));
         var nodeMap = {};
         _1980.nodes.forEach(function (x) {
             nodeMap[x.name] = x;
@@ -90,139 +97,91 @@ sankey_chart.prototype.initVis = function() {
 
 
         that.graph = _1980;
-//            old = _1980;
-//            for(i=0; i< old.links.length; i++){
-//                old.links[i].old_dy = 0
-//            }
+
+
         that.chart();
     }
-
+}
 
     sankey_chart.prototype.chart = function()  {
+that = this;
 
+        d3.selectAll(".node").remove()
+        d3.selectAll(".link").remove()
 
-            d3.selectAll(".link").remove()
 
 // add in the links
-            var link = that.svg.selectAll(".link")
-                .data(that.graph.links)
-
-            link.enter().append("path")
-                .attr("class", "link")
-
-            link
-                .attr("d", that.path)
-                .style("stroke-width", function (d) {
-                    return Math.max(1, d.dy);
-                })
-                .sort(function (a, b) {
-                    return b.dy - a.dy;
-                });
+        var link = this.svg.append("g").selectAll(".link")
+            .data(that.graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", that.path)
+            .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+            .sort(function(a, b) { return b.dy - a.dy; });
 
 // add the link titles
-            link.append("title")
-                .text(function (d) {
-                    return d.source.name + " → " +
-                        d.target.name + "\n" + that.format(d.value);
-                });
+        link.append("title")
+            .text(function(d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + that.format(d.value); });
 
-            link.exit().remove()
-
-            d3.selectAll(".node").remove()
 // add in the nodes
-            var node = that.svg.selectAll(".node")
-                .data(that.graph.nodes)
+        var node = that.svg.append("g").selectAll(".node")
+            .data(that.graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")"; })
+            .call(d3.behavior.drag()
+                .origin(function(d) { return d; })
+                .on("dragstart", function() {console.log(this.parentNode);
+                    this.parentNode.appendChild(this); })
+                .on("drag", dragmove));
 
-            node.enter().append("g")
-                .attr("class", "node")
-                .attr("transform", function (d) {
-                    return "translate(" + d.x + "," + d.y + ")";
-                })
-                    .call(d3.behavior.drag()
-                            .origin(function(d) {console.log("go");return d; })
-                            .on("dragstart", function() {
-                                this.parentNode.appendChild(this); })
-                            .on("drag", dragmove));
-
-
-            node.exit().remove()
 // add the rectangles for the nodes
-
-            node.append("rect")
-                .attr("height", function (d) {
-                    return d.dy;
-                })
-                .attr("width", 20)
-                .style("fill", function (d) {
-                    return d.color = color(d.name.replace(/ .*/, ""));
-                })
-                .style("stroke", function (d) {
-                    return d3.rgb(d.color).darker(2);
-                })
-                .append("title")
-                .text(function (d) {
-                    return d.name + "\n" + that.format(d.value);
-                });
-
+        node.append("rect")
+            .attr("height", function(d) { return d.dy; })
+            .attr("width", that.sankey.nodeWidth())
+            .style("fill", function(d) {
+                return d.color = color(d.name.replace(/ .*/, "")); })
+            .style("stroke", function(d) {
+                return d3.rgb(d.color).darker(2); })
+            .append("title")
+            .text(function(d) {
+                return d.name + "\n" + that.format(d.value); });
 
 // add in the title for the nodes
+        node.append("text")
+            .attr("x", -6)
+            .attr("y", function(d) { return d.dy / 2; })
+            .attr("dy", ".35em")
+            .attr("text-anchor", "end")
+            .attr("transform", null)
+            .text(function(d) { return d.name; })
+            .filter(function(d) { return d.x < that.width / 2; })
+            .attr("x", 6 + that.sankey.nodeWidth())
+            .attr("text-anchor", "start");
 
-            d3.selectAll(".text").remove()
-
-            var label = that.svg.selectAll(".text")
-                .data(that.graph.nodes)
-
-            label.enter().append("g")
-                .attr("class", "text")
-                .attr("transform", function (d) {
-                    return "translate(" + d.x + "," + d.y + ")";
-                })
-                    .call(d3.behavior.drag()
-                            .origin(function(d) { console.log("test"); return d; })
-                            .on("dragstart", function() {
-                                this.parentNode.appendChild(this); })
-                            .on("drag", dragmove));
-
-
-            label.append("text")
-                .attr("x", -6)
-                .attr("y", function (d) {
-                    return d.dy / 2;
-                })
-                .attr("dy", ".35em")
-                .attr("text-anchor", "end")
-                .attr("transform", null)
-                .text(function (d) {
-                    return d.name;
-                })
-                .filter(function (d) {
-                    return d.x < that.width / 2;
-                })
-                .attr("x", 6 + 20)
-                .attr("text-anchor", "start");
-
-            label.exit()
-                .remove()
-
-
+        var testing = that;
 // the function for moving the nodes
-            function dragmove(d) {
-                d3.select(this).attr("transform",
-                    "translate(" + (
-                        d.x = Math.max(0, Math.min(that.width - d.dx, d3.event.x))
-                    )
-                    + "," + (
-                        d.y = Math.max(0, Math.min(that.height - d.dy, d3.event.y))
-                    ) + ")");
-                that.sankey.relayout();
-                link.attr("d", that.path);
-            }
+        function dragmove(d) {
+
+            d3.select(this).attr("transform",
+                "translate(" + (
+                    d.x = Math.max(0, Math.min(testing.width - d.dx, d3.event.x))
+                ) + "," + (
+                    d.y = Math.max(0, Math.min(testing.height - d.dy, d3.event.y))
+                ) + ")");
+             testing.sankey.relayout();
+            link.attr("d", testing.path);
+        }
+
 
 
         };
 
 
-}
+
 
 
 
@@ -230,14 +189,26 @@ sankey_chart.prototype.update = function(){
 
     that = this;
 
-        var slider_year = parseInt(d3.select("#slider-time").property("value"));
-        document.getElementById("year").innerHTML = slider_year.toString();
+    var slider_year = 1980
+    var slider = document.getElementsByName("slider-time")
+    for(i=0; i< slider.length; i++){
+        if(slider[i].checked){
+            slider_year = parseInt(slider[i].value)
+        }
+    }
 
 
+    if(document.getElementById("sankey_oecd").checked){
+        that.height = 1500;
+        that.sankey.size([that.width, that.height]);
+    }else {
+
+        that.height = 700;
+        that.sankey.size([that.width, that.height]);}
 
         if (slider_year == "1980") {
-            _1980 = JSON.parse(JSON.stringify(that._1980, null, 1));
-
+            if(document.getElementById("sankey_oecd").checked){_1980 = JSON.parse(JSON.stringify(that.oecd_1980, null, 1));}
+            else{ _1980 = JSON.parse(JSON.stringify(that._1980, null, 1))}
             var nodeMap = {};
             _1980.nodes.forEach(function (x) {
                 nodeMap[x.name] = x;
@@ -260,8 +231,8 @@ sankey_chart.prototype.update = function(){
         }
         if (slider_year == "1985") {
 
-            _1985 = JSON.parse(JSON.stringify(that._1985, null, 1));;
-
+            if(document.getElementById("sankey_oecd").checked){_1985 = JSON.parse(JSON.stringify(that.oecd_1985, null, 1));}
+            else{ _1985 = JSON.parse(JSON.stringify(that._1985, null, 1))}
 
 
             var nodeMap = {};
@@ -286,8 +257,8 @@ sankey_chart.prototype.update = function(){
         }
 
         if (slider_year == "1990") {
-            _1990 = JSON.parse(JSON.stringify(that._1990, null, 1));;
-
+            if(document.getElementById("sankey_oecd").checked){_1990 = JSON.parse(JSON.stringify(that.oecd_1990, null, 1));}
+            else{ _1990 = JSON.parse(JSON.stringify(that._1990, null, 1))}
 
             var nodeMap = {};
             _1990.nodes.forEach(function (x) {
@@ -311,8 +282,8 @@ sankey_chart.prototype.update = function(){
         }
 
         if (slider_year == "1995") {
-            _1995 = JSON.parse(JSON.stringify(that._1995, null, 1));;
-
+            if(document.getElementById("sankey_oecd").checked){_1995 = JSON.parse(JSON.stringify(that.oecd_1995, null, 1));}
+            else{ _1995 = JSON.parse(JSON.stringify(that._1995, null, 1))}
 
             var nodeMap = {};
             _1995.nodes.forEach(function (x) {
@@ -335,8 +306,8 @@ sankey_chart.prototype.update = function(){
 
         }
         if (slider_year == "2000") {
-            _2000 = JSON.parse(JSON.stringify(that._2000, null, 1));;
-
+            if(document.getElementById("sankey_oecd").checked){_2000 = JSON.parse(JSON.stringify(that.oecd_2000, null, 1));}
+            else{ _2000 = JSON.parse(JSON.stringify(that._2000, null, 1))}
 
             var nodeMap = {};
             _2000.nodes.forEach(function (x) {
@@ -360,7 +331,8 @@ sankey_chart.prototype.update = function(){
         }
 
         if (slider_year == "2005") {
-            _2005 = JSON.parse(JSON.stringify(that._2005, null, 1));;
+            if(document.getElementById("sankey_oecd").checked){_2005 = JSON.parse(JSON.stringify(that.oecd_2005, null, 1));}
+            else{ _2005 = JSON.parse(JSON.stringify(that._2005, null, 1))}
 
 
             var nodeMap = {};
@@ -384,7 +356,8 @@ sankey_chart.prototype.update = function(){
 
         }
         if (slider_year == "2010") {
-            _2010 = JSON.parse(JSON.stringify(that._2010, null, 1));;
+            if(document.getElementById("sankey_oecd").checked){_2010 = JSON.parse(JSON.stringify(that.oecd_2010, null, 1));}
+            else{ _2010 = JSON.parse(JSON.stringify(that._2010, null, 1))}
 
             var nodeMap = {};
             _2010.nodes.forEach(function (x) {
@@ -406,6 +379,8 @@ sankey_chart.prototype.update = function(){
             that.graph = _2010
 
         }
+
+
 
         this.chart()
 

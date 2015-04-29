@@ -53,23 +53,23 @@
 
         var sankey_fill = {
             "nodes":[
-                {"name":"Male"},
-                {"name":"Female"},
-                {"name":"Ed LVL I"},
-                {"name":"Ed LVL II"},
-                {"name":"Ed LVL III"},
-                {"name": "OECD"}
+                {"id": 1, "name":"Male"},
+                {"id": 2,"name":"Female"},
+                {"id": 3,"name":"Ed LVL I"},
+                {"id": 4,"name":"Ed LVL II"},
+                {"id": 5,"name":"Ed LVL III"},
+                {"id": 6,"name": "OECD"}
             ],
             "links":[
-                {"source":"Male","target":"Ed LVL I","value":11395189},
-                {"source":"Male","target":"Ed LVL II","value":10667654},
-                {"source":"Male","target":"Ed LVL III","value":14194359},
-                {"source":"Female","target":"Ed LVL I","value":11890368},
-                {"source":"Female","target":"Ed LVL II","value":10047154},
-                {"source":"Female","target":"Ed LVL III","value":15017105},
-                {"source":"Ed LVL I","target":"OECD","value":23285557},
-                {"source":"Ed LVL II","target":"OECD","value":20714808},
-                {"source":"Ed LVL III","target":"OECD","value":29211464}
+                {"id": 1,"source":"Male","target":"Ed LVL I","value":11395189},
+                {"id": 2,"source":"Male","target":"Ed LVL II","value":10667654},
+                {"id": 3,"source":"Male","target":"Ed LVL III","value":14194359},
+                {"id": 4,"source":"Female","target":"Ed LVL I","value":11890368},
+                {"id": 5,"source":"Female","target":"Ed LVL II","value":10047154},
+                {"id": 6,"source":"Female","target":"Ed LVL III","value":15017105},
+                {"id": 7,"source":"Ed LVL I","target":"OECD","value":23285557},
+                {"id": 8,"source":"Ed LVL II","target":"OECD","value":20714808},
+                {"id": 9,"source":"Ed LVL III","target":"OECD","value":29211464}
             ]}
 
         var year_data = _1980;
@@ -118,29 +118,114 @@
             sankey_fill.links[7].value = totalII
             sankey_fill.links[8].value = totalIII
 
-            var str = JSON.stringify(sankey_fill, null, 1); // spacing level = 2
-            console.log(str)
+//            var str = JSON.stringify(sankey_fill, null, 1); // spacing level = 2
+//            console.log(str)
         }
 
-        var sankey_fillI = {
-            "nodes":[
-                {"name":"Non_OECD Country"},
-                {"name":"Ed LVL I"},
-                {"name":"Ed LVL II"},
-                {"name":"Ed LVL III"},
-                {"name": "OECD_Country"}
-            ],
-            "links":[
-                {"source":"Male","target":"Ed LVL I","value":11395189},
-                {"source":"Male","target":"Ed LVL II","value":10667654},
-                {"source":"Male","target":"Ed LVL III","value":14194359},
 
-                {"source":"Ed LVL I","target":"OECD_country","value":23285557},
-                {"source":"Ed LVL II","target":"OECD_country","value":20714808},
-                {"source":"Ed LVL III","target":"OECD_country","value":29211464}
-            ]}
 
-        var sankey_fillI = {
+        var year_data = _1980;
+        for(h=0; h<7; h++) {
+            var sankey_oecd = {
+                "nodes":[
+                    {"id": 1,"name":"Male"},
+                    {"id": 2,"name":"Female"},
+                    {"id": 3,"name":"Ed LVL I"},
+                    {"id": 4,"name":"Ed LVL II"},
+                    {"id": 5,"name":"Ed LVL III"}
+
+                ],
+                "links":[
+                    {"id": 1,"source":"Male","target":"Ed LVL I","value":0},
+                    {"id": 2,"source":"Male","target":"Ed LVL II","value":0},
+                    {"id": 3,"source":"Male","target":"Ed LVL III","value":0},
+
+                    {"id": 4,"source":"Female","target":"Ed LVL I","value":0},
+                    {"id": 5,"source":"Female","target":"Ed LVL II","value":0},
+                    {"id": 6,"source":"Female","target":"Ed LVL III","value":0}
+
+
+
+                ]}
+            if(h==0){year_data = _1980}
+            else if (h ==1){year_data = _1985}
+            else if (h==2) {year_data = _1990}
+            else if (h==3){year_data = _1995}
+            else if (h==4) {year_data = _2000}
+            else if (h==5) {year_data = _2005}
+            else if (h==6) {year_data = _2010}
+            var genderMI = 0;
+            var genderFI = 0;
+            var genderMII = 0;
+            var genderFII = 0;
+            var genderMIII = 0;
+            var genderFIII = 0;
+            var totalI=0, totalII=0, totalIII=0;
+            var count = 7;
+            var counter =  6;
+            var totalmaleI = 0;
+            var totalfemaleI=0;
+            var totalmaleII = 0;
+            var totalfemaleII=0;
+            var totalmaleIII = 0;
+            var totalfemaleIII=0;
+
+            for (i = 0; i < 20; i++) {
+                var genderMI = 0;
+                var genderFI = 0;
+                var genderMII = 0;
+                var genderFII = 0;
+                var genderMIII = 0;
+                var genderFIII = 0;
+                var totalI=0, totalII=0, totalIII=0;
+                for (z = 0; z < 195; z++) {
+                    genderMI = genderMI + parseInt(year_data._children[i]._children[z]._children[0]._children[0].size)
+                    genderFI = genderFI + parseInt(year_data._children[i]._children[z]._children[0]._children[1].size)
+
+                    genderMII = genderMII + parseInt(year_data._children[i]._children[z]._children[1]._children[0].size)
+                    genderFII = genderFII + parseInt(year_data._children[i]._children[z]._children[1]._children[1].size)
+
+                    genderMIII = genderMIII + parseInt(year_data._children[i]._children[z]._children[2]._children[0].size)
+                    genderFIII = genderFIII + parseInt(year_data._children[i]._children[z]._children[2]._children[1].size)
+
+                    totalI = genderMI + genderFI;
+                    totalII = genderMII + genderFII;
+                    totalIII = genderMIII + genderFIII;
+
+
+                }
+
+                sankey_oecd.nodes.push({"id": counter, "name": year_data._children[i].name});
+                sankey_oecd.links.push(
+                        {"id": count, "source":"Ed LVL I","target": year_data._children[i].name, "value":totalI},
+                        {"id": count+1, "source":"Ed LVL II","target":year_data._children[i].name, "value":totalII},
+                        {"id": count+2, "source":"Ed LVL III","target":year_data._children[i].name, "value":totalIII}
+                )
+
+                totalmaleI = totalmaleI +genderMI;
+                totalfemaleI=totalfemaleI +genderFI;
+                totalmaleII = totalmaleII +genderMII;
+                totalfemaleII=totalfemaleII +genderFII;
+                totalmaleIII = totalmaleIII +genderMIII;
+                 totalfemaleIII=totalfemaleIII +genderFIII;;
+                counter++;
+                count = count + 3;
+            }
+
+            sankey_oecd.links[0].value = totalmaleI
+            sankey_oecd.links[1].value = totalmaleII
+            sankey_oecd.links[2].value = totalmaleIII
+            sankey_oecd.links[3].value = totalfemaleI
+            sankey_oecd.links[4].value = totalfemaleII
+            sankey_oecd.links[5].value = totalfemaleIII
+
+        }
+
+        var str = JSON.stringify(sankey_oecd, null, 1); // spacing level = 2
+        console.log(str)
+
+
+        var sankey_fillII = {
             "nodes":[
                 {"name":"Non_OECD Country"},
                 {"name":"Ed LVL I"},
@@ -149,13 +234,13 @@
                 {"name": "OECD"}
             ],
             "links":[
-                {"source":"Male","target":"Ed LVL I","value":11395189},
-                {"source":"Male","target":"Ed LVL II","value":10667654},
-                {"source":"Male","target":"Ed LVL III","value":14194359},
+                {"source":"Male","target":"Ed LVL I","value":0},
+                {"source":"Male","target":"Ed LVL II","value":0},
+                {"source":"Male","target":"Ed LVL III","value":0},
 
-                {"source":"Ed LVL I","target":"OECD","value":23285557},
-                {"source":"Ed LVL II","target":"OECD","value":20714808},
-                {"source":"Ed LVL III","target":"OECD","value":29211464}
+                {"source":"Ed LVL I","target":"OECD","value":0},
+                {"source":"Ed LVL II","target":"OECD","value":0},
+                {"source":"Ed LVL III","target":"OECD","value":0}
             ]}
 
     //Create Empty frame of future JSON file

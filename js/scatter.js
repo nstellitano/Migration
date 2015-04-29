@@ -61,24 +61,13 @@ ScatterVis.prototype.initVis = function(){
         .orient("left");
 
 
-    this.brush = d3.svg.brush()
-        .x(this.x)
-        .y(this.y)
-        .on("brush", brushmove());
-            //$(that.eventHandler).trigger("selectionChanged",that.brush.extent());
+    this.brush = this.svg.append("g")
+        .attr("class", "brush")
+    ;
 
-    function brushmove(p) {
-        var e = that.brush.extent();
-        countryname = that.svg.selectAll("circle").classed("hidden", function(d) {
-            return e[0][0] > d[p.x] || d[p.x] > e[1][0]
-                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
-        });
-        console.log(countryname);
-    }
-
-
-    this.svg.append("g")
-        .attr("class", "brush");
+    //
+    //this.svg.append("g")
+    //    .attr("class", "brush");
 
 
     this.svg.append("g")
@@ -306,11 +295,27 @@ ScatterVis.prototype.updateVis = function(){
 
 
 
-    this.brush.x(this.x);
-    this.svg.select(".brush")
-        .call(this.brush)
-        .selectAll("rect")
-        .attr("height", that.height-20);
+    this.brush.call(d3.svg.brush()
+        .x(that.x)
+        .y(that.y)
+        .on("brush", function() {
+            var extent = d3.event.target.extent();
+console.log(extent)
+    console.log(that.displayData)
+            dots.classed("selected", function(d) {
+                console.log(extent[0][0] <= d.x && d.x < extent[1][0]
+                && extent[0][1] <= d.y && d.y < extent[1][1]);
+                return extent[0][0] <= d.x && d.x < extent[1][0]
+                    && extent[0][1] <= d.y && d.y < extent[1][1];
+            });
+
+        }));
+
+    //this.brush.x(this.x);
+    //this.svg.select(".brush")
+    //    .call(this.brush)
+    //    .selectAll("rect")
+    //    .attr("height", that.height-20);
 
     // add legend
     var legend = this.svg.selectAll(".legend")

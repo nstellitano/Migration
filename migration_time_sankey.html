@@ -1,48 +1,48 @@
-<!--<!DOCTYPE html>-->
-<!--<meta charset="utf-8">-->
-<!--<style>-->
-    <!--.node rect {-->
-        <!--cursor: move;-->
-        <!--fill-opacity: .9;-->
-        <!--shape-rendering: crispEdges;-->
-    <!--}-->
-    <!--.node text {-->
-        <!--pointer-events: none;-->
-        <!--text-shadow: 0 1px 0 #fff;-->
-    <!--}-->
-    <!--.link {-->
-        <!--fill: none;-->
-        <!--stroke: #000;-->
-        <!--stroke-opacity: .2;-->
-    <!--}-->
-    <!--.link:hover {-->
-        <!--stroke-opacity: .5;-->
-    <!--}-->
-<!--</style>-->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+    .link:hover {
+        stroke-opacity: .5;
+    }
+</style>
 
-<!--<div  id = "dashboard" class="dashboard">-->
-    <!--<form>-->
+<div  id = "dashboard" class="dashboard">
+    <form>
 
 
-        <!--<label><input type="radio" name="layout" value="Wage" id = "Wage" > Wage </label>-->
-        <!--&lt;!&ndash;<label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>&ndash;&gt;-->
-        <!--&lt;!&ndash;<label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>&ndash;&gt;-->
-        <!--<label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant</label>-->
+        <label><input type="radio" name="layout" value="Wage" id = "Wage" > Wage </label>
+        <!--<label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>-->
+        <!--<label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>-->
+        <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant</label>
 
-    <!--</form>-->
+    </form>
 
-<!--</div>-->
-<!--<body>-->
-<!--<p id="chart">-->
-    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
-    <!--<script src="js/sankey.js"></script>-->
-    <!--<script src = "http://d3js.org/queue.v1.min.js"></script>-->
-    <!--<script>-->
+</div>
+<body>
+<p id="chart">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/sankey.js"></script>
+    <script src = "http://d3js.org/queue.v1.min.js"></script>
+    <script>
 
 
         var units = "Migrants";
-        slider_year = parseInt(d3.select("#slider-time").property("value"));
-        document.getElementById("year").innerHTML = slider_year.toString();
+//        slider_year = parseInt(d3.select("#slider-time").property("value"));
+//        document.getElementById("year").innerHTML = slider_year.toString();
 
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
                 width = 1200 - margin.left - margin.right,
@@ -127,9 +127,7 @@
 
 // add in the links
                 var link = svg.selectAll(".link")
-                        .data(graph.links)
-
-                link.enter().append("path")
+                        .data(graph.links).enter().append("path")
                         .attr("class", "link")
 
                 link
@@ -148,31 +146,30 @@
                                     d.target.name + "\n" + format(d.value);
                         });
 
-                link.exit().remove()
+//                link.exit().remove()
 
                 d3.selectAll(".node").remove()
 // add in the nodes
                 var node = svg.selectAll(".node")
-                        .data(graph.nodes)
-
-                node.enter().append("g")
+                        .data(graph.nodes).enter().append("g")
                         .attr("class", "node")
                         .attr("transform", function (d) {
                             return "translate(" + d.x + "," + d.y + ")";
                         })
-//                    .call(d3.behavior.drag()
-//                            .origin(function(d) { return d; })
-//                            .on("dragstart", function() {
-//                                this.parentNode.appendChild(this); })
-//                            .on("drag", dragmove));
-                node.exit().remove()
+                    .call(d3.behavior.drag()
+                            .origin(function(d) { return d; })
+                            .on("dragstart", function() {
+                                this.parentNode.appendChild(this); })
+                            .on("drag", dragmove));
+
+//                node.exit().remove()
 // add the rectangles for the nodes
 
                 node.append("rect")
                         .attr("height", function (d) {
                             return d.dy;
                         })
-                        .attr("width", 20)
+                        .attr("width", 50)
                         .style("fill", function (d) {
                             return d.color = color(d.name.replace(/ .*/, ""));
                         })
@@ -191,18 +188,16 @@
                 d3.selectAll(".text").remove()
 
                 var label = svg.selectAll(".text")
-                        .data(graph.nodes)
-
-                label.enter().append("g")
+                        .data(graph.nodes).enter().append("g")
                         .attr("class", "text")
                         .attr("transform", function (d) {
                             return "translate(" + d.x + "," + d.y + ")";
-                        })
-//                    .call(d3.behavior.drag()
-//                            .origin(function(d) { return d; })
-//                            .on("dragstart", function() {
-//                                this.parentNode.appendChild(this); })
-//                            .on("drag", dragmove));
+                        }).call(d3.behavior.drag()
+                                .origin(function(d) { return d; })
+                                .on("dragstart", function() {
+                                    this.parentNode.appendChild(this); })
+                                .on("drag", dragmove));
+
 
 
                 label.append("text")
@@ -222,8 +217,8 @@
                         .attr("x", 6 + 20)
                         .attr("text-anchor", "start");
 
-                label.exit()
-                        .remove()
+//                label.exit()
+//                        .remove()
 
 
 // the function for moving the nodes
@@ -289,4 +284,4 @@
             });
 
         }
-    <!--</script>-->
+    </script>
