@@ -223,11 +223,11 @@ $(function() {
 
     });
 
-        $(MyEventHandler).bind("scatter_selection", function (event, name, name1) {//input name will be an array of names -> singular array or multiple array
-                console.log(name);
-            console.log(name1);
+        $(MyEventHandler).bind("scatter_selection", function (event, name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19) {//input name will be an array of names -> singular array or multiple array
+                country_select = [name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19];
 //            world_map.draw_arcData(last_name)
-//            oecd_bar.wrangledata([name])
+
+            stackbar_vis.wrangleData(country_select);
 //            //stack
 //            //scatter
 //            changeDivHTML(last_name);
@@ -235,7 +235,7 @@ $(function() {
 
         });
 
-        $(MyEventHandler).bind("selection", function (event, name) {//{input name is 1 country in array format
+        $(MyEventHandler).bind("nonoecd_selection", function (event, name) {//{input name is 1 country in array format
 
 //            world_map.draw_arcData(last_name)
 //            oecd_bar.wrangledata([name])

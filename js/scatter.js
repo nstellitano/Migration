@@ -322,7 +322,7 @@ ScatterVis.prototype.updateVis = function(){
         .y(that.y)
         .on("brush", function() {
             var extent = d3.event.target.extent();
-            console.log(extent);
+            //console.log(extent);
             compare=[];
             for(z =0; z<20; z++) {
                 if(extent[0][0] <= that.displayData.size_high[z] && that.displayData.wage_diff_high[z] < extent[1][0]

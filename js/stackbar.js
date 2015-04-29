@@ -99,41 +99,23 @@ StackbarVis.prototype.initVis = function(){
 
 
 
-/**
- * Method to wrangle the data. In this case it takes an options object
- * @param _filterFunction - a function that filters data or "null" if none
- */
-StackbarVis.prototype.wrangleData= function(_filterFunction){
+StackbarVis.prototype.wrangleData= function(country_select){
 
     // displayData should hold the data which is visualized
-    this.displayData = this.filterAndAggregate(_filterFunction);
-
-    //// you might be able to pass some options,
-    //// if you don't pass options -- set the default options
-    //// the default is: var options = {filter: function(){return true;} }
-    //var options = _options || {filter: function(){return true;}};
-
+    this.displayData = this.filterAndAggregate(country_select);
+    this.updateVis()
 
 }
 
 
-
-/**
- * the drawing function - should use the D3 selection, enter, exit
- */
 StackbarVis.prototype.updateVis = function(){
 
     var that = this;
 
-    //console.log(that.displayData);
-
-
-    // updates scales
 
     this.x.domain([0,21])
     this.y.domain([0,d3.max(that.displayData.total_differential)])
     this.yalt.domain([0,d3.max(that.displayData.total_differential)])
-    console.log(that.displayData.country)
 
     var offsetL = document.getElementById("stackbarVis").offsetLeft;
     var offsetT = document.getElementById("stackbarVis").offsetTop;
@@ -157,24 +139,6 @@ StackbarVis.prototype.updateVis = function(){
         .attr("transform", function(d) {
             return "rotate(-60)"
         });
-
-
-    //// Add a group for each column.
-    //var valgroup = this.svg.selectAll("g.valgroup")
-    //    .data(that.displayData)
-    //    .enter().append("svg:g")
-    //    .attr("class", "valgroup")
-    //    .style("fill", function(d, i) { return that.z(i); })
-    //    .style("stroke", function(d, i) { return d3.rgb(that.z(i)).darker(); });
-    //
-    //// Add a rect for each date.
-    //var rect = valgroup.selectAll("rect")
-    //    .data(function(d){return that.displayData})
-    //    .enter().append("svg:rect")
-    //    .attr("x", function(d,i) { return  5 + that.x(i); })
-    //    .attr("y", function(d, i,j) { return - that.y(that.displayData[i][j].y0) - that.y(that.displayData[i][j].y); })
-    //    .attr("height", function(d,i,j) { return that.y(that.displayData[i][j].y); })
-    //    .attr("width", 10);
 
     //Differential
     var bar = this.svg.selectAll(".rect")
@@ -340,12 +304,10 @@ StackbarVis.prototype.updateVis = function(){
  * be defined here.
  * @param selection
  */
-StackbarVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
-
-    //var filter = {"start": selectionStart, "end": selectionEnd}
+StackbarVis.prototype.selection= function (country_select){
 
 
-    //this.wrangleData(filter)
+    this.wrangleData(country_select)
 
     this.updateVis();
 
@@ -367,13 +329,13 @@ StackbarVis.prototype.onSelectionChange= function (selectionStart, selectionEnd)
  * @param _filter - A filter can be, e.g.,  a function that is only true for data of a given time range
  * @returns {Array|*}
  */
-StackbarVis.prototype.filterAndAggregate = function(_filter){
+StackbarVis.prototype.filterAndAggregate = function(country_select){
 
 
 
     var filter = function(){return true;}
-    if (_filter != null){
-        filter = _filter;
+    if (country_select != null){
+        filter = country_select;
     }
 
 
@@ -499,9 +461,45 @@ StackbarVis.prototype.filterAndAggregate = function(_filter){
         "total_remit":  totalremittance,
         "total_differential": totaldifferential}
 
-    console.log(sc);
+    arr=[];
 
-    return sc;
+    if (country_select != null) {
+
+        arr = country_select
+
+    }
+
+    arr = arr.filter(Boolean);
+
+    //console.log(arr.length);
+
+    //console.log(sc.country);
+
+    result={"country":[], "total_aid": [], "total_remit":  [], "total_differential": [] };
+
+    function isInArray(array, search)
+    {
+        return array.indexOf(search) >= 0;
+    }
+
+    if (country_select != null) {
+
+        for(c =0; c<arr.length; c++) {
+            if(isInArray(sc.country, arr[c])){
+                result.country[c]=sc.country[c]
+                result.total_aid[c]=sc.total_aid[c]
+                result.total_remit[c]=sc.total_remit[c]
+                result.total_differential[c]=sc.total_differential[c]
+
+            }
+        }
+    return result;
+    }
+
+    if (country_select == null) {
+        return sc;
+    }
+
 
     //var sc=[];
     //
