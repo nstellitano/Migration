@@ -22,6 +22,8 @@
 <script src = "js/stackbar.js"></script>
 <script  src= "js/sankey.js"></script>
 <script  src = "js/boe.js"></script>
+<script  src = "js/INFO.js"></script>
+
 
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -162,7 +164,6 @@ $(function() {
    // d3.select.("#country_list").write("test");
     //Create EventHandler
     var MyEventHandler = new Object();
-    sank = new sankey_chart(d3.select("#sankey"))
     document.getElementById("sankey_dash").style.display = "none";
     document.getElementById("sankey").style.display = "none";
 
@@ -179,7 +180,6 @@ $(function() {
             .defer(d3.csv, "data/countries-data.csv")
             .defer(d3.json, "data/capitals.json")
             .defer(d3.json, "data/master_data_set.json")
-            .defer(d3.json, "data/world-topo-110m.json")
             .defer(d3.json, "data/_1980.json")
             .defer(d3.json, "data/_1985.json")
             .defer(d3.json, "data/_1990.json")
@@ -205,6 +205,7 @@ $(function() {
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
+        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
 
 
 
@@ -232,9 +233,11 @@ $(function() {
 
     });
 
-        $(MyEventHandler).bind("scatter_selection", function (event, name) {//input name will be an array of names -> singular array or multiple array
-
+        $(MyEventHandler).bind("scatter_selection", function (event, name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19) {//input name will be an array of names -> singular array or multiple array
+                country_select = [name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19];
 //            world_map.draw_arcData(last_name)
+
+            stackbar_vis.wrangleData(country_select);
             oecd_bar.wrangledata([name])
 //            //stack
 //            //scatter
@@ -243,7 +246,7 @@ $(function() {
 
         });
 
-        $(MyEventHandler).bind("non_oecd_selection", function (event, name) {//{input name is 1 country in array format
+        $(MyEventHandler).bind("nonoecd_selection", function (event, name) {//{input name is 1 country in array format
 
 //            world_map.draw_arcData(last_name)
             oecd_bar.wrangledata([name])
