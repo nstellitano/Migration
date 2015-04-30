@@ -340,7 +340,7 @@ ScatterVis.prototype.updateVis = function(){
                 compare = unique(compare);
 
             }
-            $(that.eventHandler).trigger("scatter_selection",compare);
+            $(that.eventHandler).trigger( "scatter_selection",compare);
         }
     ));
 

@@ -128,7 +128,7 @@ OECDBAR.prototype.updatevis = function(){
             else if(that.displayData.type[i] == "A" || that.displayData.type[i] == "II"  ){return that.color(8)}
             else{ return that.color(1)}})
         .attr("opacity",1)
-        .on("click", function (d, i) {console.log([that.displayData.name[i]]);
+        .on("click", function (d, i) {
             $(that.eventHandler).trigger("oecd_selection", [that.displayData.name[i]])
 
         })
@@ -231,7 +231,8 @@ OECDBAR.prototype.filter = function(name){
 
 
     this.olddisplayData = this.displayData || 1;
-    selected_name = [name] || ["Argentina"]
+    selected_name = name || ["Argentina"]
+
 
 
     var total_oecd = {"name":[], "total": [], "type":[]};
@@ -263,6 +264,7 @@ OECDBAR.prototype.filter = function(name){
     if(document.getElementById("Wage").checked){
         total_oecd = {"name":[], "total": [], "type":[], "tool": []};
         var counter = 0;
+
 
         that.data._children.map(function (d) {
 
@@ -296,6 +298,7 @@ OECDBAR.prototype.filter = function(name){
                         for (z = 0; z < 195; z++) {
                             selected_name.map(function (selection) {
 
+
                                 if (selection == d._children[z].name) {
                                     total_wageI = total_wageI + (d._children[z]._children[0].size * (d.wageI - d._children[z]._children[0].wage))
                                     total_wageII = total_wageII + (d._children[z]._children[1].size * (d.wageII - d._children[z]._children[0].wage))
@@ -309,6 +312,7 @@ OECDBAR.prototype.filter = function(name){
                                     total_popIII = total_popIII + d._children[z]._children[2].size;
 
                                     pop = pop + d._children[z].size
+
                                 }
 
                             })

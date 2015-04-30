@@ -112,7 +112,7 @@ WorldMap.prototype.initVis = function(){
             .style("fill", "#ccc")
             .style("stroke", "#111")
 
-            this.country.on("click", function (d) {console.log([d.properties.name]);
+            this.country.on("click", function (d) {
                 $(that.eventHandler).trigger("map_selection", [d.properties.name])
 
             })
@@ -356,7 +356,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
             for (i = 0; i < 195; i++) {
 
 
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){console.log('[title="' + String(that.data._children[1]._children[i].name) + '"]'); return "whitesmoke"});
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){ return "whitesmoke"});
 
 
 
@@ -394,8 +394,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
 
             that.heat_map.domain(range)
 
-            console.log(that.data)
-            console.log(wage_table)
+
             for (i = 0; i < wage_table.name.length; i++) {
 
                 $('[title="' + String(wage_table.name[i]) + '"]').css("fill", function () {

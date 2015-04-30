@@ -22,7 +22,7 @@
 <script src = "js/stackbar.js"></script>
 <script  src= "js/sankey.js"></script>
 <script  src = "js/boe.js"></script>
-<script  src = "js/INFO.js"></script>
+<!--<script  src = "js/INFO.js"></script>-->
 
 
 <!--Stylesheets-->
@@ -163,7 +163,8 @@ $(function() {
 
    // d3.select.("#country_list").write("test");
     //Create EventHandler
-    var MyEventHandler = new Object();
+    var MyEventHandler = new Object()
+    sank = new sankey_chart(d3.select("#sankey"))
     document.getElementById("sankey_dash").style.display = "none";
     document.getElementById("sankey").style.display = "none";
 
@@ -180,6 +181,7 @@ $(function() {
             .defer(d3.csv, "data/countries-data.csv")
             .defer(d3.json, "data/capitals.json")
             .defer(d3.json, "data/master_data_set.json")
+            .defer(d3.json, "data/world-topo-110m.json")
             .defer(d3.json, "data/_1980.json")
             .defer(d3.json, "data/_1985.json")
             .defer(d3.json, "data/_1990.json")
@@ -205,7 +207,7 @@ $(function() {
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
-        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
+//        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
 
 
 
@@ -214,7 +216,7 @@ $(function() {
 
     $(MyEventHandler).bind("map_selection", function (event, name) { //input name is 1 country in array format
 
-        last_name = name;
+        last_name = [name];
         //world_map.draw_arcData(last_name)
         oecd_bar.wrangledata([name])
         //stack
@@ -226,10 +228,12 @@ $(function() {
         $(MyEventHandler).bind("oecd_selection", function (event, name) { //input name is 1 country in array format
 
 //            world_map.draw_arcData(last_name)
+
+            //stackbar_vis.wrangleData(country_select);
 //            oecd_bar.wrangledata([name])
 //            //stack
 //            //scatter
-//            changeDivHTML(last_name);
+            //changeDivHTML(name);
 
     });
 
@@ -237,11 +241,18 @@ $(function() {
                 country_select = [name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19];
 //            world_map.draw_arcData(last_name)
 
+
+            for(i=19; i>-1; i--){
+                if((country_select[i]===undefined)){
+                    country_select.splice(i,1)
+                }
+            }
+
+
             stackbar_vis.wrangleData(country_select);
-            oecd_bar.wrangledata([name])
-//            //stack
-//            //scatter
-            changeDivHTML(name);
+            oecd_bar.wrangledata(country_select)
+//
+            changeDivHTML(country_select);
 
 
         });
@@ -249,10 +260,11 @@ $(function() {
         $(MyEventHandler).bind("nonoecd_selection", function (event, name) {//{input name is 1 country in array format
 
 //            world_map.draw_arcData(last_name)
-            oecd_bar.wrangledata([name])
+            console.log(name)
+            oecd_bar.wrangledata(name)
 //            //stack
 //            //scatter
-            changeDivHTML(name);
+            //changeDivHTML(name);
 
         });
     d3.selectAll("input").on("change", function()
@@ -321,7 +333,16 @@ $(function() {
         var previousInnerHTML = new String();
 
         previousInnerHTML = document.getElementById('country_list').innerHTML;
-        previousInnerHTML = previousInnerHTML.concat("<h5>" + name + "<h5>")
+
+        for(i=0; i<name.length; i++)
+        {
+            if(i!=name.length-1) {
+                previousInnerHTML = previousInnerHTML.concat("<h5>" + name[i] + "," + "<h5>")
+            }else
+            {
+                previousInnerHTML = previousInnerHTML.concat("<h5>" + name[i] + "<h5>")
+            }
+        }
 //        if(d3.select(radio).attr("value") == "NONOECD") {
 //
 //            for (i = 0; i < 195; i++) {
