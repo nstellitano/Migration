@@ -276,7 +276,7 @@ label {
 
 
  #stackbarVis{
-     width: 80%;
+     width: 72%;
      height: 30em;
      float: left;
      margin: 1%;
@@ -286,8 +286,8 @@ label {
 
 }
 
-#scatterVis{
-    width: 80%;
+#description1{
+    width: 22%;
     height: 30em;
     float: left;
     margin: 1%;
@@ -297,7 +297,27 @@ label {
 
 }
 
+#scatterVis{
+    width: 72%;
+    height: 30em;
+    float: left;
+    margin: 1%;
+    background-color: white;
+    /*border: 1px solid black;*/
+    background-image: url('light_grey.png');
 
+}
+
+#description2{
+    width: 22%;
+    height: 30em;
+    float: left;
+    margin: 1%;
+    background-color: white;
+    /*border: 1px solid black;*/
+    background-image: url('light_grey.png');
+
+}
 #footers  {
     width: 99%;
     height: 2em;

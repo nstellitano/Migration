@@ -178,14 +178,26 @@
         <div  id = "stackbarVis" class="graph grid_8">
 
         </div>
-        <p>
+
+        <div  id = "description1" class="description1">
+            <p><b><u>Utilize for Story telling</u></b></p>
+            <p>
+                Change the world..etc..
+            </p>
+        </div>
         <div  id = "scatterVis" class="graph grid_8">
             <b>Skill Level:</b>
             <input name="a" id = "low" value="lowskill" type="checkbox" checked>Low Skill
             <input name="a" id = "medium" value="medskill" type="checkbox" checked >Medium Skill
             <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
         </div>
-        </p>
+
+        <div  id = "description2" class="description2">
+            <p><b><u>Utilize for Story telling</u></b></p>
+            <p>
+                Change the world..etc..
+            </p>
+        </div>
         <div  id = "footers" class = "footers" >
             <p>Copyright etc...</p>
         </div>
@@ -256,7 +268,7 @@ $(function() {
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
-        oecd_bar.wrangledata();
+        oecd_bar.wrangledata(["Argentina"]);
         world_map.heatmap()
         changeDivHTML(["Argentina"]);
 //        desc_info = new Info(d3.select("description",alldata, MyEventHandler))

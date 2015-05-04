@@ -54,6 +54,8 @@ OECDBAR.prototype.initvis = function(){
     this.xAxis = d3.svg.axis()
         .scale(this.x)
         .orient("bottom")
+        .tickFormat(d3.format(".2s"))
+
 
 
     this.yAxis = d3.svg.axis()
@@ -70,8 +72,9 @@ OECDBAR.prototype.initvis = function(){
 
 
 
-    this.wrangledata(null);
-    this.updatevis();
+    this.wrangledata(["Argentina"]);
+    this.addSlider(this.svg)
+
 
 };
 
@@ -80,7 +83,8 @@ OECDBAR.prototype.wrangledata = function(name){
 
     this.selected_country = name;
     this.displayData = this.filter(name);
-    this.addSlider(this.svg)
+
+
     this.updatevis()
 
 
@@ -93,6 +97,7 @@ OECDBAR.prototype.updatevis = function(){
     //What is selected?
 
 
+    console.log(d3.max(that.displayData.total))
     this.y.domain([0,that.displayData.total.length])
     //if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
     this.x.domain([0, d3.max(that.displayData.total)])
@@ -130,7 +135,7 @@ OECDBAR.prototype.updatevis = function(){
         .attr("height", 15)
       // .attr("width", function(d,i) {return that.x(0)})
         //.transition().duration(1000)
-        .attr("width", function(d,i) {return that.x(d)})
+        .attr("width", function(d,i) {console.log((d)); return that.x(d)})
 
 
 
@@ -221,6 +226,36 @@ OECDBAR.prototype.updatevis = function(){
     text2
         .exit()
         .remove();
+
+
+
+    if(document.getElementById("migrant_stock").checked) {
+
+        var sum = 0;
+        for (i = 0; i < that.displayData.total.length; i++) {
+            sum = sum + that.displayData.total[i]
+        }
+
+
+        //clear current list
+        document.getElementById('total').innerHTML = ("$" + String(that.formatNumber(sum)));
+
+    } else {
+        var sum = 0;
+        for (i = 0; i < that.displayData.total.length; i++) {
+            sum = sum + that.displayData.total[i]
+        }
+
+        var average = sum / 24;
+
+        //clear current list
+        document.getElementById('total').innerHTML = ("$" + String(that.formatNumber(average)) + "per capita");
+
+
+
+    }
+
+
 
 
 
@@ -425,6 +460,8 @@ OECDBAR.prototype.filter = function(name){
 
 
 
+
+    console.log(total_oecd)
     return total_oecd;
 
 
@@ -441,35 +478,31 @@ OECDBAR.prototype.addSlider = function(svg){
     var that = this;
 
 
-
-    var sliderScale = d3.scale.linear()
-        .domain([0,d3.max(that.displayData.total)])
-        .range([200,0])
-
-
     var sliderDragged = function(){
-        var value = Math.max(55, Math.min(199,d3.event.x));
+
+        var sliderScale = d3.scale.linear()
+            .domain([0,d3.max(that.displayData.total)])
+            .range([200,0])
+
+        var value = Math.max(65, Math.min(199,d3.event.x));
+
 
 
         var sliderValue = sliderScale.invert(value);
 
+        console.log(Math.exp(sliderValue/d3.max(that.displayData.total)))
 
 
-        that.x = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total))
+        that.x = d3.scale.pow().exponent(sliderValue/(d3.max(that.displayData.total)))
             .range([0,that.width - 75])
+
 
 
         that.xAxis = d3.svg.axis()
             .scale(that.x)
             .orient("bottom")
+            .tickFormat(d3.format(".2s"))
 
-        // function rescale() {
-        //     this.y.domain([0,sliderValue])
-        //     vis.select(".y.axis")
-        //             .transition().duration(10) // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
-        //             .call(this.yAxis);
-        //             vis.select("y axis")
-        // }
 
         d3.select(this)
             .attr("x", function () {
@@ -488,9 +521,9 @@ OECDBAR.prototype.addSlider = function(svg){
 
     sliderGroup.append("rect").attr({
         class:"sliderBg",
-        x:50,
+        x:60,
         y:465,
-        width:200,
+        width:150,
         height:10
     }).style({
         fill:"lightgray"
@@ -499,7 +532,7 @@ OECDBAR.prototype.addSlider = function(svg){
     sliderGroup.append("rect").attr({
         "class":"sliderHandle",
         y:460,
-        x:50,
+        x:60,
         width:10,
         height:20
     }).style({
