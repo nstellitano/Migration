@@ -3,13 +3,14 @@
 OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.parentElement = _parentelement;
     this.data = _alldata;
-    this.displayData;
-    this.olddisplayData = [];
+    this.displayData= {"name":[], "total": [], "type":[], "tool": []};
+    this.olddisplayData = {"name":[], "total": [], "type":[], "tool": []};
 
     this.eventhandler = eventhandler;
 
     this.width = getInnerWidth(this.parentElement);
     this.height = 500;
+    this.selected_country = ["Argentina"];
 
     this.units =0;
     this.formatNumber = d3.format(",.0f");  // zero decimal places
@@ -40,6 +41,10 @@ OECDBAR.prototype.initvis = function(){
     this.x = d3.scale.linear()
         .range([0,this.width - 75])
 
+    this.xalt = d3.scale.linear()
+        .range([this.width-68,30]);
+
+
     this.y = d3.scale.linear()
         .range([0,this.height]);
 
@@ -63,6 +68,8 @@ OECDBAR.prototype.initvis = function(){
         .attr("class", "x axis")
         .attr("transform", "translate(50,"+ (this.height + 20) + ")")
 
+
+
     this.wrangledata(null);
     this.updatevis();
 
@@ -71,8 +78,12 @@ OECDBAR.prototype.initvis = function(){
 OECDBAR.prototype.wrangledata = function(name){
 
 
+    this.selected_country = name;
     this.displayData = this.filter(name);
+    this.addSlider(this.svg)
     this.updatevis()
+
+
 };
 
 OECDBAR.prototype.updatevis = function(){
@@ -83,7 +94,9 @@ OECDBAR.prototype.updatevis = function(){
 
 
     this.y.domain([0,that.displayData.total.length])
-    if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
+    //if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
+    this.x.domain([0, d3.max(that.displayData.total)])
+
 
     var offsetL = document.getElementById("graph_1").offsetLeft;
     var offsetT = document.getElementById("graph_1").offsetTop;
@@ -108,14 +121,14 @@ OECDBAR.prototype.updatevis = function(){
     var rect = this.svg.selectAll(".rect")
         .data(that.displayData.total, function(d){return d})
 
-    rect.enter().append("g").append("rect").attr("class", "rect")
+    rect.enter().append("rect").attr("class", "rect")
 
 
-    rect.select("rect")
+    rect
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +21 ; })
         .attr("height", 20)
-       .attr("width", function(d,i) {return that.x(0)})
+      // .attr("width", function(d,i) {return that.x(0)})
         .transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
@@ -424,3 +437,74 @@ var getInnerWidth = function(element) {
     return parseInt(style.getPropertyValue('width'));
 }
 
+OECDBAR.prototype.addSlider = function(svg){
+    var that = this;
+
+
+
+    var sliderScale = d3.scale.linear()
+        .domain([0,d3.max(that.displayData.total)])
+        .range([200,0])
+
+
+    var sliderDragged = function(){
+        var value = Math.max(0, Math.min(199,d3.event.x));
+
+
+        var sliderValue = sliderScale.invert(value);
+
+
+
+        that.x = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total))
+            .range([0,that.width - 75])
+
+
+        that.xAxis = d3.svg.axis()
+            .scale(that.x)
+            .orient("bottom")
+
+        // function rescale() {
+        //     this.y.domain([0,sliderValue])
+        //     vis.select(".y.axis")
+        //             .transition().duration(10) // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+        //             .call(this.yAxis);
+        //             vis.select("y axis")
+        // }
+
+        d3.select(this)
+            .attr("x", function () {
+                return sliderScale(sliderValue);
+            })
+
+        that.wrangledata(that.selected_country)
+    }
+    var sliderDragBehaviour = d3.behavior.drag()
+        .on("drag", sliderDragged)
+
+    var sliderGroup = svg.append("g").attr({
+        class:"sliderGroup",
+        "transform":"translate("+0+","+30+")"
+    })
+
+    sliderGroup.append("rect").attr({
+        class:"sliderBg",
+        x:30,
+        y:555,
+        width:200,
+        height:10
+    }).style({
+        fill:"lightgray"
+    })
+
+    sliderGroup.append("rect").attr({
+        "class":"sliderHandle",
+        y:550,
+        x:30,
+        width:10,
+        height:20
+    }).style({
+        fill:"#333333"
+    }).call(sliderDragBehaviour)
+
+
+}

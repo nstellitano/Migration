@@ -119,6 +119,27 @@
 
     </div>
 
+    <div id="loading">
+        <img src="css/ajax-loader.gif" alt="Loading..." />
+    </div>
+
+
+    <div id = "overlay" class="overlay">
+        <h3>Welcome to Migration as an Instrument for International Development</h3>
+        <p>Welcome to our page of wonder and delight.  Please take a moment to familiarize yourself with this wonder
+        of wonders.  Blah blah blah blah.  Push botton to continue</p>
+
+        <div>
+            <label>
+                <p>
+
+                    <a href="#" ID ="button" class="myButton">Continue</a>
+                </p>
+            </label>
+        </div>
+
+    </div>
+
     <div id="data_layout" class = "data_layout">
         <div  id = "graph_1" class="graph grid_8">
 
@@ -196,6 +217,10 @@ $(function() {
         ccapitals = capitals
         alldata = AllData;
 
+        $("#button").click(function(){
+            document.getElementById("overlay").style.display = "none";
+
+        });
 
 
         //Make a WorldMap via the worldmap object
@@ -378,7 +403,7 @@ $(function() {
 
 
     };
-
+    $("#loading").hide();
 
 })
 </script>

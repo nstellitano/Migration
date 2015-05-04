@@ -356,7 +356,7 @@ WorldMap.prototype.draw_arcData = function(source_country){
             for (i = 0; i < 195; i++) {
 
 
-                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){ return "whitesmoke"});
+                $('[title="' + String(that.data._children[1]._children[i].name) + '"]').css("fill", function(){ return "grey"});
 
 
 
@@ -508,6 +508,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
         .attr("x", function(d, i){return 35 ; } )
         .attr("y", function(d,i) {count--; return count*20 +258})
         .attr("font-size", "9px")
+        .attr("font-family", "Lato")
          .attr("dy", ".35em")
          .text(function(d) { if(test ==1){return "< $" +  Math.round(d);} else {return "> " + Math.round(d+13)} });
 
@@ -525,7 +526,8 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
             .attr("x", function(d, i){return 115 ; } )
             .attr("y", function(d,i) {count1--; return count1*20 +258})
             .attr("font-size", "9px")
-            .attr("dy", ".35em")
+            .attr("font-family", "Lato")
+            //.attr("dy", ".35em")
             .text(function(d) { return "< " + Math.round(-1*(d-3)); });
 
         label1.exit()
@@ -544,7 +546,8 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
         .attr("x", function(d, i){return 0 ; } )
         .attr("y", function(d,i) { return 218})
         .attr("font-size", "10px")
-        .attr("dy", ".35em")
+        .attr("font-family", "Lato")
+        //.attr("dy", ".35em")
         .text(function(d) {if(test == 1){return "Annual Avg Wage"} else {return "Outflows vs Inflows of Migrant Stock" }});
 
     label2.exit()
