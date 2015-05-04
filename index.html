@@ -15,6 +15,7 @@
 <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
 
 
+
 <!-- add own vis classes-->
 <script src = "js/map.js"></script>
 <script src = "js/scatter.js"></script>
@@ -35,6 +36,7 @@
 
 <!-- add own stylesheet-->
 <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
 
 
 
@@ -187,8 +189,8 @@
         </div>
         <div  id = "scatterVis" class="graph grid_8">
             <b>Skill Level:</b>
-            <input name="a" id = "low" value="lowskill" type="checkbox" checked>Low Skill
-            <input name="a" id = "medium" value="medskill" type="checkbox" checked >Medium Skill
+            <input name="a" id = "low" value="lowskill" type="checkbox" checked >Low Skill
+            <input name="a" id = "medium" value="medskill" type="checkbox" checked  >Medium Skill
             <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
         </div>
 
@@ -215,6 +217,7 @@ $(function() {
     //Create EventHandler
     var MyEventHandler = new Object()
     sank = new sankey_chart(d3.select("#sankey"))
+
     document.getElementById("sankey_dash").style.display = "none";
     document.getElementById("sankey").style.display = "none";
 
@@ -287,6 +290,7 @@ $(function() {
         //scatter
         changeDivHTML(last_name);
 
+
     });
 
         $(MyEventHandler).bind("oecd_selection", function (event, name) { //input name is 1 country in array format
@@ -311,6 +315,7 @@ $(function() {
                     country_select.splice(i,1)
                 }
             }
+
 
 
             stackbar_vis.wrangleData(country_select);
@@ -382,6 +387,11 @@ $(function() {
             sank.update();
 
             world_map.heatmap()
+        }
+
+        if(d3.select(this).attr("id")  == "low" || d3.select(this).attr("id")  == "medium" || d3.select(this).attr("id")  == "high") {
+
+            scatter_vis.updateVis();
         }
 
 

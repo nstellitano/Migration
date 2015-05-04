@@ -80,17 +80,10 @@ ScatterVis.prototype.initVis = function(){
 
     this.svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + this.height/1.1 + ")")
+        .attr("transform", "translate(0," + this.height/1.06 + ")")
        // .style("font-size", "10px")
        // .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
-    this.svg.append("text")
-        .attr("x", (that.width / 2))
-        .attr("y", 0 + (that.height/20))
-        .attr("text-anchor", "middle")
-        .style("font-size", "12px")
-        .style("text-decoration", "underline")
-        .text("Scatter Plot of Average Wage Differentials and Migrant Stock");
 
 
     // filter, aggregate, modify data
@@ -130,8 +123,9 @@ ScatterVis.prototype.updateVis = function(){
 
     // updates scales
 
-    this.x.domain([0,d3.max(that.displayData.size_low)]);
-    this.y.domain([0,50000]);
+    this.x.domain([0,d3.max(that.displayData.size_low) + 40000]);
+
+    this.y.domain([0,60000]);
 
     var offsetL = document.getElementById("scatterVis").offsetLeft;
     var offsetT = document.getElementById("scatterVis").offsetTop;
@@ -147,6 +141,50 @@ ScatterVis.prototype.updateVis = function(){
 
     //Low-Low
     // on enter
+
+    var dots = this.svg.selectAll(".circle")
+        .data(that.displayData.country);
+
+
+    dots.enter().append("g").append("circle")
+
+    dots
+        .attr("class","circle")
+
+
+    dots.exit()
+        .remove();
+
+    // on update
+
+
+
+    dots.select("circle")
+        //.transition()
+        .attr("cx", function(d,i){ return 5 + that.x(that.displayData.size_low[i])})
+        .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
+        .style("fill", "black")
+        .attr("r", 0);
+
+    dots
+        .on("click", function (d, i) { console.log([that.displayData.country[i]])
+            $(that.eventHandler).trigger("scatter_selection", [that.displayData.country[i]])
+
+        })
+        .on("mousemove", function (d, i) {
+            var mouse = d3.mouse(that.svg.node()).map(function (d) {
+                return parseInt(d);
+            });
+
+            that.tooltip_nonoecd.classed("hidden", false)
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
+                .html(that.displayData.country[i])
+
+        })
+        .on("mouseout", function (d, i) {
+
+            that.tooltip_nonoecd.classed("hidden", true);
+        });
 
     if(document.getElementById("low").checked){
 
@@ -164,8 +202,11 @@ ScatterVis.prototype.updateVis = function(){
         .remove();
 
     // on update
+
+
+
     dots.select("circle")
-        .transition()
+        //.transition()
         .attr("cx", function(d,i){ return 5 + that.x(that.displayData.size_low[i])})
         .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
         .style("fill", "black")
@@ -182,7 +223,7 @@ ScatterVis.prototype.updateVis = function(){
                 });
 
                 that.tooltip_nonoecd.classed("hidden", false)
-                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
                     .html(that.displayData.country[i])
 
             })
@@ -212,7 +253,7 @@ ScatterVis.prototype.updateVis = function(){
 
         // on update
         dots2.select("circle")
-            .transition()
+            //.transition()
             .attr("cx", function (d, i) {
                 return 5 + that.x(that.displayData.size_medium[i])
             })
@@ -233,7 +274,7 @@ ScatterVis.prototype.updateVis = function(){
                 });
 
                 that.tooltip_nonoecd.classed("hidden", false)
-                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
                     .html(that.displayData.country[i])
 
             })
@@ -262,7 +303,7 @@ ScatterVis.prototype.updateVis = function(){
 
         // on update
         dots3.select("circle")
-            .transition()
+           // .transition()
             .attr("cx", function (d, i) {
                 return 5 + that.x(that.displayData.size_high[i])
             })
@@ -283,7 +324,7 @@ ScatterVis.prototype.updateVis = function(){
                 });
 
                 that.tooltip_nonoecd.classed("hidden", false)
-                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
+                    .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
                     .html(that.displayData.country[i])
 
             })
@@ -325,22 +366,24 @@ ScatterVis.prototype.updateVis = function(){
             //console.log(extent);
             compare=[];
             for(z =0; z<20; z++) {
-                if(extent[0][0] <= that.displayData.size_high[z] && that.displayData.wage_diff_high[z] < extent[1][0]
-                        && extent[0][1] <= that.displayData.size_high[z] && that.displayData.wage_diff_high[z] < extent[1][1]) {
+                if(extent[0][0] <= that.displayData.size_high[z] && that.displayData.size_high[z] < extent[1][0]
+                        && extent[0][1] <= that.displayData.wage_diff_high[z]  && that.displayData.wage_diff_high[z] < extent[1][1]) {
                     compare.push(that.displayData.country[z])
                 }
-                if(extent[0][0] <= that.displayData.size_medium[z] && that.displayData.wage_diff_medium[z] < extent[1][0]
-                    && extent[0][1] <= that.displayData.size_medium[z] && that.displayData.wage_diff_medium[z] < extent[1][1]) {
+                if(extent[0][0] <= that.displayData.size_medium[z] && that.displayData.size_medium[z] < extent[1][0]
+                    && extent[0][1] <= that.displayData.wage_diff_medium[z] && that.displayData.wage_diff_medium[z] < extent[1][1]) {
                     compare.push(that.displayData.country[z])
                 }
-                if(extent[0][0] <= that.displayData.size_low[z] && that.displayData.wage_diff_low[z] < extent[1][0]
-                    && extent[0][1] <= that.displayData.size_low[z] && that.displayData.wage_diff_low[z] < extent[1][1]) {
+                if(extent[0][0] <= that.displayData.size_low[z] && that.displayData.size_low[z] < extent[1][0]
+                    && extent[0][1] <= that.displayData.wage_diff_low[z] && that.displayData.wage_diff_low[z] < extent[1][1]) {
                     compare.push(that.displayData.country[z]);
                 }
-                compare = unique(compare);
+                compareindex =[];
+                compareindex = unique(compare);
 
             }
-            $(that.eventHandler).trigger( "scatter_selection",compare);
+            console.log(compareindex);
+            $(that.eventHandler).trigger( "scatter_selection",compareindex);
         }
     ));
 
@@ -500,6 +543,7 @@ ScatterVis.prototype.filterAndAggregate = function(_filter){
         "wage_diff_low": avg_wage_diffI,
         "wage_diff_medium":avg_wage_diffII,
         "wage_diff_high":avg_wage_diffIII}
+
 
     return sc;
     //this.updateVis(sc);

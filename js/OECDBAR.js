@@ -539,5 +539,4 @@ OECDBAR.prototype.addSlider = function(svg){
         fill:"#333333"
     }).call(sliderDragBehaviour)
 
-
 }
