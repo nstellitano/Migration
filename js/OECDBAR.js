@@ -9,7 +9,7 @@ OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.eventhandler = eventhandler;
 
     this.width = getInnerWidth(this.parentElement);
-    this.height = 500;
+    this.height = 400;
     this.selected_country = ["Argentina"];
 
     this.units =0;
@@ -30,7 +30,7 @@ OECDBAR.prototype.initvis = function(){
 
     this.svg = this.parentElement.append("svg")
         .attr("width", this.width)
-        .attr("height", this.height+200)
+        .attr("height", this.height+150)
         .append("g")
         .attr("class", 'graph')
 
@@ -126,10 +126,10 @@ OECDBAR.prototype.updatevis = function(){
 
     rect
         .attr("x", 50)
-        .attr("y", function(d,i) {return that.y(i) +21 ; })
-        .attr("height", 20)
+        .attr("y", function(d,i) {return that.y(i) +12 ; })
+        .attr("height", 15)
       // .attr("width", function(d,i) {return that.x(0)})
-        .transition().duration(1000)
+        //.transition().duration(1000)
         .attr("width", function(d,i) {return that.x(d)})
 
 
@@ -197,7 +197,7 @@ OECDBAR.prototype.updatevis = function(){
         .text(function(d,i) {return d })
         .attr("font-size", "11px")
         .attr("x", 5)
-        .attr("y", function(d,i) { return that.y(i) + 55; });
+        .attr("y", function(d,i) { return that.y(i) + 47; });
 
     text
         .exit()
@@ -216,7 +216,7 @@ OECDBAR.prototype.updatevis = function(){
         .text(function(d,i) {return that.displayData.type[i] })
         .attr("font-size", "11px")
         .attr("x", 35)
-        .attr("y", function(d,i) { return that.y(i) + 32; });
+        .attr("y", function(d,i) { return that.y(i) + 25; });
 
     text2
         .exit()
@@ -448,7 +448,7 @@ OECDBAR.prototype.addSlider = function(svg){
 
 
     var sliderDragged = function(){
-        var value = Math.max(0, Math.min(199,d3.event.x));
+        var value = Math.max(55, Math.min(199,d3.event.x));
 
 
         var sliderValue = sliderScale.invert(value);
@@ -488,8 +488,8 @@ OECDBAR.prototype.addSlider = function(svg){
 
     sliderGroup.append("rect").attr({
         class:"sliderBg",
-        x:30,
-        y:555,
+        x:50,
+        y:465,
         width:200,
         height:10
     }).style({
@@ -498,8 +498,8 @@ OECDBAR.prototype.addSlider = function(svg){
 
     sliderGroup.append("rect").attr({
         "class":"sliderHandle",
-        y:550,
-        x:30,
+        y:460,
+        x:50,
         width:10,
         height:20
     }).style({

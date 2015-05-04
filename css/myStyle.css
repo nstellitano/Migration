@@ -2,11 +2,12 @@
     font-family: 'Lato';
     color: #665544;
     text-align: center;
-    background-image: url('light_grey.png');
+
 }
 
 html {
     box-sizing: border-box;
+
 }
 
 *, *:before, *:after {
@@ -15,15 +16,42 @@ html {
 
 body{
     width: 99%;
-    margin: 0 auto;
-    background-color: white;
-}
+    /*margin: 0 auto;*/
+    background-image: url('light_grey.png');}
 
 #container {
 
     overflow: auto;
-
+    /*border: 1px solid black;*/
 }
+
+.under_overlay{
+    position: fixed;
+    top: 1%;
+    left: 1%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url('light_grey.png');
+    content: ' ';
+    opacity: 0.8;
+    z-index: 9;
+}
+
+/*.under_overlay {*/
+    /*background-color: white;*/
+/*}*/
+
+/*.under_overlay.down {*/
+    /*transform: translateY(100%) translateY(-7rem);*/
+/*}*/
+/*.under_overlay.down::before {*/
+    /*transform: translateY(-100%) translateY(7rem);*/
+/*}*/
+/*.under_overlay.up, .glass.up::before {*/
+    /*transform: translateY(0);*/
+/*}*/
 
 .overlay {
     position: fixed;
@@ -32,7 +60,22 @@ body{
     height: 30%;
     width: 33%;
     z-index: 10;
-    background-color: steelblue;
+    border: 1px solid black;
+
+    /* basics */
+    float: right;
+    background-color: burlywood;
+    color: black;
+    text-align: center;
+
+    /* rounded corners */
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    padding: .8em .8em 1em;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 12px 0px #000;
+    box-shadow: 0px 0px 12px 0px #000;
 }
 
 #loading {
@@ -86,7 +129,9 @@ body{
     position: relative;
     top: 0px;
     left: 0px;
-    margin: 1%;
+    /*margin: 1%;*/
+    /*border: 1px solid black;*/
+    height: 3em;
 
     /*background-color: #efefef;*/
     z-index:10;
@@ -94,8 +139,8 @@ body{
 
 
 #dashboard{
-    /*position: fixed;*/
-    margin: 1%;
+    position: relative;
+    /*margin: 1%;*/
     float: left;
     width: 97%;
     /*background-color: #efefef;*/
@@ -103,6 +148,7 @@ body{
     /*overflow: scroll;*/
     /*border-bottom: 1px solid #efefef;*/
     padding-bottom: 10px;
+    /*border: 1px solid black;*/
     /*width: 97%*/
     font-size: 20px
 }
@@ -122,11 +168,11 @@ body{
     position: relative;
     /*margin: 1%;*/
     float: left;
-    width: 99%;
+    width: 10%;
     /*background-color: #efefef;*/
-    height: 5em;
+    height: 27em;
     overflow: scroll;
-    margin:.5em 0 .5em 0
+    /*margin:.5em 0 .5em 0*/
 }
 
 #sankey_dash{
@@ -138,6 +184,7 @@ body{
     height: 5em;
     overflow: scroll;
     margin:.5em 0 .5em 0;
+    background-image: url('light_grey.png');
 
 }
 
@@ -148,6 +195,7 @@ body{
     background-color: white;
     height: 50em;
     transition:500ms linear;
+    background-image: url('light_grey.png');
 
 }
 
@@ -155,48 +203,97 @@ body{
     position: relative;
     /*margin: 1%;*/
     float: left;
-    width: 15%;
+    width: 64%;
     /*background-color: #efefef;*/
-    height: 30em;
+    height: 15em;
     overflow: scroll;
-    margin:.5em 0 .5em 0
+    margin:.5em 0 .5em 0;
+    /*border: 1px solid black;*/
+    z-index: 7;
+}
+
+
+label {
+    font-family: 'Lato';
+    display: block;
+    font-size: 1em;
+    color: white
+}
+
+#counter {
+    /* basics */
+    float: right;
+    background-color: #444;
+    color: #C4BE92;
+    text-align: center;
+
+    /* rounded corners */
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    padding: .8em .8em 1em;
+    width: 32%;
+    height: 5.2em;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 12px 0px #000;
+    box-shadow: 0px 0px 12px 0px #000;
+    z-index: 7;
+
+}
+
+#total {
+    font-size: 2.5em;
+    background-color: transparent;
+    text-align: center;
+    border-width: 0;
+    width: 100%;
+    margin: 0 0 .1em 0;
+    color: #fff;
 }
 
 #world_map{
     float: left;
     margin: 1%;
-    width: 65%;
-    height:30em;
+    width: 60%;
+    height:27em;
+    /*border: 1px solid black;*/
 
 }
 
 #graph_1{
-    width: 30%;
+    width: 25%;
     float: left;
     margin: 1%;
     background-color: white;
-    height: 52em;
+    height: 40em;
     transition:500ms linear;
+    /*border: 1px solid black;*/
+    background-image: url('light_grey.png');
+
 
 }
 
 
 
  #stackbarVis{
-     width: 64%;
+     width: 80%;
      height: 30em;
      float: left;
      margin: 1%;
      background-color: white;
+     /*border: 1px solid black;*/
+     background-image: url('light_grey.png');
 
 }
 
 #scatterVis{
-    width: 64%;
+    width: 80%;
     height: 30em;
     float: left;
     margin: 1%;
     background-color: white;
+    /*border: 1px solid black;*/
+    background-image: url('light_grey.png');
 
 }
 
@@ -207,6 +304,7 @@ body{
     float: left;
     margin: 1%;
     background-color: #efefef;
+    background-image: url('light_grey.png');
 
 }
 

@@ -68,13 +68,13 @@ WorldMap.prototype.initVis = function(){
     //Create SVG of the overall map
     this.svg = that.parentElement.append("svg")
         .attr("width", that.width)
-        .attr("height", that.height);
+        .attr("height", that.height + 50);
 
     //Create a giant rectangle that will encompass the map (filled by sea)
-    this.svg.append("rect")
-        .attr("width", that.width)
-        .attr("height", that.height)
-        .style("fill", "#bce8f1")
+    //this.svg.append("rect")
+    //    .attr("width", that.width)
+    //    .attr("height", that.height)
+    //    .style("fill", "#bce8f1")
 
 
     //Still working out what this is actually doing
@@ -462,7 +462,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
     var count = 8
     rect.attr("x", function(d, i){return 10 ; } )
-        .attr("y", function(d,i) {count--; return count*20 +250})
+        .attr("y", function(d,i) {count--; return count*20 +200})
         .attr("width", function(d,i) {return 20})
         .attr("height", 20)
         .attr("fill", function(d,i){if (test == 1){return that.heat_map(d)} else {return that.heat_map_oecd(d)}})
@@ -487,7 +487,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
         var count1 = 0
         rect1.attr("x", function(d, i){return 90 ; } )
-            .attr("y", function(d,i) { count1++; return count1*20 +210})
+            .attr("y", function(d,i) { count1++; return count1*20 +160})
             .attr("width", function(d,i) {return 20})
             .attr("height", 20)
             .attr("fill", function(d,i){return that.heat_map_nonoecd(d)})
@@ -506,7 +506,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
     count =8;
     label
         .attr("x", function(d, i){return 35 ; } )
-        .attr("y", function(d,i) {count--; return count*20 +258})
+        .attr("y", function(d,i) {count--; return count*20 +208})
         .attr("font-size", "9px")
         .attr("font-family", "Lato")
          .attr("dy", ".35em")
@@ -524,7 +524,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
         count1 =8;
         label1
             .attr("x", function(d, i){return 115 ; } )
-            .attr("y", function(d,i) {count1--; return count1*20 +258})
+            .attr("y", function(d,i) {count1--; return count1*20 +208})
             .attr("font-size", "9px")
             .attr("font-family", "Lato")
             //.attr("dy", ".35em")
@@ -544,7 +544,7 @@ WorldMap.prototype.legend = function(min, max, min1, max1, test) {
 
     label2
         .attr("x", function(d, i){return 0 ; } )
-        .attr("y", function(d,i) { return 218})
+        .attr("y", function(d,i) { return 168})
         .attr("font-size", "10px")
         .attr("font-family", "Lato")
         //.attr("dy", ".35em")

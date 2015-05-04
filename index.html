@@ -46,14 +46,14 @@
 <div class = "container">
     <div id="header" class="header">
         <h1>Migration as an Instrument for International Development</h1>
-            <div id="nav">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Video</a></li>
-                    <li><a href="">Authors</a></li>
-                </ul>
-            </div>
+            <!--<div id="nav">-->
+                <!--<ul>-->
+                    <!--<li><a href="">Home</a></li>-->
+                    <!--<li><a href="">About</a></li>-->
+                    <!--<li><a href="">Video</a></li>-->
+                    <!--<li><a href="">Authors</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
     </div>
 
 
@@ -63,26 +63,48 @@
             <form>
 
 
-                <label><input type="radio" name="layout" value="Wage" id = "Wage"  > Wage Comparison 2010 </label>
+                <input type="radio" name="layout" value="Wage" id = "Wage"  checked> Wage Comparison 2010
                 <!--<label><input type="radio" name="layout" value="Remittance" id = "Remittance" > Remittance</label>-->
                 <!--<label><input type="radio" name="layout" value="Aid" id = "Aid"> Aid</label>-->
-                <label><input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant Flows 1980-2010</label>
+                <input type="radio" name="layout" value="Migrant" id = "Migrant"> Migrant Flows 1980-2010
 
             </form>
 
         </div>
 
 
+    <div  id = "graph_1" class="graph grid_8">
+
+        <!--<p>Graph 1</p>-->
+        <h3 style="margin-top: 0px; margin-bottom: 1px">Extra Annual Wage Earned</h3>
+        <form>
+            <b>
+                Compare: <input name="compare" value="compare" id = "compare" type="radio">
+                Don't Compare: <input name="compare" value="dcompare" id = "dcompare" type="radio" check>
+            </b>
+        </form>
+        <b>Aggregated by:
+            <form>
+                <input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock
+                <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
+            </form></b>
+    </div>
+
+
+
+
     <div  id = "description" class="description">
         <p><b><u>Utilize for Story telling</u></b></p>
         <p>
-            Displays Selected Countries
-
+            Change the world..etc..
         </p>
+
+        <div  id = "counter" class="counter">
+            <label id="amounter_earned">Total Amount Earned</abbr></label>
+            <h1 id = "total">$5,000,000,000</h1>
+        </div>
     </div>
 
-    <div  id = "world_map" class="world_map">
-    </div>
 
     <div  id = "country_list" class="country_list">
         <p><b><u>Selected Countries</u></b></p>
@@ -90,6 +112,9 @@
             Displays Selected Countries
         </p>
     </div>
+    <div  id = "world_map" class="world_map">
+    </div>
+
 
     <div  id = "sankey_dash" class="sankey_dash">
         <p>
@@ -105,6 +130,7 @@
                 <!--<input type="range" name="slider-time" min="1980" max="2010" step="5" value="0" id="slider-time" oninput=";">-->
 
             <!--</label>-->
+
         </p>
         <form>
             <b>
@@ -119,15 +145,21 @@
 
     </div>
 
-    <div id="loading">
-        <img src="css/ajax-loader.gif" alt="Loading..." />
-    </div>
 
+
+
+    <div id="under_overlay" class = "under_overlay">
+
+    </div>
 
     <div id = "overlay" class="overlay">
         <h3>Welcome to Migration as an Instrument for International Development</h3>
         <p>Welcome to our page of wonder and delight.  Please take a moment to familiarize yourself with this wonder
         of wonders.  Blah blah blah blah.  Push botton to continue</p>
+
+        <div id="loading">
+            <img src="css/ajax-loader.gif" alt="Loading..." />
+        </div>
 
         <div>
             <label>
@@ -141,22 +173,7 @@
     </div>
 
     <div id="data_layout" class = "data_layout">
-        <div  id = "graph_1" class="graph grid_8">
 
-            <!--<p>Graph 1</p>-->
-            <h3>Extra Annual Wage Earned</h3>
-            <form>
-                <b>
-                   Compare: <input name="compare" value="compare" id = "compare" type="radio">
-                    Don't Compare: <input name="compare" value="dcompare" id = "dcompare" type="radio" check>
-                </b>
-            </form>
-            <b>Aggregated by:
-            <form>
-                <input name="oecd" value="migrant_stock" id = "migrant_stock" type="radio" checked>Migrant Stock
-                <input name="oecd" value="per_capita" id = "per_capita" type="radio" checked >Per Capita
-            </form></b>
-        </div>
 
         <div  id = "stackbarVis" class="graph grid_8">
 
@@ -219,8 +236,15 @@ $(function() {
 
         $("#button").click(function(){
             document.getElementById("overlay").style.display = "none";
+            document.getElementById("under_overlay").style.display = "none";
 
         });
+
+
+        $().ready(function() {
+            $("#loading").hide();
+        });
+
 
 
         //Make a WorldMap via the worldmap object
@@ -232,6 +256,9 @@ $(function() {
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
+        oecd_bar.wrangledata();
+        world_map.heatmap()
+        changeDivHTML(["Argentina"]);
 //        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
 
 
@@ -403,7 +430,7 @@ $(function() {
 
 
     };
-    $("#loading").hide();
+
 
 })
 </script>
