@@ -150,7 +150,7 @@ body{
     padding-bottom: 10px;
     /*border: 1px solid black;*/
     /*width: 97%*/
-    font-size: 20px
+    font-size: 23px
 }
 
 /*input[type=radio] {*/
@@ -181,7 +181,7 @@ body{
     float: left;
     width: 99%;
     /*background-color: #efefef;*/
-    height: 5em;
+    height: 8em;
     overflow: scroll;
     margin:.5em 0 .5em 0;
     background-image: url('light_grey.png');
@@ -266,6 +266,19 @@ label {
     margin: 1%;
     background-color: white;
     height: 40em;
+    transition:500ms linear;
+    /*border: 1px solid black;*/
+    background-image: url('light_grey.png');
+
+
+}
+
+#description4{
+    width: 25%;
+    float: left;
+    margin: 1%;
+    background-color: white;
+    height: 27em;
     transition:500ms linear;
     /*border: 1px solid black;*/
     background-image: url('light_grey.png');
@@ -411,7 +424,8 @@ li.key {
 }
 
 .axis text {
-    font: 10px sans-serif;
+    font-family: "Lato";
+    font-size: 13px;
 }
 
 .axis line,
