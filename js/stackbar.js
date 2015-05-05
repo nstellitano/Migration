@@ -101,9 +101,13 @@ StackbarVis.prototype.initVis = function(){
 
 StackbarVis.prototype.wrangleData= function(country_select){
 
+
+
     // displayData should hold the data which is visualized
     this.displayData = this.filterAndAggregate(country_select);
+
     this.updateVis()
+
 
 }
 
@@ -340,7 +344,6 @@ StackbarVis.prototype.selection= function (country_select){
 StackbarVis.prototype.filterAndAggregate = function(country_select){
 
 
-
     var filter = function(){return true;}
     if (country_select != null){
         filter = country_select;
@@ -368,63 +371,79 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
 
     var country=[]
 
-    for (i = 0; i < 195; i++) {
-        var lowskill=0
-        var medskill=0
-        var highskill=0
-        var totalskill=0
+    //filter.forEach(function(d){
 
-        var lowwage=0
-        var medwage=0
-        var highwage=0
-        var totalwage=0
+            for (i = 0; i < 195; i++) {
+               // if(d == that.data._children[0]._children[i].name) {
+                var lowskill = 0
+                var medskill = 0
+                var highskill = 0
+                var totalskill = 0
 
-        var totalwagediff=0
-        var totalaid=0
-        var totalrem = 0
-        name=""
+                var lowwage = 0
+                var medwage = 0
+                var highwage = 0
+                var totalwage = 0
 
-        for(z =0; z<20; z++) {
-            if (that.data._children[z]._children[i].wage_diffI !=0) {
+                var totalwagediff = 0
+                var totalaid = 0
+                var totalrem = 0
+                name = ""
 
-                if (that.data._children[z]._children[i]._children[3].size != 0) {
-                    lowskill = lowskill + +that.data._children[z]._children[i]._children[0].size
-                    medskill = medskill + +that.data._children[z]._children[i]._children[1].size
-                    highskill = highskill + +that.data._children[z]._children[i]._children[2].size
+                var oecd_main = ["Australia", "Austria", "Canada", "France", "Germany", "Great Britain", "Norway", "United States"]
+                for (hh = 0; hh < 8; hh++) {
+                    for (z = 0; z < 20; z++) {
+                        if (oecd_main[hh] == that.data._children[z].name) {
+                            if (that.data._children[z]._children[i].wage_diffI != 0) {
 
-                    totalskill = lowskill + medskill + highskill
+                                if (that.data._children[z]._children[i]._children[3].size != 0) {
+                                lowskill = lowskill + that.data._children[z]._children[i]._children[0].size
+                                medskill = medskill + that.data._children[z]._children[i]._children[1].size
+                                highskill = highskill + that.data._children[z]._children[i]._children[2].size
 
-                    lowwage = lowwage + +that.data._children[z]._children[i].wage_diffI
-                    medwage = medwage + +that.data._children[z]._children[i].wage_diffII
-                    highwage = highwage + +that.data._children[z]._children[i].wage_diffIII
+                                totalskill = lowskill + medskill + highskill
 
-                    //totalwage = lowwage + medwage + highwage
+                                //lowwage = lowwage + +that.data._children[z]._children[i].wage_diffI
+                                //medwage = medwage + +that.data._children[z]._children[i].wage_diffII
+                                //highwage = highwage + +that.data._children[z]._children[i].wage_diffIII
 
-                    //totalwagediff = totalskill * totalwage
+                                lowwage = lowwage + (that.data._children[z].wageI - that.data._children[z]._children[i]._children[0].wage)
+                                medwage = medwage + (that.data._children[z].wageII - that.data._children[z]._children[i]._children[1].wage)
+                                highwage = highwage + (that.data._children[z].wageIII - that.data._children[z]._children[i]._children[2].wage)
 
-                    totalaid = totalaid + +that.data._children[z]._children[i]._children[3].size
 
-                    totalrem = totalrem + +that.data._children[z]._children[i]._children[4].size
+                                //totalwage = lowwage + medwage + highwage
 
-                    name = that.data._children[z]._children[i].name
+                                //totalwagediff = totalskill * totalwage
 
+                                totalaid = totalaid + that.data._children[z]._children[i]._children[3].size
+
+                                totalrem = totalrem + that.data._children[z]._children[i]._children[4].size
+
+                                name = that.data._children[z]._children[i].name
+
+                                }
+                            }
+                        }
+                    }
                 }
+
+                sizeI.push(parseInt(lowskill))
+                sizeII.push(parseInt(medskill))
+                sizeIII.push(parseInt(highskill))
+
+                avg_wage_diffI.push(parseInt(lowwage) / 8)
+                avg_wage_diffII.push(parseInt(medwage) / 8)
+                avg_wage_diffIII.push(parseInt(highwage) / 8)
+
+                totaldifferential.push(parseInt(((lowwage) / 8) * lowskill + ((medwage) / 8) * medskill + ((highwage) / 8) * highskill))
+                totaid.push(parseInt(totalaid))
+                totalremittance.push(parseInt(totalrem) * 1000000)
+
+                country.push(name)
             }
-        }
-        sizeI.push(parseInt(lowskill))
-        sizeII.push(parseInt(medskill))
-        sizeIII.push(parseInt(highskill))
-
-        avg_wage_diffI.push(parseInt(lowwage)/20)
-        avg_wage_diffII.push(parseInt(medwage)/20)
-        avg_wage_diffIII.push(parseInt(highwage)/20)
-
-        totaldifferential.push(parseInt(((lowwage)/20) * lowskill + ((medwage)/20) * medskill + ((highwage)/20) * highskill))
-        totaid.push(parseInt(totalaid))
-        totalremittance.push(parseInt(totalrem) * 1000000)
-
-        country.push(name)
-    }
+  //      }}
+//)
 
     var sizeI = sizeI.filter(function(v) {
         return v !== 0;
@@ -503,13 +522,14 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
                 }
             }
         }
-        console.log(result.country);
+        console.log(result);
     return result;
     }
 
     if (country_select == null) {
         return sc;
     }
+
 
 
     //var sc=[];
@@ -609,13 +629,18 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
     var that = this;
 
     this.displayData = this.filterAndAggregate(country_select);
-
-    // TODO: Think of what is domain and what is range for the y axis slider !!
-    var sliderScale = d3.scale.linear()
-        .domain([10,d3.max(that.displayData.total_differential)])
-        .range([0,200])
+    //console.log(d3.max(that.displayData.total_differential));
 
     var sliderDragged = function(){
+
+
+
+
+        // TODO: Think of what is domain and what is range for the y axis slider !!
+        var sliderScale = d3.scale.linear()
+            .domain([10,d3.max(that.displayData.total_differential)])
+            .range([0,200])
+
         var value = Math.max(0, Math.min(200,d3.event.y));
 
         var sliderValue = sliderScale.invert(value);

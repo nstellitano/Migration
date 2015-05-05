@@ -104,11 +104,23 @@
             The second box shows total/average remittance flows and the thid box shows total/average aid flows.
         </p>
 
-        <div  id = "counter" class="counter">
-            <label id="amounter_earned">Total Amount Earned</abbr></label>
-            <h1 id = "total">$5,000,000,000</h1>
+        <div  id = "counterW" class="counterW">
+            <label id="amounter_earnedW">Total Wage Differential</label>
+            <h3 style="color: white" id = "totalW">$5,000,000,000</h3>
+        </div>
+
+        <div  id = "counterA" class="counterA">
+            <label id="amounter_earnedA">Total Aid</label>
+            <h3 style="color: white" id = "totalA">$5,000,000,000</h3>
+        </div>
+
+        <div  id = "counterR" class="counterR">
+            <label id="amounter_earnedR">Total Remittance</label>
+            <h3 style="color: white" id = "totalR">$5,000,000,000</h3>
         </div>
     </div>
+
+
 
 
     <div  id = "country_list" class="country_list">
@@ -120,9 +132,13 @@
     <div  id = "world_map" class="world_map">
     </div>
     <div  id = "description4" class="description4">
-        <p><b><u>Utilize for Story telling</u></b></p>
-        <p>
-            Change the world..etc..
+        <p><b><u>Migration flows over the last 30 years</u></b></p>
+        <p style="text-align: left">
+            To complete our visualization picture, we tell the story of how migration has evolved over the last 35 years.
+            Utilizing data from 1980-2015 over a five year interval, we show the flow of male and female migrants from 195 non-OECD countries to 20 OECD countries by gender and education level.
+            By clicking on the "By OECD" radio button, we can see flows into each individual OECD country.
+            For example, we can see that in 1980, Canada allowed equal proportions of high-skilled and low-skilled migrants into the country.
+            Fast forward to 2010, and it is selectively letting in many more high-skilled than low-skilled migrants.
         </p>
     </div>
 
@@ -224,7 +240,7 @@
             </p>
             <p style="text-align: left">
                 Clicking on a country updates other visuals and estimates for gains accordingly. For example, in 2010, Nepal had around <u><span style="color: blue">50,000</span></u> migrants in OECD countries.
-                If we sum up the average wages gained by each of those migrants by moving to a OECD country, we come up with the estimate of <u><span style="color: blue">$25,000,000,000</span></u>.
+                If we sum up the average wages gained by each of those migrants by moving to a OECD country, we come up with the estimate of <u><span style="color: blue">$500,000,000</span></u>.
             </p>
         </div>
         <div  id = "footers" class = "footers" >
@@ -240,6 +256,7 @@
 $(function() {
 
 
+    console.log("test")
    // d3.select.("#country_list").write("test");
     //Create EventHandler
     var MyEventHandler = new Object()

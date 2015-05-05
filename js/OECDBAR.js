@@ -1,4 +1,11 @@
 
+var total_popI = 0;
+var total_popII = 0;
+var total_popIII = 0;
+var aid = 0;
+var rem = 0;
+var pop = 0;
+
 
 OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.parentElement = _parentelement;
@@ -225,6 +232,7 @@ OECDBAR.prototype.updatevis = function(){
     text2
         .exit()
         .remove();
+    console.log("test")
 
 
 
@@ -237,7 +245,9 @@ OECDBAR.prototype.updatevis = function(){
 
 
         //clear current list
-        document.getElementById('total').innerHTML = ("$" + String(that.formatNumber(sum)));
+        document.getElementById('totalW').innerHTML = ("$" + String(that.formatNumber(sum)));
+        document.getElementById('totalA').innerHTML = ("$" + String(that.formatNumber(aid)));
+        document.getElementById('totalR').innerHTML = ("$" + String(that.formatNumber(rem)));
 
     } else {
         var sum = 0;
@@ -248,7 +258,9 @@ OECDBAR.prototype.updatevis = function(){
         var average = sum / 24;
 
         //clear current list
-        document.getElementById('total').innerHTML = ("$" + String(that.formatNumber(average)) + "per capita");
+        document.getElementById('totalW').innerHTML = ("$" + String(that.formatNumber(average)) + " per migrant");
+        document.getElementById('totalA').innerHTML = ("$" + String(that.formatNumber(aid/(total_popI+total_popII+total_popIII))) + " per migrant");
+        document.getElementById('totalR').innerHTML = ("$" + String(that.formatNumber(rem/(total_popI+total_popII+total_popIII))) + " per migrant");
 
 
 
@@ -331,12 +343,12 @@ OECDBAR.prototype.filter = function(name){
                 var total_wageI = 0;
                 var total_wageII = 0;
                 var total_wageIII = 0;
-                var total_popI = 0;
-                var total_popII = 0;
-                var total_popIII = 0;
-                var aid = 0;
-                var rem = 0;
-                var pop = 0;
+                total_popI = 0;
+                total_popII = 0;
+                total_popIII = 0;
+                aid = 0;
+                rem = 0;
+                pop = 0;
                 if (check == 1) {
 
                     if (d.name == total_oecd.name[i]) {
@@ -348,8 +360,8 @@ OECDBAR.prototype.filter = function(name){
 
                                 if (selection == d._children[z].name) {
                                     total_wageI = total_wageI + (d._children[z]._children[0].size * (d.wageI - d._children[z]._children[0].wage))
-                                    total_wageII = total_wageII + (d._children[z]._children[1].size * (d.wageII - d._children[z]._children[0].wage))
-                                    total_wageIII = total_wageIII + (d._children[z]._children[2].size * (d.wageIII - d._children[z]._children[0].wage));
+                                    total_wageII = total_wageII + (d._children[z]._children[1].size * (d.wageII - d._children[z]._children[1].wage))
+                                    total_wageIII = total_wageIII + (d._children[z]._children[2].size * (d.wageIII - d._children[z]._children[2].wage));
 
                                     aid = aid + d._children[z]._children[3].size;
                                     rem = rem + (d._children[z]._children[4].size*1000000);
@@ -364,6 +376,7 @@ OECDBAR.prototype.filter = function(name){
 
                             })
                         }
+                        console.log("test");
 
 
                         total_oecd.type[i] = "I"

@@ -129,7 +129,7 @@ ScatterVis.prototype.updateVis = function(){
 
     this.x.domain([0,d3.max(that.displayData.size_low) + 40000]);
 
-    this.y.domain([0,60000]);
+    this.y.domain([0,45000]);
 
     var offsetL = document.getElementById("scatterVis").offsetLeft;
     var offsetT = document.getElementById("scatterVis").offsetTop;

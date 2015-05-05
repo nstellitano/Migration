@@ -220,26 +220,35 @@ label {
     color: white
 }
 
-#counter {
+#counterW, #counterA, #counterR  {
     /* basics */
-    float: right;
+    float: left;
     background-color: #444;
     color: #C4BE92;
     text-align: center;
+
 
     /* rounded corners */
     -webkit-border-radius: 12px;
     border-radius: 12px;
     -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
-    padding: .8em .8em 1em;
-    width: 32%;
-    height: 5.2em;
-    margin: 0 auto;
+    /*padding: .8em .8em 1em;*/
+    width: 28%;
+    height: 5em;
+    margin-top: 1%;
+    max-resolution: 10px ;
     -webkit-box-shadow: 0px 0px 12px 0px #000;
     box-shadow: 0px 0px 12px 0px #000;
     z-index: 7;
 
 }
+
+#counterR, #counterA{
+    float: left;
+    margin-left: 5%;
+}
+
+
 
 #total {
     font-size: 2.5em;
