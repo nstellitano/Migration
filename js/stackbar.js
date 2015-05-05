@@ -72,11 +72,15 @@ StackbarVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
+        .style("font-size", "13px")
+        .style("font-family", "Lato")
         //.style("font-size", "8px")
         //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
+        .style("font-size", "13px")
+        .style("font-family", "Lato")
         //.attr("transform", "translate(0,20)")
         //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
@@ -133,7 +137,8 @@ StackbarVis.prototype.updateVis = function(){
         .call(that.xAxis)
         .selectAll("text")
         .style("text-anchor", "end")
-        .style("font-size", "9px")
+        .style("font-size", "13px")
+        .style("font-family", "Lato")
         .attr("dx", ".1em")
         .attr("dy", ".40em")
         .attr("transform", function(d) {
@@ -145,7 +150,6 @@ StackbarVis.prototype.updateVis = function(){
         .data(that.displayData.country);
 
     bar.enter().append("g").append("rect");
-    //console.log(that.displayData.country);
 
     // Add attributes (position) to all bars
     bar
@@ -239,8 +243,6 @@ StackbarVis.prototype.updateVis = function(){
     bar3.exit()
         .remove();
 
-
-
     bar3.select("rect")
         .attr("x", function(d,i){ return 25 + that.x(i)})
         .attr("y", function(d,i){ return  that.height - 68 -  that.y(that.displayData.total_remit[i])})
@@ -289,12 +291,14 @@ StackbarVis.prototype.updateVis = function(){
                     .style("fill", that.color_hash[String(i)][1]);
 
                 g.append("text")
-                    .attr("x", 495)
+                    .attr("x", 700)
                     .attr("y", (i + 2) * 12 + 8)
                     .attr("height", 3)
                     .attr("width", 3)
                     // .style("fill", that.color_hash[String(i)][1])
-                    .text(that.color_hash[String(i)][0]);
+                    .text(that.color_hash[String(i)][0])
+                    .style("font-size", "13px")
+                    .style("font-family", "Lato");
             }
         });
 
@@ -383,9 +387,9 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
             if (that.data._children[z]._children[i].wage_diffI !=0) {
 
                 if (that.data._children[z]._children[i]._children[3].size != 0) {
-                    lowskill = lowskill + (+that.data._children[z]._children[i]._children[0].size)
-                    medskill = medskill + (+that.data._children[z]._children[i]._children[1].size)
-                    highskill = highskill + (+that.data._children[z]._children[i]._children[2].size)
+                    lowskill = lowskill + +that.data._children[z]._children[i]._children[0].size
+                    medskill = medskill + +that.data._children[z]._children[i]._children[1].size
+                    highskill = highskill + +that.data._children[z]._children[i]._children[2].size
 
                     totalskill = lowskill + medskill + highskill
 
@@ -477,7 +481,6 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
     //console.log(arr.length);
 
     //console.log(sc.country);
-    console.log(country_select);
 
     result={"country":[], "total_aid": [], "total_remit":  [], "total_differential": [] };
 
@@ -656,7 +659,7 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
 
     sliderGroup.append("rect").attr({
         class:"sliderBg",
-        x:5,
+        x:2,
         width:10,
         height:200
     }).style({
@@ -666,8 +669,9 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
     sliderGroup.append("rect").attr({
         "class":"sliderHandle",
         y:200,
+        x:-5,
         width:20,
-        height:10,
+        height:10
     }).style({
         fill:"#333333"
     }).call(sliderDragBehaviour)
