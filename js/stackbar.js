@@ -243,6 +243,7 @@ StackbarVis.prototype.updateVis = function(){
     bar3.exit()
         .remove();
 
+
     bar3.select("rect")
         .attr("x", function(d,i){ return 25 + that.x(i)})
         .attr("y", function(d,i){ return  that.height - 68 -  that.y(that.displayData.total_remit[i])})
