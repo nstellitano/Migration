@@ -398,9 +398,9 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
                     medwage = medwage + +that.data._children[z]._children[i].wage_diffII
                     highwage = highwage + +that.data._children[z]._children[i].wage_diffIII
 
-                    totalwage = lowwage + medwage + highwage
+                    //totalwage = lowwage + medwage + highwage
 
-                    totalwagediff = totalskill * totalwage
+                    //totalwagediff = totalskill * totalwage
 
                     totalaid = totalaid + +that.data._children[z]._children[i]._children[3].size
 
@@ -419,7 +419,7 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
         avg_wage_diffII.push(parseInt(medwage)/20)
         avg_wage_diffIII.push(parseInt(highwage)/20)
 
-        totaldifferential.push(parseInt(totalwagediff))
+        totaldifferential.push(parseInt(((lowwage)/20) * lowskill + ((medwage)/20) * medskill + ((highwage)/20) * highskill))
         totaid.push(parseInt(totalaid))
         totalremittance.push(parseInt(totalrem) * 1000000)
 
