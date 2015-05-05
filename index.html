@@ -96,9 +96,12 @@
 
 
     <div  id = "description" class="description">
-        <p><b><u>Utilize for Story telling</u></b></p>
-        <p>
-            Change the world..etc..
+        <p><b><u>Our story</u></b></p>
+        <p style="text-align: left">
+            In our dataset, we have a list of 20 non-OECD countries and 8 OECD countries.
+            For each of these countries, we have wage information by education level from 2010 that we received from the World Bank.
+            The first box below shows average/total (depending on the selection) wage differentials in wages for the selected list of non-OECD and OECD countries.
+            The second box shows total/average remittance flows and the thid box shows total/average aid flows.
         </p>
 
         <div  id = "counter" class="counter">
@@ -165,8 +168,9 @@
 
     <div id = "overlay" class="overlay">
         <h3>Welcome to Migration as an Instrument for International Development</h3>
-        <p>Welcome to our page of wonder and delight.  Please take a moment to familiarize yourself with this wonder
-        of wonders.  Blah blah blah blah.  Push botton to continue</p>
+        <p>This is our attempt to visualize migration flows from developing or what we call "non-OECD" countries to developed or "OECD" countries.
+            In order to assess the different metrics that migrants benefit from, we compare wage differentials among developing and developed nations and compare that to remittances and aid.
+        Push botton to continue</p>
 
         <div id="loading">
             <img src="css/ajax-loader.gif" alt="Loading..." />
@@ -194,9 +198,15 @@
 
 
         <div  id = "description1" class="description1">
-            <p><b><u>Utilize for Story telling</u></b></p>
-            <p>
-                Change the world..etc..
+            <p><b><u>Scatter Plot</u></b></p>
+            <p style="text-align: left">
+                Each dot on the plot to your left is a country's relative position in the migrant stock - average extra annual wage earned axes.
+                Hovering over a dot provides the name of the country.
+            </p>
+            <p style="text-align: left">
+                Brushing a dot or a list of dots changes other features of the visualization accordingly.
+                For example, brushing the right-most green dot shows Pakistan's relative position in the graph and updates the bar plots as well as the corresponding gains estimate above the map layout.
+                By migrating to OECD countries, the <u><span style="color: green">270,000</span></u> or so Pakistani high-skilled migrants, gained on an average <u><span style="color: green">$35,000</span></u> in wages in 2010.
             </p>
         </div>
 
@@ -207,9 +217,14 @@
         </div>
 
         <div  id = "description2" class="description2">
-            <p><b><u>Utilize for Story telling</u></b></p>
-            <p>
-                Change the world..etc..
+            <p><b><u>Bar Plot</u></b></p>
+            <p style="text-align: left">
+                Each blue bar to the left shows the total wage differential (average wage differential X total migrant stock) among migrants from a particular non-OECD country to the average wages in the OECD country.
+                Because total remittances and aid flows are orders of magnitude lower in comparison to wage differentials, we have implemented a slider with a log scale that allows you to see the other two metrics of comparison.
+            </p>
+            <p style="text-align: left">
+                Clicking on a country updates other visuals and estimates for gains accordingly. For example, in 2010, Nepal had around <u><span style="color: blue">50,000</span></u> migrants in OECD countries.
+                If we sum up the average wages gained by each of those migrants by moving to a OECD country, we come up with the estimate of <u><span style="color: blue">$25,000,000,000</span></u>.
             </p>
         </div>
         <div  id = "footers" class = "footers" >

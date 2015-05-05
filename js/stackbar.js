@@ -285,7 +285,7 @@ StackbarVis.prototype.updateVis = function(){
             if (i<3) {
                 var g = d3.select(this);
                 g.append("rect")
-                    .attr("x", 475)
+                    .attr("x", 680)
                     .attr("y", (i + 2) * 12)
                     .attr("width", 10)
                     .attr("height", 5)

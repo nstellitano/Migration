@@ -258,7 +258,8 @@ ScatterVis.prototype.updateVis = function(){
 
         // on update
         dots2.select("circle")
-            //.transition()
+            .attr("r", 1e-6)
+            .transition().duration(1000)
             .attr("cx", function (d, i) {
                 return 5 + that.x(that.displayData.size_medium[i])
             })
@@ -308,7 +309,8 @@ ScatterVis.prototype.updateVis = function(){
 
         // on update
         dots3.select("circle")
-           // .transition()
+            .attr("r", 1e-6)
+            .transition().duration(1000)
             .attr("cx", function (d, i) {
                 return 5 + that.x(that.displayData.size_high[i])
             })
