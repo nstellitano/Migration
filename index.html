@@ -22,7 +22,7 @@
 <script src = "js/OECDBAR.js"></script>
 <script src = "js/stackbar.js"></script>
 <script  src= "js/sankey.js"></script>
-<script  src = "js/boe.js"></script>
+<script  src = "js/migration_flow_sankey.js"></script>
 <!--<script  src = "js/INFO.js"></script>-->
 
 
@@ -116,9 +116,16 @@
     </div>
     <div  id = "world_map" class="world_map">
     </div>
+    <div  id = "description4" class="description4">
+        <p><b><u>Utilize for Story telling</u></b></p>
+        <p>
+            Change the world..etc..
+        </p>
+    </div>
 
 
     <div  id = "sankey_dash" class="sankey_dash">
+        <h3>Migrant Stock Across Gender and Time</h3>
         <p>
             1980: <input name="slider-time" value= 1980 id = "_1980" type="radio" checked>
             1985: <input name="slider-time" value= 1985 id = "_1985" type="radio" >
@@ -135,6 +142,8 @@
 
         </p>
         <form>
+
+
             <b>
                 By Education: <input name="sankey_type" value="sankey_ed" id = "sankey_ed" type="radio" checked>
                 By OECD: <input name="sankey_type" value="sankey_oecd" id = "sankey_oecd" type="radio" >
@@ -175,11 +184,14 @@
     </div>
 
     <div id="data_layout" class = "data_layout">
-
-
-        <div  id = "stackbarVis" class="graph grid_8">
-
+        <div  id = "scatterVis" class="graph grid_8">
+            <h3>Average Extra Annual Wage Earned vs Migrant Stock</h3>
+            <b>Skill Level:</b>
+            <input name="a" id = "low" value="lowskill" type="checkbox" checked >Low Skill
+            <input name="a" id = "medium" value="medskill" type="checkbox" checked  >Medium Skill
+            <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
         </div>
+
 
         <div  id = "description1" class="description1">
             <p><b><u>Utilize for Story telling</u></b></p>
@@ -187,11 +199,11 @@
                 Change the world..etc..
             </p>
         </div>
-        <div  id = "scatterVis" class="graph grid_8">
-            <b>Skill Level:</b>
-            <input name="a" id = "low" value="lowskill" type="checkbox" checked >Low Skill
-            <input name="a" id = "medium" value="medskill" type="checkbox" checked  >Medium Skill
-            <input name="a" id = "high" value="highskill" type="checkbox" checked >High Skill
+
+
+        <div  id = "stackbarVis" class="graph grid_8">
+            <h3>Average wage differentials in comparison to Remittances/Aid</h3>
+
         </div>
 
         <div  id = "description2" class="description2">
@@ -220,6 +232,7 @@ $(function() {
 
     document.getElementById("sankey_dash").style.display = "none";
     document.getElementById("sankey").style.display = "none";
+    document.getElementById("description4").style.display = "none";
 
     var cdata, ccapitals, alldata;
     var last_name;
@@ -350,9 +363,12 @@ $(function() {
 
             document.getElementById("sankey_dash").style.display = "";
             document.getElementById("sankey").style.display = "";
+            document.getElementById("description4").style.display = "";
 
             document.getElementById("data_layout").style.display = "none";
             document.getElementById("country_list").style.display = "none";
+            document.getElementById("graph_1").style.display = "none";
+            document.getElementById("description").style.display = "none";
 
             world_map.heatmap()
 
@@ -368,9 +384,12 @@ $(function() {
 
             document.getElementById("sankey_dash").style.display = "none";
             document.getElementById("sankey").style.display = "none";
+            document.getElementById("description4").style.display = "none";
 
+            document.getElementById("graph_1").style.display = "";
             document.getElementById("data_layout").style.display = "";
             document.getElementById("country_list").style.display = "";
+            document.getElementById("description").style.display = "";
 
 
         }

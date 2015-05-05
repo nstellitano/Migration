@@ -9,7 +9,7 @@ sankey_chart = function(parent_element)
 
     this.margin = {top: 10, right: 10, bottom: 10, left: 10}
     this.width = 1100 - that.margin.left - that.margin.right
-    this.height = 700 - that.margin.top - that.margin.bottom;
+    this.height = 400 - that.margin.top - that.margin.bottom;
 
     this.formatNumber = d3.format(",.0f");  // zero decimal places
       this.format = function (d) {
@@ -20,7 +20,7 @@ sankey_chart = function(parent_element)
     // append the svg canvas to the page
     this.svg = parent_element.append("svg")
         .attr("width", that.width + that.margin.left + that.margin.right)
-        .attr("height", that.height +1000+ that.margin.top + that.margin.bottom)
+        .attr("height", that.height +1300+ that.margin.top + that.margin.bottom)
         .append("g")
         .attr("transform",
         "translate(" + that.margin.left + "," + that.margin.top + ")");
@@ -34,6 +34,8 @@ sankey_chart = function(parent_element)
     this.path = this.sankey.link();
 
     this.graph =0;
+    this.oldgraph = 0;
+    this.oldgraphbig=0;
 
     this.initVis()
 }
@@ -77,6 +79,7 @@ sankey_chart.prototype.initVis = function() {
         that.oecd_2010 = JSON.parse(JSON.stringify(oecd_2010, null, 1));
 
 
+
         _1980 = JSON.parse(JSON.stringify(that._1980, null, 1));
         var nodeMap = {};
         _1980.nodes.forEach(function (x) {
@@ -96,62 +99,125 @@ sankey_chart.prototype.initVis = function() {
             .layout(32);
 
 
-        that.graph = _1980;
 
+
+        that.graph = _1980;
+        for(i=0; i<that.graph.links.length; i++){
+            that.graph.links[i].id = i
+        }
+
+
+        that.oldgraph = that.graph;
 
         that.chart();
     }
 }
 
     sankey_chart.prototype.chart = function()  {
-that = this;
 
-        d3.selectAll(".node").remove()
-        d3.selectAll(".link").remove()
+        that = this;
+
+       // d3.selectAll(".node").remove()
+        //d3.selectAll(".link").remove()
 
 
 // add in the links
-        var link = this.svg.append("g").selectAll(".link")
-            .data(that.graph.links)
-            .enter().append("path")
-            .attr("class", "link")
-            .attr("d", that.path)
+
+
+        var link = this.svg.selectAll(".link")
+            .data(that.graph.links, function(d){return d.id})
+
+            link.enter().append("path").attr("class", "link")
+
+
+        link.exit().remove()
+
+        link.attr("d", that.path)
+            .transition().duration(3000)
             .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-            .sort(function(a, b) { return b.dy - a.dy; });
+            //.sort(function(a, b) { return b.dy - a.dy; });
+
 
 // add the link titles
-        link.append("title")
+        var title = link.selectAll(".title")
+            .data(function(d){return [d]})
+
+        title.enter().append("title").attr("class", "title")
+
+        title.exit().remove();
+
+        title
             .text(function(d) {
                 return d.source.name + " → " +
                     d.target.name + "\n" + that.format(d.value); });
 
+
+
 // add in the nodes
-        var node = that.svg.append("g").selectAll(".node")
-            .data(that.graph.nodes)
-            .enter().append("g")
+
+
+        var node = this.svg.selectAll(".node")
+            .data(that.graph.nodes, function(d) { return d.id})
+
+            node.enter().append("g")
             .attr("class", "node")
-            .attr("transform", function(d) {
-                return "translate(" + d.x + "," + d.y + ")"; })
+
+        node.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")"; })
             .call(d3.behavior.drag()
                 .origin(function(d) { return d; })
-                .on("dragstart", function() {console.log(this.parentNode);
+                .on("dragstart", function() {
                     this.parentNode.appendChild(this); })
                 .on("drag", dragmove));
 
+        node.exit().remove()
+
 // add the rectangles for the nodes
-        node.append("rect")
-            .attr("height", function(d) { return d.dy; })
-            .attr("width", that.sankey.nodeWidth())
-            .style("fill", function(d) {
+
+        var rect = node.selectAll(".rect")
+            .data(function(d) {return [d]})
+
+
+        rect.enter().append("rect").attr("class", "rect")
+
+        var count = -1;
+            rect
+                //.attr("height", function(d,i) {count++; return that.oldgraph.nodes[i].dy ; })
+                //.transition().duration(1000)
+                .attr("height", function(d) {return d.dy; })
+
+                rect
+                    .attr("width", that.sankey.nodeWidth())
+                    .style("fill", function(d) {
                 return d.color = color(d.name.replace(/ .*/, "")); })
             .style("stroke", function(d) {
-                return d3.rgb(d.color).darker(2); })
-            .append("title")
-            .text(function(d) {
-                return d.name + "\n" + that.format(d.value); });
+                return d3.rgb(d.color).darker(2); });
 
-// add in the title for the nodes
-        node.append("text")
+
+        var titles =  rect.selectAll(".title")
+                 .data(function(d) {return[d]})
+
+
+        titles.enter().append("title").attr("class", "title")
+
+
+        titles
+                .text(function(d) {
+                return d.name + "\n" + that.format(d.value);});
+
+        titles.exit().remove()
+
+
+
+        rect.exit().remove()
+
+        var label = node.selectAll(".text")
+            .data(function(d) {return [d]})
+
+
+        label.enter().append("text").attr("class", "text")
+
+        label
             .attr("x", -6)
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", ".35em")
@@ -161,6 +227,11 @@ that = this;
             .filter(function(d) { return d.x < that.width / 2; })
             .attr("x", 6 + that.sankey.nodeWidth())
             .attr("text-anchor", "start");
+
+
+        label.exit().remove()
+
+        if(document.getElementById("sankey_oecd").checked){that.oldgraphbig = that.graph}else{that.oldgraph = that.graph};
 
         var testing = that;
 // the function for moving the nodes
@@ -203,11 +274,12 @@ sankey_chart.prototype.update = function(){
         that.sankey.size([that.width, that.height]);
     }else {
 
-        that.height = 700;
+        that.height = 400;
         that.sankey.size([that.width, that.height]);}
 
+    var check = 0;
         if (slider_year == "1980") {
-            if(document.getElementById("sankey_oecd").checked){_1980 = JSON.parse(JSON.stringify(that.oecd_1980, null, 1));}
+            if(document.getElementById("sankey_oecd").checked){check =1; _1980 = JSON.parse(JSON.stringify(that.oecd_1980, null, 1));}
             else{ _1980 = JSON.parse(JSON.stringify(that._1980, null, 1))}
             var nodeMap = {};
             _1980.nodes.forEach(function (x) {
@@ -225,6 +297,7 @@ sankey_chart.prototype.update = function(){
                 .nodes(_1980.nodes)
                 .links(_1980.links)
                 .layout(32);
+
 
             that.graph = _1980
 
@@ -381,6 +454,11 @@ sankey_chart.prototype.update = function(){
         }
 
 
+    for(i=0; i<that.graph.links.length; i++){
+        that.graph.links[i].id = i
+    }
+
+    this.path = this.sankey.link();
 
         this.chart()
 

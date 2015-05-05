@@ -9,7 +9,7 @@ OECDBAR = function(_parentelement, _alldata, eventhandler){
     this.eventhandler = eventhandler;
 
     this.width = getInnerWidth(this.parentElement);
-    this.height = 400;
+    this.height = 430;
     this.selected_country = ["Argentina"];
 
     this.units =0;
@@ -97,7 +97,6 @@ OECDBAR.prototype.updatevis = function(){
     //What is selected?
 
 
-    console.log(d3.max(that.displayData.total))
     this.y.domain([0,that.displayData.total.length])
     //if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
     this.x.domain([0, d3.max(that.displayData.total)])
@@ -135,7 +134,7 @@ OECDBAR.prototype.updatevis = function(){
         .attr("height", 15)
       // .attr("width", function(d,i) {return that.x(0)})
         //.transition().duration(1000)
-        .attr("width", function(d,i) {console.log((d)); return that.x(d)})
+        .attr("width", function(d,i) { return that.x(d)})
 
 
 
@@ -200,7 +199,7 @@ OECDBAR.prototype.updatevis = function(){
     text.select("text")
         .transition().duration(500)
         .text(function(d,i) {return d })
-        .attr("font-size", "11px")
+        .attr("font-size", "13px")
         .attr("x", 5)
         .attr("y", function(d,i) { return that.y(i) + 47; });
 
@@ -219,7 +218,7 @@ OECDBAR.prototype.updatevis = function(){
     text2.select("text")
         .transition().duration(500)
         .text(function(d,i) {return that.displayData.type[i] })
-        .attr("font-size", "11px")
+        .attr("font-size", "13px")
         .attr("x", 35)
         .attr("y", function(d,i) { return that.y(i) + 25; });
 
@@ -461,7 +460,6 @@ OECDBAR.prototype.filter = function(name){
 
 
 
-    console.log(total_oecd)
     return total_oecd;
 
 
@@ -490,7 +488,6 @@ OECDBAR.prototype.addSlider = function(svg){
 
         var sliderValue = sliderScale.invert(value);
 
-        console.log(Math.exp(sliderValue/d3.max(that.displayData.total)))
 
 
         that.x = d3.scale.pow().exponent(sliderValue/(d3.max(that.displayData.total)))

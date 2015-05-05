@@ -75,12 +75,16 @@ ScatterVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
+        .style("font-size", "13px")
+        .style("font-family", "Lato")
        // .style("font-size", "10px")
        // .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + this.height/1.06 + ")")
+        .style("font-size", "13px")
+        .style("font-family", "Lato")
        // .style("font-size", "10px")
        // .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
@@ -206,7 +210,8 @@ ScatterVis.prototype.updateVis = function(){
 
 
     dots.select("circle")
-        //.transition()
+        .attr("r", 1e-6)
+        .transition().duration(1000)
         .attr("cx", function(d,i){ return 5 + that.x(that.displayData.size_low[i])})
         .attr("cy", function(d,i){return that.y(that.displayData.wage_diff_low[i])})
         .style("fill", "black")
@@ -400,13 +405,13 @@ ScatterVis.prototype.updateVis = function(){
             if (i<3) {
                 var g = d3.select(this);
                 g.append("circle")
-                    .attr("cx", 475)
+                    .attr("cx", 680)
                     .attr("cy", (i + 2) * 12)
                     .attr("r", 5)
                     .style("fill", that.color_hash[String(i)][1]);
 
                 g.append("text")
-                    .attr("x", 485)
+                    .attr("x", 700)
                     .attr("y", (i + 2) * 12 + 8)
                     .attr("height", 2)
                     .attr("width", 2)

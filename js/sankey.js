@@ -105,10 +105,6 @@ d3.sankey = function() {
                 d3.sum(node.sourceLinks, value),
                 d3.sum(node.targetLinks, value)
             );
-            console.log(node.name)
-            console.log(node.value)
-            console.log(d3.sum(node.sourceLinks, value))
-            console.log(d3.sum(node.targetLinks, value))
         });
     }
 
