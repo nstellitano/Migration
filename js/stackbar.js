@@ -15,6 +15,8 @@ StackbarVis = function(_parentElement, _alldata, _eventHandler){
     this.width = getInnerWidth(this.parentElement)
     this.height = (this.width) / 2.1
 
+    this.formatNumber = d3.format(",.0f");  // zero decimal places
+
     //To show country names when hovering over the country
     this.tooltip_nonoecd = d3.select("body").append("div").attr("class", "tooltip hidden");
 
@@ -41,12 +43,12 @@ StackbarVis.prototype.initVis = function(){
         .range([54, this.width-30]);
 
     this.y = d3.scale.linear()
-        .range([20,this.height-68]);
+        .range([30,this.height-98]);
 
     this.z = d3.scale.ordinal().range(["orange", "blue", "green"])
 
     this.yalt = d3.scale.linear()
-        .range([this.height-68,20]);
+        .range([this.height-98,30]);
 
 
     this.color_hash = {  0 : ["Wage Differential", "Blue"],
@@ -56,7 +58,7 @@ StackbarVis.prototype.initVis = function(){
 
     this.xAxis = d3.svg.axis()
         .scale(this.x)
-        .ticks(21)
+        .ticks(20)
         .tickFormat(function(d){return that.displayData.country[d]})
         .orient("bottom");
 
@@ -70,25 +72,16 @@ StackbarVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(54,0)")
-        .style("font-size", "13px")
-        .style("font-family", "Lato")
+        //.style("font-size", "8px")
         //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
     this.svg.append("g")
         .attr("class", "x axis")
-        .style("font-size", "13px")
-        .style("font-family", "Lato")
         //.attr("transform", "translate(0,20)")
         //.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
 
 
-    this.svg.append("text")
-        .attr("x", (that.width / 2))
-        .attr("y", 0 + (that.height/20))
-        .attr("text-anchor", "middle")
-        .style("font-size", "12px")
-        .style("text-decoration", "underline")
-        //.text("Average wage differentials in comparison to Remittances/Aid");
+
 
 
     //Slider
@@ -116,7 +109,7 @@ StackbarVis.prototype.updateVis = function(){
     var that = this;
 
 
-    this.x.domain([0,21])
+    this.x.domain([0,that.displayData.country.length])
     this.y.domain([0,d3.max(that.displayData.total_differential)])
     this.yalt.domain([0,d3.max(that.displayData.total_differential)])
 
@@ -124,6 +117,10 @@ StackbarVis.prototype.updateVis = function(){
     var offsetT = document.getElementById("stackbarVis").offsetTop;
 
     // updates axis
+
+    this.xAxis
+        .ticks(that.displayData.country.length)
+
     this.svg.select(".y.axis")
         .call(this.yAxis)
 
@@ -132,12 +129,11 @@ StackbarVis.prototype.updateVis = function(){
         .call(this.xAxis)
 
     this.svg.select(".x.axis")
-        .attr("transform", "translate(5,"+ (that.height - 68) +")")
+        .attr("transform", "translate(5,"+ (that.height - 98) +")")
         .call(that.xAxis)
         .selectAll("text")
         .style("text-anchor", "end")
-        .style("font-size", "13px")
-        .style("font-family", "Lato")
+        .style("font-size", "9px")
         .attr("dx", ".1em")
         .attr("dy", ".40em")
         .attr("transform", function(d) {
@@ -149,6 +145,7 @@ StackbarVis.prototype.updateVis = function(){
         .data(that.displayData.country);
 
     bar.enter().append("g").append("rect");
+    //console.log(that.displayData.country);
 
     // Add attributes (position) to all bars
     bar
@@ -160,10 +157,10 @@ StackbarVis.prototype.updateVis = function(){
 
     bar.select("rect")
         .attr("x", function(d,i){ return 5 + that.x(i)})
-        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_differential[i])})
-        .attr("width", 6)
+        .attr("y", function(d,i){ return  that.height - 68 -  that.y(that.displayData.total_differential[i])})
+        .attr("width", 10)
         .attr("height", function(d, i) {
-            return that.y(that.displayData.total_differential[i]) - 20 ;
+            return that.y(that.displayData.total_differential[i]) - 30 ;
         });
 
     bar
@@ -177,8 +174,8 @@ StackbarVis.prototype.updateVis = function(){
             });
 
             that.tooltip_nonoecd.classed("hidden", false)
-                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
-                .html(that.displayData.country[i] + ":" +that.displayData.total_differential[i])
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
+                .html(that.displayData.country[i] + ":" + "$" +that.formatNumber(that.displayData.total_differential[i]))
 
         })
         .on("mouseout", function (d, i) {
@@ -201,11 +198,11 @@ StackbarVis.prototype.updateVis = function(){
         .remove();
 
     bar2.select("rect")
-        .attr("x", function(d,i){ return 11 + that.x(i)})
-        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_aid[i])})
-        .attr("width", 6)
+        .attr("x", function(d,i){ return 15 + that.x(i)})
+        .attr("y", function(d,i){ return  that.height - 68 -  that.y(that.displayData.total_aid[i])})
+        .attr("width", 10)
         .attr("height", function(d, i) {
-            return that.y(that.displayData.total_aid[i]) - 20 ;
+            return that.y(that.displayData.total_aid[i]) - 30 ;
         });
 
     bar2
@@ -219,8 +216,8 @@ StackbarVis.prototype.updateVis = function(){
             });
 
             that.tooltip_nonoecd.classed("hidden", false)
-                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
-                .html(that.displayData.country[i] + ":" +that.displayData.total_aid[i])
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
+                .html(that.displayData.country[i] + ":" + "$" +that.formatNumber(that.displayData.total_aid[i]))
 
         })
         .on("mouseout", function (d, i) {
@@ -242,12 +239,14 @@ StackbarVis.prototype.updateVis = function(){
     bar3.exit()
         .remove();
 
+
+
     bar3.select("rect")
-        .attr("x", function(d,i){ return 17 + that.x(i)})
-        .attr("y", function(d,i){ return  that.height - 48 -  that.y(that.displayData.total_remit[i])})
-        .attr("width", 6)
+        .attr("x", function(d,i){ return 25 + that.x(i)})
+        .attr("y", function(d,i){ return  that.height - 68 -  that.y(that.displayData.total_remit[i])})
+        .attr("width", 10)
         .attr("height", function(d, i) {
-            return that.y(that.displayData.total_remit[i]) - 20 ;
+            return that.y(that.displayData.total_remit[i]) - 30 ;
         });
 
     bar3
@@ -261,8 +260,8 @@ StackbarVis.prototype.updateVis = function(){
             });
 
             that.tooltip_nonoecd.classed("hidden", false)
-                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 80) + "px" )
-                .html(that.displayData.country[i] + ":" +that.displayData.total_remit[i])
+                .attr("style", "left:" + (mouse[0] + offsetL +10) + "px;top:" + (mouse[1] + offsetT+ 10) + "px" )
+                .html(that.displayData.country[i] + ":" + "$" +that.formatNumber(that.displayData.total_remit[i]))
 
         })
         .on("mouseout", function (d, i) {
@@ -283,21 +282,19 @@ StackbarVis.prototype.updateVis = function(){
             if (i<3) {
                 var g = d3.select(this);
                 g.append("rect")
-                    .attr("x", 680)
+                    .attr("x", 475)
                     .attr("y", (i + 2) * 12)
                     .attr("width", 10)
                     .attr("height", 5)
                     .style("fill", that.color_hash[String(i)][1]);
 
                 g.append("text")
-                    .attr("x", 700)
+                    .attr("x", 495)
                     .attr("y", (i + 2) * 12 + 8)
                     .attr("height", 3)
                     .attr("width", 3)
                     // .style("fill", that.color_hash[String(i)][1])
-                    .text(that.color_hash[String(i)][0])
-                    .style("font-size", "13px")
-                    .style("font-family", "Lato");
+                    .text(that.color_hash[String(i)][0]);
             }
         });
 
@@ -386,9 +383,9 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
             if (that.data._children[z]._children[i].wage_diffI !=0) {
 
                 if (that.data._children[z]._children[i]._children[3].size != 0) {
-                    lowskill = lowskill + +that.data._children[z]._children[i]._children[0].size
-                    medskill = medskill + +that.data._children[z]._children[i]._children[1].size
-                    highskill = highskill + +that.data._children[z]._children[i]._children[2].size
+                    lowskill = lowskill + (+that.data._children[z]._children[i]._children[0].size)
+                    medskill = medskill + (+that.data._children[z]._children[i]._children[1].size)
+                    highskill = highskill + (+that.data._children[z]._children[i]._children[2].size)
 
                     totalskill = lowskill + medskill + highskill
 
@@ -480,25 +477,29 @@ StackbarVis.prototype.filterAndAggregate = function(country_select){
     //console.log(arr.length);
 
     //console.log(sc.country);
+    console.log(country_select);
 
     result={"country":[], "total_aid": [], "total_remit":  [], "total_differential": [] };
 
-    function isInArray(array, search)
-    {
-        return array.indexOf(search) >= 0;
-    }
+    //function isInArray(array, search)
+    //{
+    //    return array.indexOf(search) >= 0;
+    //}
 
     if (country_select != null) {
 
         for(c =0; c<arr.length; c++) {
-            if(isInArray(sc.country, arr[c])){
-                result.country[c]=sc.country[c]
-                result.total_aid[c]=sc.total_aid[c]
-                result.total_remit[c]=sc.total_remit[c]
-                result.total_differential[c]=sc.total_differential[c]
+            for (d = 0; d < sc.country.length; d++) {
+                if (sc.country[d]== arr[c]) {
+                    result.country[c] = sc.country[d]
+                    result.total_aid[c] = sc.total_aid[d]
+                    result.total_remit[c] = sc.total_remit[d]
+                    result.total_differential[c] = sc.total_differential[d]
 
+                }
             }
         }
+        console.log(result.country);
     return result;
     }
 
@@ -607,7 +608,7 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
 
     // TODO: Think of what is domain and what is range for the y axis slider !!
     var sliderScale = d3.scale.linear()
-        .domain([0,d3.max(that.displayData.total_differential)])
+        .domain([10,d3.max(that.displayData.total_differential)])
         .range([0,200])
 
     var sliderDragged = function(){
@@ -619,10 +620,10 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
         console.log("Y Axis Slider value: ", sliderValue);
 
         that.y = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total_differential))
-            .range([20,that.height-68])
+            .range([30,that.height-98])
 
         that.yalt = d3.scale.pow().exponent(sliderValue/d3.max(that.displayData.total_differential))
-            .range([that.height-68,20])
+            .range([that.height-98,30])
 
         that.yAxis = d3.svg.axis()
             .scale(that.yalt)
@@ -655,7 +656,7 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
 
     sliderGroup.append("rect").attr({
         class:"sliderBg",
-        x:2,
+        x:5,
         width:10,
         height:200
     }).style({
@@ -665,9 +666,8 @@ StackbarVis.prototype.addSlider = function(svg, country_select){
     sliderGroup.append("rect").attr({
         "class":"sliderHandle",
         y:200,
-        x:-5,
         width:20,
-        height:10
+        height:10,
     }).style({
         fill:"#333333"
     }).call(sliderDragBehaviour)
