@@ -256,6 +256,8 @@ $(function() {
     var scatter_vis
     var stackbar_vis
     var oecd_bar, oecd_bar1, count=0;
+    var non_oecd = ["Argentina", "Colombia", "Dominican Republic", "Ecuador", "Ethiopia", "Honduras", "Indonesia",
+        "Jordan", "Mauritius", "Mongolia", "Nepal", "Pakistan", "Panama", "Paraguay", "Peru", "Rwanda", "South Africa", "Uruguay", "Zambia"]
 
     //------------Load the Data and begin-------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -265,13 +267,13 @@ $(function() {
             .defer(d3.json, "data/capitals.json")
             .defer(d3.json, "data/master_data_set.json")
             .defer(d3.json, "data/world-topo-110m.json")
-            .defer(d3.json, "data/_1980.json")
-            .defer(d3.json, "data/_1985.json")
-            .defer(d3.json, "data/_1990.json")
-            .defer(d3.json, "data/_1995.json")
-            .defer(d3.json, "data/_2000.json")
-            .defer(d3.json, "data/_2005.json")
-            .defer(d3.json, "data/_2010.json")
+            .defer(d3.json, "data/1980.json")
+            .defer(d3.json, "data/1985.json")
+            .defer(d3.json, "data/1990.json")
+            .defer(d3.json, "data/1995.json")
+            .defer(d3.json, "data/2000.json")
+            .defer(d3.json, "data/2005.json")
+            .defer(d3.json, "data/2010.json")
             .await(ready)
     //Ready function takes the data files loaded via the queue function and begins with loading the WorldMap
     function ready(error, countries, capitals, AllData, topo, _1980, _1985, _1990, _1995, _2000, _2005, _2010) {
@@ -296,16 +298,14 @@ $(function() {
         world_map = new WorldMap(d3.select("#world_map"), cdata, ccapitals, alldata, MyEventHandler, topo, _1980, _1985, _1990, _1995, _2000, _2005, _2010);
 
 
-//        world_map.heatmap(document.getElementById("Wage"));
+
 
         scatter_vis = new ScatterVis(d3.select("#scatterVis"), alldata, MyEventHandler);
         stackbar_vis = new StackbarVis(d3.select("#stackbarVis"), alldata, MyEventHandler);
         oecd_bar = new OECDBAR(d3.select("#graph_1"), alldata, MyEventHandler)
-        oecd_bar.wrangledata(["Argentina"]);
+        oecd_bar.wrangledata(non_oecd);
         world_map.heatmap()
-        changeDivHTML(["Argentina"]);
-//        desc_info = new Info(d3.select("description",alldata, MyEventHandler))
-
+        changeDivHTML(non_oecd);
 
 
 
@@ -327,19 +327,12 @@ $(function() {
 
         $(MyEventHandler).bind("oecd_selection", function (event, name) { //input name is 1 country in array format
 
-//            world_map.draw_arcData(last_name)
-
-            //stackbar_vis.wrangleData(country_select);
-//            oecd_bar.wrangledata([name])
-//            //stack
-//            //scatter
-            //changeDivHTML(name);
 
     });
 
         $(MyEventHandler).bind("scatter_selection", function (event, name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19) {//input name will be an array of names -> singular array or multiple array
                 country_select = [name, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19];
-//            world_map.draw_arcData(last_name)
+
 
 
             for(i=19; i>-1; i--){
@@ -352,7 +345,7 @@ $(function() {
 
             stackbar_vis.wrangleData(country_select);
             oecd_bar.wrangledata(country_select)
-//
+
             changeDivHTML(country_select);
 
 
@@ -360,12 +353,9 @@ $(function() {
 
         $(MyEventHandler).bind("nonoecd_selection", function (event, name) {//{input name is 1 country in array format
 
-//            world_map.draw_arcData(last_name)
             console.log(name)
             oecd_bar.wrangledata(name)
-//            //stack
-//            //scatter
-            //changeDivHTML(name);
+
 
         });
     d3.selectAll("input").on("change", function()
@@ -455,33 +445,6 @@ $(function() {
                 previousInnerHTML = previousInnerHTML.concat("<h5>" + name[i] + "<h5>")
             }
         }
-//        if(d3.select(radio).attr("value") == "NONOECD") {
-//
-//            for (i = 0; i < 195; i++) {
-//                var check = true;
-//                for (z = 0; z < 20; z++) {
-//                    if (alldata._children[1]._children[i].name == alldata._children[z].name){ check=false}
-//
-//                }
-//                if (check==true) { previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");}
-//            }
-//        }
-//
-//        if(d3.select(radio).attr("value") == "OECD") {
-//
-//            for (i = 0; i < 20; i++) {
-//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[i].name + "<h5>");
-//            }
-//
-//        }
-//
-//        if(d3.select(radio).attr("value") == "Migrant" || d3.select(radio).attr("value") == "Remittance" || d3.select(radio).attr("value") == "Aid") {
-//
-//            for (i = 0; i < 195; i++) {
-//                previousInnerHTML = previousInnerHTML.concat("<h5>" + alldata._children[1]._children[i].name + "<h5>");
-//            }
-//
-//        }
 
         document.getElementById('country_list').innerHTML = previousInnerHTML;
 
