@@ -117,6 +117,8 @@ WorldMap.prototype.initVis = function(){
 
             })
             .on("mousemove", function (d, i) {
+                    var offsetL = document.getElementById("world_map").offsetLeft;
+                    var offsetT = document.getElementById("world_map").offsetTop;
 
                 //d3.select(this).style("stroke", "red")
                 //d.classed("country_hidden", true)

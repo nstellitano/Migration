@@ -29,6 +29,9 @@
 <!--Stylesheets-->
 <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/colorbrewer.css">
+<!--<link rel="stylesheet" type = "text/css" href="css/960_12_col.css" />-->
+<!--<link rel="stylesheet" type = "text/css" href="css/960_24_col.css" />-->
+<!--&lt;!&ndash; Get some nice font&ndash;&gt;-->
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
 <!-- add own stylesheet-->
@@ -45,7 +48,14 @@
 <div class = "container">
     <div id="header" class="header">
         <h1>Migration as an Instrument for International Development</h1>
-
+            <!--<div id="nav">-->
+                <!--<ul>-->
+                    <!--<li><a href="">Home</a></li>-->
+                    <!--<li><a href="">About</a></li>-->
+                    <!--<li><a href="">Video</a></li>-->
+                    <!--<li><a href="">Authors</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
     </div>
 
 
@@ -93,24 +103,22 @@
             The first box below shows average/total (depending on the selection) wage differentials in wages for the selected list of non-OECD and OECD countries.
             The second box shows total/average remittance flows and the thid box shows total/average aid flows.
         </p>
-
-        <div  id = "counterW" class="counterW">
-            <label id="amounter_earnedW">Total Wage Differential</label>
+        <div  id = "counterW" class="counter">
+            <label id="amounter_earnedW">Total Wage Differentia</label>
             <h3 style="color: white" id = "totalW">$5,000,000,000</h3>
         </div>
 
-        <div  id = "counterA" class="counterA">
+        <div  id = "counterA" class="counter">
             <label id="amounter_earnedA">Total Aid</label>
             <h3 style="color: white" id = "totalA">$5,000,000,000</h3>
         </div>
 
-        <div  id = "counterR" class="counterR">
+        <div  id = "counterR" class="counter">
             <label id="amounter_earnedR">Total Remittance</label>
             <h3 style="color: white" id = "totalR">$5,000,000,000</h3>
         </div>
+
     </div>
-
-
 
 
     <div  id = "country_list" class="country_list">
@@ -122,13 +130,9 @@
     <div  id = "world_map" class="world_map">
     </div>
     <div  id = "description4" class="description4">
-        <p><b><u>Migration flows over the last 30 years</u></b></p>
-        <p style="text-align: left">
-            To complete our visualization picture, we tell the story of how migration has evolved over the last 35 years.
-            Utilizing data from 1980-2015 over a five year interval, we show the flow of male and female migrants from 195 non-OECD countries to 20 OECD countries by gender and education level.
-            By clicking on the "By OECD" radio button, we can see flows into each individual OECD country.
-            For example, we can see that in 1980, Canada allowed equal proportions of high-skilled and low-skilled migrants into the country.
-            Fast forward to 2010, and it is selectively letting in many more high-skilled than low-skilled migrants.
+        <p><b><u>Utilize for Story telling</u></b></p>
+        <p>
+            Change the world..etc..
         </p>
     </div>
 
@@ -143,6 +147,11 @@
             2000: <input name="slider-time" value= 2000 id = "_2000" type="radio" >
             2005: <input name="slider-time" value= 2005 id = "_2005" type="radio" >
             2010: <input name="slider-time" value= 2010 id = "_2010" type="radio" >
+            <!--<label>-->
+                <!--<text id="year">Selected Year</text>-->
+                <!--<input type="range" name="slider-time" min="1980" max="2010" step="5" value="0" id="slider-time" oninput=";">-->
+
+            <!--</label>-->
 
         </p>
         <form>
@@ -225,14 +234,11 @@
             </p>
             <p style="text-align: left">
                 Clicking on a country updates other visuals and estimates for gains accordingly. For example, in 2010, Nepal had around <u><span style="color: blue">50,000</span></u> migrants in OECD countries.
-                If we sum up the average wages gained by each of those migrants by moving to a OECD country, we come up with the estimate of <u><span style="color: blue">$500,000,000</span></u>.
+                If we sum up the average wages gained by each of those migrants by moving to a OECD country, we come up with the estimate of <u><span style="color: blue">$25,000,000,000</span></u>.
             </p>
         </div>
         <div  id = "footers" class = "footers" >
-            <p>This Website was created by Samik Adhikari and Nicholas Stellitano.  Both are students at the Harvard Kennedy School </p>
-
-            <li><a href="https://www.youtube.com/watch?v=TzdWsYaYuoc">Video</a></li>
-            <li><a href="http://adhikarisamik.github.io/data/process_book.pdf">Process Book </a></li>
+            <p>Copyright etc...</p>
         </div>
     </div>
 </div>
@@ -244,6 +250,8 @@
 $(function() {
 
 
+   // d3.select.("#country_list").write("test");
+    //Create EventHandler
     var MyEventHandler = new Object()
     sank = new sankey_chart(d3.select("#sankey"))
 
@@ -315,7 +323,7 @@ $(function() {
     $(MyEventHandler).bind("map_selection", function (event, name) { //input name is 1 country in array format
 
         last_name = [name];
-        //world_map.draw_arcData(last_name)
+
         oecd_bar.wrangledata([name])
         stackbar_vis.wrangleData([name])
         //stack
