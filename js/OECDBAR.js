@@ -41,9 +41,6 @@ OECDBAR.prototype.initvis = function(){
         .append("g")
         .attr("class", 'graph')
 
-        //this.svg.style(" preserveAspectRatio", "xMidYMid meet")
-
-
 
     this.x = d3.scale.linear()
         .range([0,this.width - 75])
@@ -105,7 +102,7 @@ OECDBAR.prototype.updatevis = function(){
 
 
     this.y.domain([0,that.displayData.total.length])
-    //if(document.getElementById("per_capita").checked){this.x.domain([0,60000])}else {this.x.domain([0, d3.max(that.displayData.total)])}; //Can change if we just do wages
+
     this.x.domain([0, d3.max(that.displayData.total)])
 
 
@@ -126,7 +123,6 @@ OECDBAR.prototype.updatevis = function(){
     this.svg.select(".y.axis")
         .call(that.yAxis)
 
-    //Need to put innerHTML to input Title that will change depending on what has been selected
 
 
     var rect = this.svg.selectAll(".rect")
@@ -139,8 +135,6 @@ OECDBAR.prototype.updatevis = function(){
         .attr("x", 50)
         .attr("y", function(d,i) {return that.y(i) +12 ; })
         .attr("height", 15)
-      // .attr("width", function(d,i) {return that.x(0)})
-        //.transition().duration(1000)
         .attr("width", function(d,i) { return that.x(d)})
 
 
@@ -296,30 +290,6 @@ OECDBAR.prototype.filter = function(name){
 
     var total_oecd = {"name":[], "total": [], "type":[]};
 
-
-
-    //this.data._children.map(function(d){
-    //    for (i = 0; i < 195; i++) {
-    //        if(d._children[i].name == name) {total_oecd.total.push(d._children[i].size); total_oecd.type.push("Migrant Stock: ")} //Migrant for each NON OECD per OECD
-    //    }
-    //
-    //})
-    //
-    //
-    //
-    //
-    //if(document.getElementById("Remittance").checked){
-    //    var total_oecd = {"name":["Australia", "Austria", "Canada", "Switzerland", "Chile", "Germany", "Denmark", "Spain", "Finland", "France", "Great Britain",
-    //        "Greece", "Ireland", "Luxembourg", "Netherlands", "Norway", "New Zealand", "Portugal", "Sweden", "United States" ], "total": [], "type":[]};
-    //
-    //    this.data._children.map(function(d){
-    //        for (i = 0; i < 195; i++) {
-    //            if(d._children[i].name == name) {total_oecd.total.push(d._children[i]._children[4].size); total_oecd.type.push("Remittance: ")} //Migrant for each NON OECD per OECD
-    //        }
-    //
-    //    })
-    //}
-
     if(document.getElementById("Wage").checked){
         total_oecd = {"name":[], "total": [], "type":[], "tool": []};
         var counter = 0;
@@ -371,6 +341,8 @@ OECDBAR.prototype.filter = function(name){
                                     total_popIII = total_popIII + d._children[z]._children[2].size;
 
                                     pop = pop + d._children[z].size
+
+
 
                                 }
 
